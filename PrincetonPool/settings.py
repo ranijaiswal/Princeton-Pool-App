@@ -28,7 +28,7 @@ SECRET_KEY = '5&&pdcj_!61pw*6btg9v)br&2v*oju37#ro5*7s=jt9-i8&)8y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [u'princeton-pool.herokuapp.com']
 
 
 # Application definition
