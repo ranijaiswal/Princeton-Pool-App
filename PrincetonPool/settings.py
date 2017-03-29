@@ -29,7 +29,7 @@ SECRET_KEY = '5&&pdcj_!61pw*6btg9v)br&2v*oju37#ro5*7s=jt9-i8&)8y'
 DEBUG = True
 
 ALLOWED_HOSTS = [u'princeton-pool.herokuapp.com', 'localhost']
-CAS_SERVER_URL = 'https://fed.princeton.edu/cas'
+CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
 
 # Application definition
 
