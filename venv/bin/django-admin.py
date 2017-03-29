@@ -1,4 +1,4 @@
-#!/Users/ranijaiswal/Desktop/Django/mysite/venv/bin/python
+#!/Users/ranijaiswal/Desktop/Django/PrincetonPool/Princeton-Pool-App/venv/bin/python
 from django.core import management
 
 if __name__ == "__main__":
