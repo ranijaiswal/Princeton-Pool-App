@@ -9,7 +9,7 @@ def index(request):
 	context = {
 		'Title': 'Welcome to Princeton Pool!',
 	}
-	'''C = CASClient()
+	C = CASClient()
 	netid = C.Authenticate()
 
 	print("Content-Type: text/html")
@@ -18,6 +18,6 @@ def index(request):
 	print("Hello from the other side, %s\n" % netid)
 
 	print("<p>Think of this as the main page of your application after %s has been authenticated." % (netid))
-	'''
+	
 	
 	return render(request, 'app/main.html', context)
