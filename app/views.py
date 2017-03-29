@@ -8,7 +8,7 @@ import os
 @login_required(login_url='/accounts/login/')
 def index(request):
 	context = {
-		'Title': 'Welcome to Princeton Pool!!',
+		'Title': 'Welcome to Princeton Pool!',
 	}
 	
 	return render(request, 'app/main.html', context)
