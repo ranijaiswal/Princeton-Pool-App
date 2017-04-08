@@ -26,9 +26,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5&&pdcj_!61pw*6btg9v)br&2v*oju37#ro5*7s=jt9-i8&)8y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [u'princeton-pool.herokuapp.com', 'localhost', u'127.0.0.1']
+ALLOWED_HOSTS = [u'princeton-pool.herokuapp.com', 'localhost']
 CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
 
 # Application definition
@@ -138,4 +138,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILE_DIRS ='/users/cindyliu/cos333/Princeton-Pool-App/app/static/'
