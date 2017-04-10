@@ -4,6 +4,9 @@ from django.template import loader
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from .forms import RequestForm
+from time import strftime
+from django.db import models
+from .models import Rides
 import os
 # Create your views here.
 
@@ -45,7 +48,6 @@ def confirm_new_airport(request):
 	form = RequestForm(request.POST)
 	if form.is_valid():
 		context = {
-			'form': form,
 			'Title': 'Confirm New Airport',
 			'name': form.cleaned_data['name'],
 			'dest': form.cleaned_data['destination'],
@@ -53,27 +55,30 @@ def confirm_new_airport(request):
 			'date': form.cleaned_data['date'],
 			'time': form.cleaned_data['time'],
 		}
+		request.session['name'] = form.cleaned_data['name']
+		request.session['dest'] = form.cleaned_data['destination']
+		request.session['number_going'] = form.cleaned_data['number_going']
+		request.session['date'] = form.cleaned_data['date'].isoformat()
+		request.session['time'] = form.cleaned_data['time'].strftime("%H:%M")
 		return render(request, 'app/confirm_ride.html', context)
 	else: 
 		raise Http404
 
 def confirmation_new_airport(request):
-	form = RequestForm(request.POST)
-	context = {}
-	if form.is_valid():
-		name = form.cleaned_data['name']
-		dest = form.cleaned_data['destination']
-		number_going = form.cleaned_data['number_going']
-		date = form.cleaned_data['date']
-		time = form.cleaned_data['time']
-		context = {
-			'Title': 'New Airport Confirmation',
-			'name': name,
-			'dest': dest,
-			'number_going': number_going,
-			'date': date,
-			'time': time,
-		}
+	name = request.session['name']
+	dest = request.session['dest']
+	number_going = request.session['number_going']
+	date = request.session['date']
+	time = request.session['time']
+
+	context = {
+		'Title': 'New Airport Confirmation',
+		'name': name,
+		'dest': dest,
+		'number_going': number_going,
+		'date': date,
+		'time': time,
+	}
 	return render(request, 'app/confirmed_ride.html', context)
 
 def join_airport_ride(request):

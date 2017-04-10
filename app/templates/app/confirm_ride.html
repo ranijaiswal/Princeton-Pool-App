@@ -153,9 +153,8 @@ li.dropdown {
   <p>How many go?: {{ number_going }}</p>
   </div>
   <br>
-  <form action = "airport/open/new/confirm/confirmation" method="POST">
-    {% csrf_token %}
-    {{ form }}
+ 
+  <form action = "airport/open/new/confirm/confirmation">
     <input type="submit" value = "Confirm" />
   </form>
   <form>

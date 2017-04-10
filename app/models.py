@@ -16,7 +16,7 @@ class Rides(models.Model):
     start_destination = models.CharField(max_length=100, choices = DESTINATIONS)
     end_destination = models.CharField(max_length=100, choices = DESTINATIONS)
     date_time = models.DateTimeField('Date and time')
-    req_date_time = models.DateTimeField(auto_now_add=True)
+    #req_date_time = models.DateTimeField(auto_now_add=True)
     usrs = models.ManyToManyField('Users')
     seats = models.IntegerField(default=0)
     owner = models.CharField(max_length=200)
