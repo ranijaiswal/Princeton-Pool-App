@@ -150,7 +150,11 @@ li.dropdown {
 
 <h2 style="padding-left:50px">Create New Request</h2>
 
-<form action="airport/open/new/confirm">
+
+<form action = "airport/open/new/confirm" method="POST">
+  {% csrf_token %}
+  {{ form }}
+  <!--
   Full Name <br>
   <input type="text" name = "user-name" class="form-text">
   <br><br>
@@ -166,8 +170,9 @@ li.dropdown {
   Time <span class="glyphicon glyphicon-time"></span><br>
   <input type="time" name="usr_time" class="short-form-text">
   <br><br>
-  <input type="submit" value="Submit" class="button">
-</form>
+  -->
+  <input type="submit" value="Next" class="button">
+</form> 
 
 </body>
 

@@ -147,14 +147,16 @@ li.dropdown {
 <div id="info-box">
 <p><b>Please confirm the following information is correct: </b></p>
   <div id= "user-info">
-  <p>Name: Alice Tang</p>
-  <p>NetID: xt6</p>
+  <p>Name: {{ name }}</p>
+  <p>Destination: {{ dest }}</p>
   <p>Destination: Wilson College</p>
-  <p>Date and time of ride: Sat Apr 8, 2017 at 10:00 AM</p>
-  <p>How many go?: 4</p>
+  <p>Date and time of ride: {{date}} at {{ time }}</p>
+  <p>How many go?: {{ number_going }}</p>
   </div>
   <br>
-  <form action="/airport/open/new/confirm/confirmation">
+  <form action = "airport/open/new/confirm/confirmation" method="POST">
+    {% csrf_token %}
+    {{ form }}
     <input type="submit" value = "Confirm" />
   </form>
   <form>
