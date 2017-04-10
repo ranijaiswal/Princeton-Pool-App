@@ -1,4 +1,7 @@
-from django.conf.urls import url
+from django.conf.urls import include, url
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 import django_cas_ng.views
 from . import views
 
@@ -10,4 +13,4 @@ urlpatterns = [
     url(r'shopping/open/$', views.open_shopping, name='open_shopping'),
    	url(r'accounts/login/$', django_cas_ng.views.login),
    	url(r'accounts/logout/$', django_cas_ng.views.logout),
-   ]
+   ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
