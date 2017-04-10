@@ -59,6 +59,10 @@ button {
     border-radius: 8px;
     background-color: white;
 }
+input {
+    border-radius: 8px;
+    background-color: white;
+}
 
 footer {
   font-family: Pavanam, sans-serif;
@@ -139,18 +143,20 @@ li.dropdown {
   <li><a href="#contact">Contact</a></li>
 </ul>
 
-<h2 style="padding-left:50px">Confirm To Join Ride</h2>
+<h2 style="padding-left:50px">Successfully Joined Ride</h2>
 
 <div id="info-box">
-<p><b>Would you like to join this ride? </b></p>
+<p><b>You will also receive an email with the following information: </b></p>
   <div id= "user-info">
   <p>Destination: Friend Library </p>
   <p>Date and time of ride: Sun, Apr 9, 2017 at 1:00 PM</p>
-  <p>Current passenger(s): Annie Chen (anniec), Cindy Liu (cindyliu) </p>
+  <p>Current passenger(s): Annie Chen, Cindy Liu </p>
   </div>
   <br>
-  <button type="confirm">Confirm</button>
-  <button type="edit">Go Back</button>
+  <p><b>Enjoy Your Carpool!</b></p>
+  <form action="/airport/open/">
+    <input type="submit" value = "Back to Open Requests Page" />
+  </form>
 </div>
 
 </body>

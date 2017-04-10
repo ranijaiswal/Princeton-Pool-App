@@ -27,12 +27,42 @@ def faq(request):
 
 def open_airport(request):
 	context = {
-		'Title': 'List of open airport requests',
+		'Title': 'Open Airport Requests',
 	}
 	return render(request, 'app/open_req_list.html', context)
 
+def open_airport_new(request):
+	context = {
+		'Title': 'New Airport Request',
+	}
+	return render(request, 'app/form.html', context)
+
+def join_airport_ride(request):
+	context = {
+		'Title': 'Join Airport Ride',
+	}
+	return render(request, 'app/confirm_join.html', context)
+
+def confirm_join_airport(request):
+	context = {
+		'Title': 'Confirm Join Airport',
+	}
+	return render(request, 'app/confirmed_join.html', context)
+
+def confirm_new_airport(request):
+	context = {
+		'Title': 'Confirm New Airport',
+	}
+	return render(request, 'app/confirm_ride.html', context)
+
+def confirmation_new_airport(request):
+	context = {
+		'Title': 'New Airport Confirmation',
+	}
+	return render(request, 'app/confirmed_ride.html', context)
+
 def open_shopping(request):
 	context = {
-		'Title': 'List of open shopping requests',
+		'Title': 'Open Shopping Requests',
 	}
 	return render(request, 'app/open_requests.html', context)

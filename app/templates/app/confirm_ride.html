@@ -58,6 +58,10 @@ button {
     border-radius: 8px;
     background-color: white;
 }
+input {
+    border-radius: 8px;
+    background-color: white;
+}
 
 footer {
   font-family: Pavanam, sans-serif;
@@ -150,8 +154,13 @@ li.dropdown {
   <p>How many go?: 4</p>
   </div>
   <br>
-  <button type="confirm">Confirm</button>
-  <button type="edit">Edit Request</button>
+  <form action="/airport/open/new/confirm/confirmation">
+    <input type="submit" value = "Confirm" />
+  </form>
+  <form>
+    <input type="submit" value = "Edit Request"
+    onClick="history.go(-1);return true;">
+  </form>
 </div>
 
 </body>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Confirm To Join Ride</title>
+<title>Create New Request</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,6 +18,7 @@ header {
   padding-bottom: 20px;
   padding-left: 50px;
   text-align: left;
+
 }
 
 h1 {
@@ -30,32 +31,40 @@ h2 {
   font-size: 35px;
 }
 
-p {
-    font-family: Pavanam, sans-serif;
-    font-size: 20px;
-}
-
 a {
   font-family: Pavanam, sans-serif;
   font-size: 18px; 
 }
 
-#info-box {
+form {
+  font-family: Pavanam, sans-serif;
+  font-size:20px;
   background-color: #FFE6CC;
   padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  text-align: left;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-#user-info {
-  background-color: white;
-  border-radius: 25px;
-  padding: 15px;
+.form-text {
+  width: 300px;
+  border-radius: 5px;
+  border-width: 2px;
 }
 
-button {
+.short-form-text {
+  width: 200px;
+  border-radius: 5px;
+}
+
+body {
+/*  padding-left: 20%;
+  padding-right: 20%;
+  padding-top: 50px;
+  padding-bottom: 20px;*/
+/*  text-align: center;*/
+}
+
+.button {
     border-radius: 8px;
     background-color: white;
 }
@@ -139,19 +148,26 @@ li.dropdown {
   <li><a href="#contact">Contact</a></li>
 </ul>
 
-<h2 style="padding-left:50px">Successfully Joined Ride</h2>
+<h2 style="padding-left:50px">Create New Request</h2>
 
-<div id="info-box">
-<p><b>You will also receive an email with the following information: </b></p>
-  <div id= "user-info">
-  <p>Destination: Friend Library </p>
-  <p>Date and time of ride: Sun, Apr 9, 2017 at 1:00 PM</p>
-  <p>Current passenger(s): Annie Chen, Cindy Liu </p>
-  </div>
-  <br>
-  <p><b>Enjoy Your Carpool!</b></p>
-  <button type="edit">Back to Open Requests Page</button>
-</div>
+<form action="airport/open/new/confirm">
+  Full Name <br>
+  <input type="text" name = "user-name" class="form-text">
+  <br><br>
+  NetID<br>
+  <input type="netid" name = "user-id" class="form-text">
+  <br><br>
+  How many go? <br>
+  <input type="number" name="pass-num" min="2" max="6" class="short-form-text">
+  <br><br>
+  Date <span class="glyphicon glyphicon-calendar"></span><br>
+  <input type="date" name="date_year" class="short-form-text">
+  <br><br>
+  Time <span class="glyphicon glyphicon-time"></span><br>
+  <input type="time" name="usr_time" class="short-form-text">
+  <br><br>
+  <input type="submit" value="Submit" class="button">
+</form>
 
 </body>
 
