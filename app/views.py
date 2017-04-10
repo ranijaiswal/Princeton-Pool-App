@@ -29,7 +29,7 @@ def open_airport(request):
 	context = {
 		'Title': 'List of open airport requests',
 	}
-	return render(request, 'app/open_requests.html', context)
+	return render(request, 'app/open_req_list.html', context)
 
 def open_shopping(request):
 	context = {
