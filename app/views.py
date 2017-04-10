@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, Http404
+from django.utils import timezone
 from django.template import loader
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
@@ -33,6 +34,7 @@ def faq(request):
 def open_airport(request):
 	context = {
 		'Title': 'Open Airport Requests',
+		'rides': Rides.objects.all()
 	}
 	return render(request, 'app/open_req_list.html', context)
 
@@ -71,6 +73,10 @@ def confirmation_new_airport(request):
 	date = request.session['date']
 	time = request.session['time']
 
+	ride = Rides(start_destination = "PTON", end_destination=dest, 
+				 date_time=date + " " + time, req_date_time=timezone.now(), 
+				 seats = number_going, owner = name)
+	ride.save()
 	context = {
 		'Title': 'New Airport Confirmation',
 		'name': name,

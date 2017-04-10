@@ -18,14 +18,19 @@
   <div class="list-group">
   <h2 align="center">{{Title}}</h1>
     <div class= "d-flex flex-column justify-content-center">
+      {% for ride in rides %}
+
       <a href="/airport/open/select" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">Ride #1</h5>
+          <h5 class="mb-1">Ride {{ride.id}}</h5>
           <small>1 day ago</small>
         </div>
-        <p class="mb-1">Destination: EWR Airport</p>
-        <small class="text-muted">Ride Departure Time: Sun, Apr 9, 2017 at 2:00 PM</small>
+        <p class="mb-1">Destination: {{ ride.end_destination}} </p>
+        <small class="text-muted">Ride Departure Time: {{ ride.date_time}}</small>
+        <small class="text-muted">Current Owner: {{ride.owner}} </small>
       </a>
+      {% endfor %}
+      <!--
       <a href="/airport/open/select" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">Ride #2</h5>
@@ -42,6 +47,7 @@
         <p class="mb-1">Destination: JFK Airport</p>
         <small class="text-muted">Ride Departure Time: Tues, Apr 11, 2017 at 2:00 PM</small>
       </a>
+      -->
     </div>
     <a href="airport/open/new" class="btn btn-outline btn-lg"> <span class="network-name">Make A New Request</span></a>
   </div>
