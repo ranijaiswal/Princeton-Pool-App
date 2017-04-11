@@ -109,7 +109,7 @@ DATABASES = {
         'NAME': 'princetonpool',
         'USER': 'cindyliu',
         'PASSWORD': '',
-        'HOST': 'localhost',
+        'HOST': '',
         'PORT': '',
     }
 }
