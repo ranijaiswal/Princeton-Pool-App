@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os 
+from local_settings import *
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')

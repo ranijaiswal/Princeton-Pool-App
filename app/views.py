@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.utils import timezone
 from django.template import loader
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from django.core.mail import send_mail
 from .forms import RequestForm
 from time import strftime
@@ -85,6 +86,10 @@ def confirmation_new_airport(request):
 		'date': date,
 		'time': time,
 	}
+	send_mail('Subject Test', 'Message test' + name + '\'s Ride!', 
+			  'ranijaiswal116@gmail.com', ['cindyliu@princeton.edu'], 
+			  fail_silently=False,
+			  )
 	return render(request, 'app/confirmed_ride.html', context)
 
 def join_airport_ride(request):
