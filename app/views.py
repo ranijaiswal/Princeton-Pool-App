@@ -11,7 +11,6 @@ from django.db import models
 from .models import Rides
 import os
 # Create your views here.
-
 # @login_required(login_url='/accounts/login/')
 def index(request):
 	context = {
@@ -53,12 +52,14 @@ def confirm_new_airport(request):
 		context = {
 			'Title': 'Confirm New Airport',
 			'name': form.cleaned_data['name'],
+			'email': form.cleaned_data['email'],
 			'dest': form.cleaned_data['destination'],
 			'number_going': form.cleaned_data['number_going'],
 			'date': form.cleaned_data['date'],
 			'time': form.cleaned_data['time'],
 		}
 		request.session['name'] = form.cleaned_data['name']
+		request.session['email'] = form.cleaned_data['email']
 		request.session['dest'] = form.cleaned_data['destination']
 		request.session['number_going'] = form.cleaned_data['number_going']
 		request.session['date'] = form.cleaned_data['date'].isoformat()
@@ -69,6 +70,7 @@ def confirm_new_airport(request):
 
 def confirmation_new_airport(request):
 	name = request.session['name']
+	email = request.session['email']
 	dest = request.session['dest']
 	number_going = request.session['number_going']
 	date = request.session['date']
@@ -81,13 +83,14 @@ def confirmation_new_airport(request):
 	context = {
 		'Title': 'New Airport Confirmation',
 		'name': name,
+		'email': email,
 		'dest': dest,
 		'number_going': number_going,
 		'date': date,
 		'time': time,
 	}
 	send_mail('Subject Test', 'Message test' + name + '\'s Ride!', 
-			  'Princeton Go <princetongo333@gmail.com>', ['rjaiswal@princeton.edu'], 
+			  'Princeton Go <princetongo333@gmail.com>', [email], 
 			  fail_silently=False,
 			  )
 	return render(request, 'app/confirmed_ride.html', context)
