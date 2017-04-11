@@ -12,11 +12,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os 
 
-
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'ranijaiswal116@gmail.com'
+EMAIL_HOST_USER = 'princetongo333@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get('P')
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))

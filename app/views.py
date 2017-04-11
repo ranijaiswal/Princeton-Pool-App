@@ -87,7 +87,7 @@ def confirmation_new_airport(request):
 		'time': time,
 	}
 	send_mail('Subject Test', 'Message test' + name + '\'s Ride!', 
-			  'ranijaiswal116@gmail.com', ['cindyliu@princeton.edu'], 
+			  'Princeton Go <princetongo333@gmail.com>', ['rjaiswal@princeton.edu'], 
 			  fail_silently=False,
 			  )
 	return render(request, 'app/confirmed_ride.html', context)
