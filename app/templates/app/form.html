@@ -33,7 +33,7 @@ h2 {
 
 a {
   font-family: Pavanam, sans-serif;
-  font-size: 18px; 
+  font-size: 18px;
 }
 
 form {
@@ -130,7 +130,7 @@ li.dropdown {
 </style>
 
 <header>
-  <h1><b>PRINCETON GO 
+  <h1><b>PRINCETON GO
     <!-- <span class="glyphicon glyphicon-user"></span> -->
 <!--     <i class="material-icons" style="font-size: 36px">&#xe531;</i> -->
 <i class="fa fa-automobile" style="font-size:40px;"></i>
@@ -151,10 +151,10 @@ li.dropdown {
 <h2 style="padding-left:50px">Create New Request</h2>
 
 
-<form action = "airport/open/new/confirm" method="POST">
+<form action = "/airport/open/new/confirm" method="POST">
   {% csrf_token %}
   <table>{{ form.as_table }}</table>
-  
+
   <!--
   Full Name <br>
   <input type="text" name = "user-name" class="form-text">
@@ -173,7 +173,7 @@ li.dropdown {
   <br><br>
   -->
   <input type="submit" value="Next" class="button">
-</form> 
+</form>
 
 </body>
 

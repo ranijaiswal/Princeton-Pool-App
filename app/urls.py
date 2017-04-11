@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'airport/open/select$', views.join_airport_ride, name='join_airport_ride'),
     url(r'airport/open/select/confirm$', views.confirm_join_airport, name='confirm_join_airport'),
     url(r'airport/open/new$', views.open_airport_new, name='open_airport_new'),
-    url(r'airport/open/new/confirm$', views.confirm_new_airport, name='confirm_new_airport'),
+    url(r'^airport/open/new/confirm$', views.confirm_new_airport, name='confirm_new_airport'),
     url(r'airport/open/new/confirm/confirmation$', views.confirmation_new_airport, name='confirmation_new_airport'),
     url(r'shopping/open/$', views.open_shopping, name='open_shopping'),
    	url(r'accounts/login/$', django_cas_ng.views.login),
