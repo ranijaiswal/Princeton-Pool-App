@@ -89,10 +89,10 @@ def confirmation_new_airport(request):
 		'date': date,
 		'time': time,
 	}
-	send_mail('Subject Test', 'Message test' + name + '\'s Ride!', 
-			  'Princeton Go <princetongo333@gmail.com>', [email], 
-			  fail_silently=False,
-			  )
+	#send_mail('Subject Test', 'Message test' + name + '\'s Ride!', 
+	#		  'Princeton Go <princetongo333@gmail.com>', [email], 
+	#		  fail_silently=False,
+	#		  )
 	return render(request, 'app/confirmed_ride.html', context)
 
 def join_airport_ride(request):
