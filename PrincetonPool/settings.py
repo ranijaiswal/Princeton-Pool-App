@@ -101,7 +101,7 @@ WSGI_APPLICATION = 'PrincetonPool.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.postgresql'),
 #     }
 # }
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -120,7 +120,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-
+'''
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'django_cas_ng.backends.CASBackend',
