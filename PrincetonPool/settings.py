@@ -112,7 +112,7 @@ DATABASES = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': dj_database_url.config(),
         'NAME': 'ddfqs2rg94kguk',
         'USER': 'xovdehfaifoflt',
         'PASSWORD': '0e4fe6d0ebd50451a032e95a2039d90c82be31c4daa008a47e976d15999b18ee',
@@ -121,7 +121,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.config()
+#DATABASES['default'] = dj_database_url.config()
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
