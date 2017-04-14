@@ -112,11 +112,11 @@ DATABASES = {
 
 DATABASES = {
     'default': {
-        'ENGINE': dj_database_url.config(),
-        'NAME': 'ddfqs2rg94kguk',
-        'USER': 'xovdehfaifoflt',
-        'PASSWORD': '0e4fe6d0ebd50451a032e95a2039d90c82be31c4daa008a47e976d15999b18ee',
-        'HOST': 'ec2-23-23-237-68.compute-1.amazonaws.com',
+        'ENGINE': 'django',
+        'NAME': 'det2e699aobccb',
+        'USER': 'pjulllqqlccyfm',
+        'PASSWORD': 'c146acdecc12d1459e1339d92f7a3fe86af232fe31df84c6768272341f5fb607',
+        'HOST': 'ec2-54-235-120-39',
         'PORT': '5432',
     }
 }
