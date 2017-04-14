@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-
+import dj_database_url
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -101,13 +101,15 @@ WSGI_APPLICATION = 'PrincetonPool.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.postgresql'),
 #     }
 # }
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+'''
+DATABASES['default'] =  dj_database_url.config()
 '''
 
 DATABASES = {
