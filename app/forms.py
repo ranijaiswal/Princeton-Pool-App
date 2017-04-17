@@ -1,5 +1,6 @@
 from django import forms
-from .models import Rides, Users
+from .models import Rides
+from .models import Users
 
 DESTINATIONS = (
     ('EWR', 'EWR'),
@@ -16,4 +17,3 @@ class RequestForm(forms.Form):
 	number_going = forms.IntegerField(max_value=10, min_value=1)
 	date = forms.DateField(label="Date (MM/DD/YYYY)")
 	time = forms.TimeField(label="Time (HH:MM)")
-	
