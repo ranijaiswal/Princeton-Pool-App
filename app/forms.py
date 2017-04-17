@@ -1,5 +1,6 @@
 from django import forms
-from .models import Rides, Users
+from .models import Rides
+from .models import Users
 
 DESTINATIONS = (
     ('EWR', 'EWR'),
