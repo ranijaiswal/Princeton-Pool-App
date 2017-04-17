@@ -21,7 +21,7 @@
     <div class= "d-flex flex-column justify-content-center">
       {% for ride in rides %}
 
-      <a href="/airport/open/select" class="list-group-item list-group-item-action flex-column align-items-start">
+      <a href="/airport/open/select/{{ride.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">Ride {{ride.id}}</h5>
           <small>1 day ago</small>

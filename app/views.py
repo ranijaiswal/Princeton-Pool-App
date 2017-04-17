@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, Http404
 from django.utils import timezone
 from django.template import loader
@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 from .forms import RequestForm
 from time import strftime
 from django.db import models
-from .models import Rides
+from .models import Rides, Users
 import os
 # Create your views here.
 # @login_required(login_url='/accounts/login/')
@@ -79,7 +79,15 @@ def confirmation_new_airport(request):
 	ride = Rides(start_destination = "PTON", end_destination=dest, 
 				 date_time=date + " " + time, req_date_time=timezone.now(), 
 				 seats = number_going, owner = name)
+	
 	ride.save()
+	user = Users(full_name=name)
+	user.save()
+	user.pools.add(ride)
+	user.save()
+	ride.usrs.add(user)
+	ride.save()
+
 	context = {
 		'Title': 'New Airport Confirmation',
 		'name': name,
@@ -95,16 +103,28 @@ def confirmation_new_airport(request):
 	#		  )
 	return render(request, 'app/confirmed_ride.html', context)
 
-def join_airport_ride(request):
+def join_airport_ride(request, ride_id):
+
+	ride = get_object_or_404(Rides, pk=ride_id)
+	
 	context = {
 		'Title': 'Join Airport Ride',
+		'Dest': ride.end_destination,
+		'Date': ride.date_time,
+		'id': ride_id,
 	}
 	return render(request, 'app/confirm_join.html', context)
 
-def confirm_join_airport(request):
+def confirm_join_airport(request, ride_id):
+	ride = get_object_or_404(Rides, pk=ride_id)
 	context = {
 		'Title': 'Confirm Join Airport',
+		'Dest': ride.end_destination,
+		'Date': ride.date_time,
+		#'Users': ride.usrs.all(),
 	}
+	# update DB
+
 	return render(request, 'app/confirmed_join.html', context)
 def open_shopping(request):
 	context = {
