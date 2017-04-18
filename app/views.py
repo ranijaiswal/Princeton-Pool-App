@@ -133,14 +133,13 @@ def join_airport_ride(request, ride_id):
 
 def confirm_join_airport(request, ride_id):
 	ride = get_object_or_404(Rides, pk=ride_id)
-	netid = get_netid(request)
 	context = {
 		'title': 'Confirm Join Airport',
 		'dest': ride.end_destination,
 		'date': ride.date_time,
 		'users': ride.usrs.all(),
-		'netid': netid
-		'email': netid + '@princeton.edu',
+		'netid': get_netid(request),
+		'email': get_netid(request) + '@princeton.edu',
 	}
 	# email notif
 	subject_line = 'Your Ride Request to ' + dest
