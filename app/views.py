@@ -134,15 +134,25 @@ def join_airport_ride(request, ride_id):
 def confirm_join_airport(request, ride_id):
 	ride = get_object_or_404(Rides, pk=ride_id)
 	context = {
-		'Title': 'Confirm Join Airport',
-		'Dest': ride.end_destination,
-		'Date': ride.date_time,
-		'Users': ride.usrs.all(),
+		'title': 'Confirm Join Airport',
+		'dest': ride.end_destination,
+		'date': ride.date_time,
+		'users': ride.usrs.all(),
 		'netid': get_netid(request),
+		'email': netid + '@princeton.edu',
 	}
+	# email notif
+	subject_line = 'Your Ride Request to ' + dest
+	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + date + ' at ' + time + ', for destination ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the \"Your Rides\" page on our website.\n' + 'Thank you for using Princeton Go!'
+	send_mail(subject_line, message, 
+			  'Princeton Go <princetongo333@gmail.com>', [email], 
+			  fail_silently=False,
+			  )
+
 	# update DB
 
 	return render(request, 'app/confirmed_join.html', context)
+
 def open_shopping(request):
 	context = {
 		'Title': 'Open Shopping Requests',
