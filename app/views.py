@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.views import View
 from django.utils import timezone
 from django.template import loader
 from django.contrib.auth.decorators import login_required
@@ -11,10 +12,13 @@ from django.db import models
 from .models import Rides, Users
 import os
 # Create your views here.
-# @login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def index(request):
+	user = request.user
+	netid = user.username
 	context = {
 		'Title': 'Welcome to Princeton Pool!',
+		'netid': netid
 	}
 
 	return render(request, 'app/index.html', context)
