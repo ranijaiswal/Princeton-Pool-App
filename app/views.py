@@ -75,7 +75,7 @@ def confirm_new_airport(request):
 		request.session['date'] = form.cleaned_data['date'].isoformat()
 		request.session['time'] = form.cleaned_data['time'].strftime("%H:%M")
 		return render(request, 'app/confirm_ride.html', context)
-	else: 
+	else:
 		raise Http404
 
 def confirmation_new_airport(request):
@@ -87,10 +87,10 @@ def confirmation_new_airport(request):
 	time = request.session['time']
 
 
-	ride = Rides(start_destination = "PTON", end_destination=dest, 
-				 date_time=date + " " + time, req_date_time=timezone.now(), 
+	ride = Rides(start_destination = "PTON", end_destination=dest,
+				 date_time=date + " " + time, req_date_time=timezone.now(),
 				 seats = number_going, owner = name)
-	
+
 	ride.save()
 	user = Users(full_name=name)
 	user.save()
@@ -111,17 +111,17 @@ def confirmation_new_airport(request):
 	}
 	subject_line = 'Your Ride Request to ' + dest
 	message = 'Hello, ' + name + '!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + date + ' at ' + time + ', for destination ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the \"Your Rides\" page on our website.\n' + 'Thank you for using Princeton Go!'
-	send_mail(subject_line, message, 
-			  'Princeton Go <princetongo333@gmail.com>', [email], 
+	send_mail(subject_line, message,
+			  'Princeton Go <princetongo333@gmail.com>', [email],
 			  fail_silently=False,
 			  )
-	
+
 	return render(request, 'app/confirmed_ride.html', context)
 
 def join_airport_ride(request, ride_id):
 
 	ride = get_object_or_404(Rides, pk=ride_id)
-	
+
 	context = {
 		'Title': 'Join Airport Ride',
 		'Dest': ride.end_destination,
@@ -139,13 +139,13 @@ def confirm_join_airport(request, ride_id):
 		'date': ride.date_time,
 		'users': ride.usrs.all(),
 		'netid': get_netid(request),
-		'email': netid + '@princeton.edu',
+		'email': get_netid(request) + '@princeton.edu',
 	}
 	# email notif
 	subject_line = 'Your Ride Request to ' + dest
 	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + date + ' at ' + time + ', for destination ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the \"Your Rides\" page on our website.\n' + 'Thank you for using Princeton Go!'
-	send_mail(subject_line, message, 
-			  'Princeton Go <princetongo333@gmail.com>', [email], 
+	send_mail(subject_line, message,
+			  'Princeton Go <princetongo333@gmail.com>', [email],
 			  fail_silently=False,
 			  )
 
