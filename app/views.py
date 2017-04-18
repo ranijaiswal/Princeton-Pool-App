@@ -106,22 +106,31 @@ def confirmation_new_airport(request):
 def join_airport_ride(request, ride_id):
 
 	ride = get_object_or_404(Rides, pk=ride_id)
-	
 	context = {
 		'Title': 'Join Airport Ride',
 		'Dest': ride.end_destination,
 		'Date': ride.date_time,
 		'id': ride_id,
+		'Riders': ride.usrs.all(),
 	}
 	return render(request, 'app/confirm_join.html', context)
 
 def confirm_join_airport(request, ride_id):
 	ride = get_object_or_404(Rides, pk=ride_id)
+
+	name = "netid"+str(ride_id)
+	user = Users(full_name=name)
+	user.save()
+	user.pools.add(ride)
+	user.save()
+	ride.usrs.add(user)
+	ride.save()
+
 	context = {
 		'Title': 'Confirm Join Airport',
 		'Dest': ride.end_destination,
 		'Date': ride.date_time,
-		#'Users': ride.usrs.all(),
+		'Riders': ride.usrs.all(),
 	}
 	# update DB
 
