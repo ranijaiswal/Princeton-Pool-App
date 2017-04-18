@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.template import loader
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
 from .forms import RequestForm
 from time import strftime
 from django.db import models
@@ -97,10 +97,13 @@ def confirmation_new_airport(request):
 		'date': date,
 		'time': time,
 	}
-	#send_mail('Subject Test', 'Message test' + name + '\'s Ride!', 
-	#		  'Princeton Go <princetongo333@gmail.com>', [email], 
-	#		  fail_silently=False,
-	#		  )
+	subject_line = 'Your Ride Request to ' + dest
+	message = 'Hello, ' + name + '!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + date + ' at ' + time + ', for destination ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the \"Your Rides\" page on our website.\n' + 'Thank you for using Princeton Go!'
+	send_mail(subject_line, message, 
+			  'Princeton Go <princetongo333@gmail.com>', [email], 
+			  fail_silently=False,
+			  )
+	
 	return render(request, 'app/confirmed_ride.html', context)
 
 def join_airport_ride(request, ride_id):
@@ -121,7 +124,7 @@ def confirm_join_airport(request, ride_id):
 		'Title': 'Confirm Join Airport',
 		'Dest': ride.end_destination,
 		'Date': ride.date_time,
-		#'Users': ride.usrs.all(),
+		'Users': ride.usrs.all(),
 	}
 	# update DB
 
