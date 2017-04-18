@@ -9,6 +9,7 @@
 </html> -->
 
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
 <title>FAQs-PrincetonPool</title>
@@ -19,12 +20,50 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
+    <!-- Custom CSS -->
+    <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
 
 </head>
 
 
 <body>
+
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="{% url 'index' %}">PRINCETON GO</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#feedback">Feedback</a>
+                    </li>
+                    <li>
+                        <a href="faq/">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="about/">About</a>
+                    </li>
+                    <li>
+                        <a>netid</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
 <h1 align="center">{{Title}}</h1>
 
 <div class="container">
