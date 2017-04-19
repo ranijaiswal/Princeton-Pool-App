@@ -132,24 +132,42 @@ def join_airport_ride(request, ride_id):
 		'Dest': ride.end_destination,
 		'Date': ride.date_time,
 		'id': ride_id,
+		'Riders': ride.usrs.all(),
 		'netid': user.username,
 	}
 	return render(request, 'app/confirm_join.html', context)
 
 def confirm_join_airport(request, ride_id):
 	ride = get_object_or_404(Rides, pk=ride_id)
+
+	name = "netid"+str(ride_id)
+	#user = Users(full_name=name)
+	#user = request.user
 	user = request.user
+	rider = Users(full_name=user.username)
+	rider.save()
+	#rider.full_name
+	#user.pools.add(ride)
+	user.save()
+	ride.usrs.add(rider)
+	ride.save()
+
+	email = user.username + '@princeton.edu'
+
 	context = {
+
+		'Riders': ride.usrs.all(),
 		'title': 'Confirm Join Airport',
 		'dest': ride.end_destination,
 		'date': ride.date_time,
-		'users': ride.usrs.all(),
 		'netid': user.username,
 		'email': user.username + '@princeton.edu',
 	}
 	# email notif
-	subject_line = 'Your Ride Request to ' + dest
-	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + date + ' at ' + time + ', for destination ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the \"Your Rides\" page on our website.\n' + 'Thank you for using Princeton Go!'
+
+
+	subject_line = 'Your Ride Request to ' + ride.end_destination
+	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + str(ride.date_time) + ', for destination ' + ride.end_destination + '. To make any changes, please visit the \"Your Rides\" page on our website.\n' + 'Thank you for using Princeton Go!'
 	send_mail(subject_line, message,
 			  'Princeton Go <princetongo333@gmail.com>', [email],
 			  fail_silently=False,
