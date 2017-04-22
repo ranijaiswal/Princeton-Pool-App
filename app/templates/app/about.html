@@ -20,7 +20,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>About Us</title>
+    <title>Meet the Team</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -137,13 +137,13 @@ footer {
                         <a href="#feedback">Feedback</a>
                     </li>
                     <li>
-                        <a href="faq/">FAQ</a>
+                        <a href="{% url 'faq' %}">FAQ</a>
                     </li>
                     <li>
-                        <a href="about/">About</a>
+                        <a href="{% url 'about' %}">Team</a>
                     </li>
                     <li>
-                        <a>{{ netid}} </a>
+                        <a>{{ netid }} </a>
                     </li>
                 </ul>
             </div>
@@ -169,16 +169,13 @@ footer {
         <!-- Project One -->
         <div class="row">
             <div class="col-md-3">
-                <a href="#">
-                    {%load static%}
-                    <img class="img-responsive" src="{% static 'img/annie.jpg' %}" alt="">
-                </a>
+                {%load static%}
+                <img class="img-responsive" src="{% static 'img/annie.jpg' %}" alt="">
             </div>
             <div class="col-md-5">
                 <h3>Annie Chen</h3>
-                <h4>Class of 2018</h4>
+                <h4>Project Manager, Front End</h4>
                 <p>Annie is a junior in the COS department. She is also involved with club Ultimate frisbee, Princeton Writing Center, and the Institute of Chocolate Studies.</p>
-                <!-- <a class="btn btn-primary" href="#">See More <span class="glyphicon glyphicon-chevron-right"></span></a> -->
             </div>
         </div>
         <!-- /.row -->
@@ -188,16 +185,13 @@ footer {
         <!-- Project Two -->
         <div class="row">
             <div class="col-md-3">
-                <a href="#">
-                    {%load static%}
-                    <img class="img-responsive" src="{% static 'img/Raniphoto.jpg' %}" alt="">
-                </a>
+                {%load static%}
+                <img class="img-responsive" src="{% static 'img/Raniphoto.jpg' %}" alt="">
             </div>
             <div class="col-md-5">
                 <h3>Rani Jaiswal</h3>
-                <h4>Class of 2018</h4>
+                <h4>Back End</h4>
                 <p>Rani is a junior in the COS department. She has a unique (read: deprived) sleep schedule, but that does not impede her from rapping for Acapellago, being Careers Chair for ACM, and getting involved with PWiCS on campus.</p>
-                <!-- <a class="btn btn-primary" href="#">See More <span class="glyphicon glyphicon-chevron-right"></span></a> -->
             </div>
         </div>
         <!-- /.row -->
@@ -207,15 +201,13 @@ footer {
         <!-- Project Three -->
         <div class="row">
             <div class="col-md-3">
-                <a href="#">
-                    {%load static%}
-                    <img class="img-responsive" src="{% static 'img/cindy.jpg' %}" alt="">
-                </a>
+                {%load static%}
+                <img class="img-responsive" src="{% static 'img/cindy.jpg' %}" alt="">
             </div>
             <div class="col-md-5">
                 <h3>Cindy Liu</h3>
-                <h4>Class of 2018</h4>
-                <p>Cindy is a junior in the COS department. She dabbles in pro-level street photography and educational documentary production when she is not writing backend for projects like Princeton Go.</p>
+                <h4>Back End</h4>
+                <p>Cindy is a junior in the COS department. She dabbles in pro-level street photography and educational documentary production when she is not writing back end for projects like Princeton Go.</p>
                 <!-- <a class="btn btn-primary" href="#">See More <span class="glyphicon glyphicon-chevron-right"></span></a> -->
             </div>
         </div>
@@ -227,49 +219,17 @@ footer {
         <div class="row">
 
             <div class="col-md-3">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/300x300" alt="">
-                </a>
+                <img class="img-responsive" src="http://placehold.it/300x300" alt="">
             </div>
             <div class="col-md-5">
                 <h3>Alice Tang</h3>
-                <h4>Class of 2018</h4>
+                <h4>Front End</h4>
                 <p>Alice is a junior in the COS department. She is a part of the Edwards Collective, PPE, Chapel Choir, and Glee Club. She also masquerades as fat pink blobs on Facebook. Do not be deceived. She is an Asian woman.</p>
-                <!-- <a class="btn btn-primary" href="#">See More <span class="glyphicon glyphicon-chevron-right"></span></a> -->
             </div>
         </div>
         <!-- /.row -->
-
-
     </div>
 
-<!-- Footer -->
-    <footer>
-        <div class="container">
-           <!--  <div class="row">
-                <div class="col-lg-12">
-                    <ul class="list-inline">
-                        <li>
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#about">About</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#services">Services</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#contact">Contact</a>
-                        </li>
-                    </ul> -->
-                    <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
-                </div>
-            </div>
-        </div>
-    </footer>
     <!-- /.container -->
 
     <!-- jQuery -->
@@ -279,5 +239,10 @@ footer {
     <script src="js/bootstrap.min.js"></script>
 
 </body>
-
+<!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
+        </div>
+    </footer>
 </html>
