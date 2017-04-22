@@ -1,17 +1,115 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+<html lang="en">
+
 <html>
 <head>
 
-<!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Latest compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"> -->
+
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"> -->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel = "stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
 <!-- Custom CSS -->
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 <link href="{% static 'css/standard-all.css' %}" rel="stylesheet">
-
 </head>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Pavanam');
+
+header {
+  font-family: Pavanam, sans-serif;
+  background-color: #FF8C00;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 50px;
+  text-align: left;
+}
+
+body {
+    padding-top:50px;
+    padding-bottom:50px;
+}
+
+h1 {
+  font-family: Pavanam, sans-serif;
+  font-size: 40px;
+}
+
+h2 {
+  font-family: Pavanam, sans-serif;
+  font-size: 35px;
+}
+
+p {
+    font-family: Pavanam, sans-serif;
+    font-size: 20px;
+}
+
+a {
+  font-family: Pavanam, sans-serif;
+  font-size: 18px;
+}
+
+#info-box {
+  background-color: #FFE6CC;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: left;
+}
+
+#user-info {
+  background-color: white;
+  border-radius: 25px;
+  padding: 15px;
+}
+
+button {
+    border-radius: 8px;
+    background-color: white;
+}
+
+input {
+    border-radius: 8px;
+    background-color: white;
+}
+
+footer {
+  font-family: Pavanam, sans-serif;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #222;
+}
+
+</style>
 
 <body>
 
@@ -52,7 +150,7 @@
 
 <a href="/airport/open/new" class="btn btn-outline btn-lg"> <span class="network-name"><b>Make A New Request</b></span></a>
   <div class="list-group">
-  <h2 align="center">{{Title}}</h1>
+  <h1 align="center">{{Title}}</h1>
     <div class= "d-flex flex-column justify-content-center">
       {% for ride in rides %}
 
@@ -75,6 +173,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
 
-<body>
+</body>
 
 </html>
