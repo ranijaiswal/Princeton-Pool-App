@@ -7,12 +7,11 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<link href="{% static 'css/standard-all.css' %}" rel="stylesheet">
 
 </head>
-
-
 
 <body>
 
@@ -51,7 +50,7 @@
         <!-- /.container -->
     </nav>
 
-<a href="/airport/open/new" class="btn btn-outline btn-lg"> <span class="network-name">Make A New Request</span></a>
+<a href="/airport/open/new" class="btn btn-outline btn-lg"> <span class="network-name"><b>Make A New Request</b></span></a>
   <div class="list-group">
   <h2 align="center">{{Title}}</h1>
     <div class= "d-flex flex-column justify-content-center">
@@ -59,7 +58,7 @@
 
       <a href="/airport/open/select/{{ride.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">Ride {{ride.id}}</h5>
+          <h5 class="mb-1">Ride #{{ride.id}}</h5>
           <small>1 day ago</small>
         </div>
         <p class="mb-1">Destination: {{ ride.end_destination}} </p>
@@ -67,24 +66,6 @@
         <small class="text-muted">Current Owner: {{ride.owner}} </small>
       </a>
       {% endfor %}
-      <!--
-      <a href="/airport/open/select" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">Ride #2</h5>
-          <small class="text-muted">3 days ago</small>
-        </div>
-        <p class="mb-1">Destination: JFK Airport</p>
-        <small class="text-muted">Ride Departure Time: Sun, Apr 9, 2017 at 2:00 PM</small>
-      </a>
-      <a href="/airport/open/select" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">Ride #3</h5>
-          <small class="text-muted">5 days ago</small>
-        </div>
-        <p class="mb-1">Destination: JFK Airport</p>
-        <small class="text-muted">Ride Departure Time: Tues, Apr 11, 2017 at 2:00 PM</small>
-      </a>
-      -->
     </div>
   </div>
 
