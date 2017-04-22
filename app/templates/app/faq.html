@@ -12,87 +12,77 @@
 {% load staticfiles %}
 <html lang="en">
 <head>
-<title>FAQs-PrincetonPool</title>
+<title>FAQs | Princeton Go</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel = "stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+   <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 
     <!-- Custom CSS -->
-    <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
+    <link href="{% static 'css/standard-all.css' %}" rel="stylesheet">
 
 </head>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Pavanam');
-    .faqHeader {
-        font-size: 27px;
-        margin: 20px;
-    }
+.faqHeader {
+    font-family: 'Pavanam', sans-serif;
+    font-size: 27px;
+    margin: 20px;
+}
 
-    .panel-heading{
-        position: relative;
-    }
+.panel-heading{
+    position: relative;
+}
 
-    .panel-heading[data-toggle="collapse"]:after {
-        font-family: 'Glyphicons Halflings';
-        content: "\e072"; /* "play" icon */
-        float: right;
-        color: #F58723;
-        font-size: 18px;
-        line-height: 22px;
-        /* rotate "play" icon from > (right arrow) to down arrow */
-        -webkit-transform: rotate(-90deg);
-        -moz-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
-        -o-transform: rotate(-90deg);
-        transform: rotate(-90deg);
-    }
+.panel-heading[data-toggle="collapse"]:after {
+    font-family: 'Pavanam', sans-serif;
+    content: "\e072"; /* "play" icon */
+    float: right;
+    color: #F58723;
+    font-size: 18px;
+    line-height: 22px;
+    /* rotate "play" icon from > (right arrow) to down arrow */
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
 
-    .panel-heading[data-toggle="collapse"].collapsed:after {
-        /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
-        -webkit-transform: rotate(90deg);
-        -moz-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        -o-transform: rotate(90deg);
-        transform: rotate(90deg);
-        color: #454444;
-    }
-    body {
-        padding-top: 50px;
-    }
+.panel-heading[data-toggle="collapse"].collapsed:after {
+    /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    color: #454444;
+}
+body {
+    padding-top: 50px;
+}
 
-
-
-header {
+/*header {
   font-family: Pavanam, sans-serif;
-  background-color: #FF8C00;
+  background-color: #222;
   padding-top: 20px;
   padding-bottom: 20px;
   padding-left: 50px;
   text-align: left;
-}
+}*/
 
 body {
     padding-top:50px;
-    padding-bottom:50px;
+    height: 100%;
+/*    padding-bottom:50px;*/
 }
 
-h1 {
+h1, h2, p, a {
   font-family: Pavanam, sans-serif;
-  font-size: 40px;
-}
-
-h2 {
-  font-family: Pavanam, sans-serif;
-  font-size: 35px;
-}
-
-p {
-    font-family: Pavanam, sans-serif;
-    font-size: 20px;
+  /*font-size: 40px;*/
 }
 
 a {
@@ -100,36 +90,43 @@ a {
   font-size: 18px; 
 }
 
-#info-box {
+.panel-body {
+    font-family: Pavanam, sans-serif;
+    font-size: 18px;
+}
+
+/*#info-box {
   background-color: #FFE6CC;
   padding-left: 50px;
   padding-right: 50px;
   padding-top: 30px;
   padding-bottom: 30px;
   text-align: left;
-}
+}*/
 
-#user-info {
+/*#user-info {
   background-color: white;
   border-radius: 25px;
   padding: 15px;
-}
+}*/
 
-button {
+/*button {
+    border-radius: 8px;
+    background-color: white;
+}*/
+
+/*input {
     border-radius: 8px;
     background-color: white;
 }
-
-input {
-    border-radius: 8px;
-    background-color: white;
-}
-
+*/
 footer {
   font-family: Pavanam, sans-serif;
-  padding-top: 20px;
-  padding-bottom: 20px;
   background-color: #222;
+  position: absolute;
+  right:0;
+  bottom:0;
+  left:0;
 }
 </style>
 
@@ -171,12 +168,14 @@ footer {
     </nav>
 
 
-<h1 align="center">{{Title}}</h1>
+<h1 align="center" style="font-family: 'Pavanam'">FAQs</h1>
+
+<hr>
 
 <div class="container">
+<!--     <br />
     <br />
-    <br />
-    <br />
+    <br /> -->
 
     <!--<div class="alert alert-warning alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -232,7 +231,7 @@ footer {
             </div>
         </div>
         <br>
-        <button type="button" data-dismiss="modal" class="btn btn-warning" onClick = "history.go(-1);return true;">Back</button>
+        <!-- <button type="button" data-dismiss="modal" class="btn btn-warning" onClick = "history.go(-1);return true;">Back</button> -->
 
     </div>
 </div>
