@@ -12,7 +12,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css?family=Pavanam');
 
-header {
+/*header {
   font-family: Pavanam, sans-serif;
   background-color: #FF8C00;
   padding-top: 20px;
@@ -69,7 +69,7 @@ input {
 footer {
   font-family: Pavanam, sans-serif;
   background-color: #222;
-}
+}*/
 
 
 </style>
@@ -102,7 +102,7 @@ footer {
                         <a href="faq/">FAQ</a>
                     </li>
                     <li>
-                        <a href="about/">About</a>
+                        <a href="about/">Team</a>
                     </li>
                     <li>
                         <a>{{netid}}</a>
@@ -116,23 +116,28 @@ footer {
 
 <h2 style="padding-left:50px">Successfully Created Ride</h2>
 
-<div id="info-box">
+<div id="confirm-info-box">
 <p><b>You will also receive an email with the following information: </b></p>
-  <div id= "user-info">
+  <div id= "confirm-user-info">
   <p>Destination: {{ dest }} </p>
   <p>Date and time of ride: {{ date }} at {{ time }}</p>
   <p>Current passenger(s): {{ name }} </p>
   </div>
   <br>
   <p><b>Enjoy Your Carpool!</b></p>
+  <hr>
   <form action="/airport/open/">
-    <input type="submit" value = "Back to Open Requests Page" />
+    <input type="submit" class="btn btn-primary"value = "Back to Open Requests Page" />
   </form>
 </div>
 
 </body>
 
-<footer>
-</footer>
+<!-- Footer -->
+    <footer>
+        <div class="container">
+          <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
+        </div>
+    </footer>
 
 </html>

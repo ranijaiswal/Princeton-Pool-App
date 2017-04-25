@@ -8,60 +8,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- Custom CSS -->
-<link href="{% static 'css/standard-all.css' %}" rel="stylesheet">
+<link href="{% static 'css/master.css' %}" rel="stylesheet">
 </head>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Pavanam');
-
-header {
-  font-family: Pavanam, sans-serif;
-  background-color: #FF8C00;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 50px;
-  text-align: left;
-}
-
-h1 {
-  font-family: Pavanam, sans-serif;
-  font-size: 40px;
-}
-
-h2 {
-  font-family: Pavanam, sans-serif;
-  font-size: 35px;
-}
-
-p {
-    font-family: Pavanam, sans-serif;
-    font-size: 20px;
-}
-
-a {
-  font-family: Pavanam, sans-serif;
-  font-size: 18px; 
-}
-
-#info-box {
-  background-color: #FFE6CC;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  text-align: left;
-}
-
-#user-info {
-  background-color: white;
-  border-radius: 25px;
-  padding: 15px;
-}
-
-button {
-    border-radius: 8px;
-    background-color: white;
-}
 
 input {
     border-radius: 8px;
@@ -72,7 +23,6 @@ footer {
   font-family: Pavanam, sans-serif;
   background-color: #222;
 }
-
 
 </style>
 
@@ -105,7 +55,7 @@ footer {
                         <a href="faq/">FAQ</a>
                     </li>
                     <li>
-                        <a href="about/">About</a>
+                        <a href="about/">Team</a>
                     </li>
                     <li>
                         <a>{{netid}}</a>
@@ -119,20 +69,20 @@ footer {
 
 <h2 style="padding-left:50px">Confirm To Join Ride</h2>
 
-<div id="info-box">
+<div id="confirm-info-box">
 <p><b>Would you like to join this ride? </b></p>
-  <div id= "user-info">
+  <div id= "confirm-user-info">
   <p>Destination: {{Dest}} </p>
   <p>Date and time of ride: {{Date}}</p>
   <p>Current passenger(s): {% for r in Riders %}  <br> &emsp; {{ r.full_name }}  {% endfor %} </p>
-
-  </div>
-  <br>
+  <hr>
   <form action="/airport/open/select/confirm/{{id}}">
-    <input type="submit" value = "Confirm" />
-    <input type="submit" value = "Go Back"
+    <input type="submit" class="btn btn-secondary" value = "Confirm" />
+    <input type="submit" class="btn btn-primary" value = "Go Back"
     onClick="history.go(-1);return true;">
   </form>
+  </div>
+  <br>
 </div>
 
 </body>
