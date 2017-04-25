@@ -57,6 +57,15 @@ def feedback(request):
 	}
 	return render(request, 'app/feedback.html', context)
 
+def your_rides(request):
+	user = request.user
+	context = {
+		'Title': 'Your Rides',
+		'rides': Rides.objects.all(),
+		'netid': user.username,
+	}
+	return render(request, 'app/your_rides.html', context)
+
 def open_airport(request):
 	user = request.user
 	context = {
