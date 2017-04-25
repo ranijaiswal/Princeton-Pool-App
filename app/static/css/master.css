@@ -41,7 +41,11 @@ footer {
 	font-family: 'Pavanam', Helvetica, sans-serif;
 	background-color: #222;
 	padding-top: 30px;
-	padding-bottom: 20px;
+	padding-bottom: 30px;
+}
+
+footer .small {
+	font-size: 85%;
 }
 
 .topnav {
@@ -128,7 +132,7 @@ input {
 /* ---------------- form.html */
 
 .form-container {
-  background: url(../img/fast-car-muted.jpg);
+  background: url(../img/fast-car.jpg);
   background-color: white;
   padding-left: 50px;
   padding-right: 50px;
