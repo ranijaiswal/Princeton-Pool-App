@@ -11,7 +11,7 @@
 
 body {
 	padding-top:50px;
-	background-color: white;
+	background-color: #222;
 	height: 100%;
 }
 
@@ -151,7 +151,24 @@ input {
 	padding: 0px;
 }
 
-
-
-
 /* ---------------- open_req_list.html */
+
+.list-group a {
+  font-size:20px;
+}
+
+.mb-1 {
+	font-size: 20px;
+}
+
+.mb-2 {
+	font-size: 18px;
+}
+
+.text-muted {
+	font-size:15px;
+}
+
+.list-group-item a {
+  font-size:20px;
+}

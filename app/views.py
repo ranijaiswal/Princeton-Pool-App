@@ -4,6 +4,7 @@ from django.views import View
 from django.utils import timezone
 from django.template import loader
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from django.conf import settings
 from django.core.mail import send_mail, EmailMultiAlternatives
 from .forms import RequestForm
@@ -14,6 +15,15 @@ import os
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 
+#public facing index page
+# def public_index(request):
+# 	context = {
+# 		'Title': 'Welcome to Princeton Pool!',
+# 	}
+
+# 	return render(request, 'app/pre_login.html', context)
+
+#inside index page
 def index(request):
 	user = request.user
 	context = {
