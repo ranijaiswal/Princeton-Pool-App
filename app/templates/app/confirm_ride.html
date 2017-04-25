@@ -15,7 +15,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css?family=Pavanam');
 
-header {
+/*header {
   font-family: Pavanam, sans-serif;
   background-color: #FF8C00;
   padding-top: 20px;
@@ -71,7 +71,7 @@ footer {
   font-family: Pavanam, sans-serif;
   background-color: #222;
 }
-
+*/
 
 </style>
 
@@ -104,7 +104,7 @@ footer {
                         <a href="faq/">FAQ</a>
                     </li>
                     <li>
-                        <a href="about/">About</a>
+                        <a href="about/">Team</a>
                     </li>
                     <li>
                         <a>{{netid}}</a>
@@ -120,52 +120,33 @@ footer {
 
 <h2 style="padding-left:50px">Confirm New Request</h2>
 
-<div id="info-box">
+<div id="confirm-info-box">
 <p><b>Please confirm the following information is correct: </b></p>
-  <div id= "user-info">
+  <div id= "confirm-user-info">
   <p>Name: {{ name }}</p>
   <p>Destination: {{ dest }}</p>
   <p>Date and time of ride: {{date}} at {{ time }}</p>
   <p>How many go?: {{ number_going }}</p>
+
+  <hr>
+  <form action = "/airport/open/new/confirm/confirmation">
+    <input type="submit" class="btn btn-secondary" value = "Confirm" />
+  </form>
+  <form>
+    <input type="submit" class="btn btn-primary" value = "Edit Request"
+    onClick="history.go(-1);return true;">
+  </form>
   </div>
   <br>
 
-  <form action = "/airport/open/new/confirm/confirmation">
-    <input type="submit" value = "Confirm" />
-  </form>
-  <form>
-    <input type="submit" value = "Edit Request"
-    onClick="history.go(-1);return true;">
-  </form>
+
 </div>
 
 </body>
-
 <!-- Footer -->
     <footer>
         <div class="container">
-           <!--  <div class="row">
-                <div class="col-lg-12">
-                    <ul class="list-inline">
-                        <li>
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#about">About</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#services">Services</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#contact">Contact</a>
-                        </li>
-                    </ul> -->
-                    <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
-                </div>
-            </div>
+          <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
         </div>
     </footer>
 

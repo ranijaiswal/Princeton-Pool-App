@@ -8,23 +8,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- Custom CSS -->
-<link href="{% static 'css/standard-all.css' %}" rel="stylesheet">
+<link href="{% static 'css/master.css' %}" rel="stylesheet">
 </head>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Pavanam');
 
-header {
-  font-family: Pavanam, sans-serif;
-  background-color: #FF8C00;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 50px;
-  text-align: left;
 
-}
-
-h1 {
+/*h1 {
   font-family: Pavanam, sans-serif;
   font-size: 40px;
 }
@@ -37,16 +28,16 @@ h2 {
 a {
   font-family: Pavanam, sans-serif;
   font-size: 18px;
-}
+}*/
 
-form {
+/*form {
   font-family: Pavanam, sans-serif;
   font-size:20px;
   background-color: #FFE6CC;
   padding-left: 50px;
   padding-top: 20px;
   padding-bottom: 20px;
-}
+}*/
 
 .form-text {
   width: 300px;
@@ -58,14 +49,14 @@ form {
   width: 200px;
   border-radius: 5px;
 }
-
+/*
 body {
-/*  padding-left: 20%;
+  padding-left: 20%;
   padding-right: 20%;
   padding-top: 50px;
-  padding-bottom: 20px;*/
-/*  text-align: center;*/
-}
+  padding-bottom: 20px;
+ text-align: center;
+}*/
 
 .button {
     border-radius: 8px;
@@ -109,7 +100,7 @@ footer {
                         <a href="faq/">FAQ</a>
                     </li>
                     <li>
-                        <a href="about/">About</a>
+                        <a href="about/">Team</a>
                     </li>
                     <li>
                         <a>{{netid}}</a>
@@ -123,59 +114,39 @@ footer {
 
 <h2 style="padding-left:50px">Create New Request</h2>
 
+<div class="form-container">
+  <form action = "/airport/open/new/confirm" method="POST">
+    {% csrf_token %}
+    <table>{{ form.as_table }}</table>
 
-<form action = "/airport/open/new/confirm" method="POST">
-  {% csrf_token %}
-  <table>{{ form.as_table }}</table>
+    <!--
+    Full Name <br>
+    <input type="text" name = "user-name" class="form-text">
+    <br><br>
+    NetID<br>
+    <input type="netid" name = "user-id" class="form-text">
+    <br><br>
+    How many go? <br>
+    <input type="number" name="pass-num" min="2" max="6" class="short-form-text">
+    <br><br>
+    Date <span class="glyphicon glyphicon-calendar"></span><br>
+    <input type="date" name="date_year" class="short-form-text">
+    <br><br>
+    Time <span class="glyphicon glyphicon-time"></span><br>
+    <input type="time" name="usr_time" class="short-form-text">
 
-  <!--
-  Full Name <br>
-  <input type="text" name = "user-name" class="form-text">
-  <br><br>
-  NetID<br>
-  <input type="netid" name = "user-id" class="form-text">
-  <br><br>
-  How many go? <br>
-  <input type="number" name="pass-num" min="2" max="6" class="short-form-text">
-  <br><br>
-  Date <span class="glyphicon glyphicon-calendar"></span><br>
-  <input type="date" name="date_year" class="short-form-text">
-  <br><br>
-  Time <span class="glyphicon glyphicon-time"></span><br>
-  <input type="time" name="usr_time" class="short-form-text">
-  <br><br>
-  -->
-  <input type="submit" value="Next" class="button">
-  <button type="button" data-dismiss="modal" class="btn btn-warning" onClick = "history.go(-1);return true;">Back</button>
-</form>
-
+    -->
+    <hr>
+    <input type="submit" value="Next" class="btn btn-secondary">
+    <button type="button" data-dismiss="modal" class="btn btn-primary" onClick = "history.go(-1);return true;">Back</button>
+  </form>
+</div>
 </body>
 
 <!-- Footer -->
     <footer>
         <div class="container">
-           <!--  <div class="row">
-                <div class="col-lg-12">
-                    <ul class="list-inline">
-                        <li>
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#about">About</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#services">Services</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#contact">Contact</a>
-                        </li>
-                    </ul> -->
-                    <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
-                </div>
-            </div>
+          <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
         </div>
     </footer>
 
