@@ -109,6 +109,9 @@ body {
     <div class="intro-header">
         <div class="container">
 
+        <!--If logged in, display options-->
+
+        {% if user.is_authenticated %}
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
@@ -130,6 +133,20 @@ body {
                 </div>
             </div>
 
+        {% else %}
+        <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>Where go?</h1>
+                        <h3>Ride Share with Fellow Princetonians</h3>
+                        <hr class="intro-divider">
+                        <!-- <a href = "{% url 'index' %}">Log in to Begin</a> -->
+                        <a href="accounts/login/" class="btn btn-default btn-lg"><i></i> <span class="network-name">Log In</span></a>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
         </div>
         <!-- /.container -->
     </div>
