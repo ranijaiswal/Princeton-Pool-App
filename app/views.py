@@ -49,6 +49,14 @@ def faq(request):
 	}
 	return render(request, 'app/faq.html', context)
 
+def feedback(request):
+	user = request.user
+	context = {
+		'Title': 'Feedback',
+		'netid': user.username,
+	}
+	return render(request, 'app/feedback.html', context)
+
 def open_airport(request):
 	user = request.user
 	context = {
