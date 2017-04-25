@@ -84,9 +84,9 @@ footer {
   <p>Current passenger(s): {% for r in Riders %}  <br> &emsp; {{ r.full_name }}  {% endfor %} </p>
   <hr>
   <form action="/airport/open/select/confirm/{{id}}">
-    <input type="submit" class="btn btn-secondary" value = "Confirm" />
     <input type="submit" class="btn btn-primary" value = "Back to Open Requests"
     onClick="history.go(-1);return true;">
+    <input type="submit" class="btn btn-secondary" value = "Confirm" />
   </form>
   </div>
   <br>
