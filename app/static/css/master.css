@@ -102,7 +102,7 @@ input {
 /* ---------------- confirm_ride.html */
 
 #confirm-info-box {
-  background: url(../img/fast-car.jpg);
+  background: url(../img/fast-car-muted-green.jpg);
   padding-left: 50px;
   padding-right: 50px;
   padding-top: 30px;
@@ -132,7 +132,7 @@ input {
 /* ---------------- form.html */
 
 .form-container {
-  background: url(../img/fast-car.jpg);
+  background: url(../img/fast-car-muted-green.jpg);
   background-color: white;
   padding-left: 50px;
   padding-right: 50px;
@@ -157,6 +157,23 @@ input {
 
 /* ---------------- open_req_list.html */
 
+.open_req_container {
+	background: url(../img/fast-car-muted-green.jpg);
+}
+
+.vertical-veil {
+	background: white;
+	width: 70%;
+	height:100%;
+	min-width: 500px;
+}
+
+.open_req_list {
+	text-align: left;
+	min-width: 400px;
+	width: 80%;
+}
+
 .list-group a {
   font-size:20px;
 }
@@ -176,3 +193,19 @@ input {
 .list-group-item a {
   font-size:20px;
 }
+
+/* ---------------- your_rides.html */
+.your_rides_container {
+	background: url(../img/fast-car-muted-green.jpg);
+}
+
+.your_rides_list {
+	text-align: left;
+	width:80%;
+	min-width: 400px;
+}
+
+/*.lg-info {
+	padding-left: 50px;
+	padding-right: 50px;
+}*/
