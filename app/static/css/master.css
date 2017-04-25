@@ -80,8 +80,8 @@ input {
 
 /* ---------------- confirm_join.html */
 
-#confirm-join-info-box {
-  background: url(../img/fast-car.jpg);
+/*#confirm-join-info-box {
+  background: url(../img/fast-car-muted.jpg);
   padding-left: 50px;
   padding-right: 50px;
   padding-top: 30px;
@@ -93,7 +93,7 @@ input {
   background-color: white;
   border-radius: 25px;
   padding: 15px;
-}
+}*/
 
 /* ---------------- confirm_ride.html */
 
@@ -128,7 +128,7 @@ input {
 /* ---------------- form.html */
 
 .form-container {
-  background: url(../img/fast-car.jpg);
+  background: url(../img/fast-car-muted.jpg);
   background-color: white;
   padding-left: 50px;
   padding-right: 50px;

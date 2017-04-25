@@ -64,8 +64,9 @@
 <h2 style="padding-left:50px">Successfully Joined Ride</h2>
 
 <div id="confirm-info-box">
-<p><b>You will also receive an email with the following information: </b></p>
   <div id= "confirm-user-info">
+    <p><b>You will also receive an email with the following information: </b></p>
+    <hr>
     <p>Destination: {{Dest}} </p>
     <p>Date and time of ride: {{Date}}</p>
     <p>Current passenger(s): {% for r in Riders %} <br> &emsp; {{ r.full_name }} {% endfor %} </p>
