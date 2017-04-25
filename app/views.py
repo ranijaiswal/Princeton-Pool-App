@@ -183,4 +183,4 @@ def open_shopping(request):
 		'Title': 'Open Shopping Requests',
 		'netid': user.username,
 	}
-	return render(request, 'app/open_requests.html', context)
+	return render(request, 'app/open_req_list.html', context)
