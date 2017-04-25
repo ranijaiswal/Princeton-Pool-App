@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'about/$', views.about, name='about'),
     url(r'faq/$', views.faq, name='faq'),
+    url(r'feedback/$', views.feedback, name='feedback'),
     url(r'airport/open/$', views.open_airport, name='open_airport'),
     url(r'airport/open/select/(?P<ride_id>[0-9]+)$', views.join_airport_ride, name='join_airport_ride'),
     url(r'airport/open/select/confirm/(?P<ride_id>[0-9]+)$', views.confirm_join_airport, name='confirm_join_airport'),
