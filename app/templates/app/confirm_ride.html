@@ -122,8 +122,9 @@ footer {
 <h2 style="padding-left:50px">Confirm New Request</h2>
 
 <div id="confirm-info-box">
-<p><b>Please confirm the following information is correct: </b></p>
   <div id= "confirm-user-info">
+  <p><b>Please confirm the following information is correct: </b></p>
+  <hr>
   <p>Name: {{ name }}</p>
   <p>Destination: {{ dest }}</p>
   <p>Date and time of ride: {{date}} at {{ time }}</p>
@@ -132,8 +133,8 @@ footer {
   <hr>
   <form action = "/airport/open/new/confirm/confirmation">
     <input type="submit" class="btn btn-secondary" value = "Confirm" />
-  </form>
-  <form>
+<!--   </form>
+  <form> -->
     <input type="submit" class="btn btn-primary" value = "Edit Request"
     onClick="history.go(-1);return true;">
   </form>

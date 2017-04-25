@@ -184,3 +184,11 @@ def open_shopping(request):
 		'netid': user.username,
 	}
 	return render(request, 'app/open_req_list.html', context)
+
+def open_other(request):
+	user = request.user
+	context = {
+		'Title': 'Open Miscellaneous Requests',
+		'netid': user.username,
+	}
+	return render(request, 'app/open_req_list.html', context)
