@@ -37,7 +37,7 @@ footer {
   font-family: Pavanam, sans-serif;
   background-color: #222;
 }
-
+h3 {text-align:center;}
 
 </style>
 
@@ -92,7 +92,10 @@ footer {
 <div class="form-container">
   <form action = "/airport/open/new/confirm" method="POST">
     {% csrf_token %}
-    <table>{{ form.as_table }}</table>
+    <h3>Hello, {{netid}}!</h3>
+    <table> 
+    {{ form.as_table }}
+    </table>
     <hr>
     <button type="button" data-dismiss="modal" class="btn btn-primary" onClick = "history.go(-1);return true;">Back to Open Requests</button>
     <input type="submit" value="Next" class="btn btn-secondary">
