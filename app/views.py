@@ -11,6 +11,7 @@ from .forms import RequestForm
 from time import strftime
 from django.db import models
 from .models import Rides, Users
+from datetime import datetime
 import os
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -26,6 +27,7 @@ import os
 #inside index page
 def index(request):
 	user = request.user
+	#Rides.objects.filter(date_time__lt=datetime.now()).delete()
 	rider, created = Users.objects.get_or_create(netid=user.username)
 	context = {
 		'Title': 'Welcome to Princeton Pool!',
@@ -73,7 +75,7 @@ def open_airport(request):
 	user = request.user
 	context = {
 		'Title': 'Open Airport Requests',
-		'rides': Rides.objects.all(),
+		'rides': Rides.objects.all().order_by('date_time'),
 		'netid': user.username,
 	}
 	return render(request, 'app/open_req_list.html', context)
