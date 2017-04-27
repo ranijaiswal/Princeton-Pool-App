@@ -175,9 +175,9 @@ def confirm_join_airport(request, ride_id):
 	user = request.user
 	rider, created = Users.objects.get_or_create(netid=user.username)
 	rider.save()
-	#rider.full_name
-	#user.pools.add(ride)
-	user.save()
+
+	rider.pools.add(ride)
+	rider.save()
 	ride.usrs.add(rider)
 	ride.save()
 
