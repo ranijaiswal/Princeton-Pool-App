@@ -63,7 +63,7 @@ def feedback(request):
 def your_rides(request):
 	user = request.user
 	theUser = Users.objects.get(netid=user.username) 
-	rides = theUser.pools.all()
+	rides = theUser.pools.all().order_by('date_time')
 	context = {
 		'Title': 'Your Rides',
 		'rides': rides,
@@ -97,12 +97,14 @@ def confirm_new_airport(request):
 	if form.is_valid():
 		context = {
 			'Title': 'Confirm New Airport',
+			'start': form.cleaned_data['starting_destination'],
 			'dest': form.cleaned_data['destination'],
 			'number_going': form.cleaned_data['number_going'],
 			'date': form.cleaned_data['date'],
 			'time': form.cleaned_data['time'],
 			'netid': user.username,
 		}
+		request.session['start'] = form.cleaned_data['starting_destination']
 		request.session['dest'] = form.cleaned_data['destination']
 		request.session['number_going'] = form.cleaned_data['number_going']
 		request.session['date'] = form.cleaned_data['date'].isoformat()
@@ -113,13 +115,14 @@ def confirm_new_airport(request):
 
 def confirmation_new_airport(request):
 	user = request.user
+	start = request.session['start']
 	dest = request.session['dest']
 	number_going = request.session['number_going']
 	date = request.session['date']
 	time = request.session['time']
 
 
-	ride = Rides(ride_type="Airport", start_destination = "PTON", end_destination=dest, 
+	ride = Rides(ride_type="Airport", start_destination = start, end_destination=dest, 
 				 other_destination="", date_time=date + " " + time, req_date_time=timezone.now(),
 				 seats = number_going, owner = user.username, own_car=False)
 
@@ -132,14 +135,15 @@ def confirmation_new_airport(request):
 	ride.save()
 	context = {
 		'Title': 'New Airport Confirmation',
+		'start': start,
 		'dest': dest,
 		'number_going': number_going,
 		'date': date,
 		'time': time,
 		'netid': user.username,
 	}
-	subject_line = 'Your Ride Request to ' + dest
-	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + date + ' at ' + time + ', for destination ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the \"Your Rides\" page on our website.\n' + 'Thank you for using Princeton Go!'
+	subject_line = 'Your Ride Request from ' + start + ' to ' + dest
+	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + date + ' at ' + time + ', from ' + start + ' to ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the \"Your Rides\" page on our website.\n' + 'Thank you for using Princeton Go!'
 	send_mail(subject_line, message,
 			  'Princeton Go <princetongo333@gmail.com>', [user.username + '@princeton.edu'],
 			  fail_silently=False,

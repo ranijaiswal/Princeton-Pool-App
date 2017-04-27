@@ -64,15 +64,13 @@
     </nav>
 
 <h2 style="padding-left:50px">Successfully Created Ride</h2>
-
 <div id="confirm-info-box">
   <div id= "confirm-user-info">
     <p><b>You will also receive an email with the following information: </b></p>
     <hr>
-  <p>Destination: {{ dest }} </p>
+  <p>Your Journey: {{ start }} to {{ dest }} </p>
   <p>Date and time of ride: {{ date }} at {{ time }}</p>
-  <br>
-  <p><b>Enjoy Your Carpool!</b></p>
+  <h3 style="text-align:center"<b>Enjoy Your Carpool!</b></p>
   <hr>
   <form action="/airport/open/">
     <input type="submit" class="btn btn-primary"value = "Back to Open Requests" />
