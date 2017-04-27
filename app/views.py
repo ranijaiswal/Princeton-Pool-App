@@ -26,6 +26,7 @@ import os
 #inside index page
 def index(request):
 	user = request.user
+	rider, created = Users.objects.get_or_create(netid=user.username)
 	context = {
 		'Title': 'Welcome to Princeton Pool!',
 		'netid': user.username
@@ -59,9 +60,11 @@ def feedback(request):
 
 def your_rides(request):
 	user = request.user
+	theUser = Users.objects.get(netid=user.username) 
+	rides = theUser.pools.all()
 	context = {
 		'Title': 'Your Rides',
-		'rides': Rides.objects.all(),
+		'rides': rides,
 		'netid': user.username,
 	}
 	return render(request, 'app/your_rides.html', context)
@@ -110,6 +113,7 @@ def confirm_new_airport(request):
 		raise Http404
 
 def confirmation_new_airport(request):
+	user = request.user
 	name = request.session['name']
 	email = request.session['email']
 	dest = request.session['dest']
@@ -118,19 +122,17 @@ def confirmation_new_airport(request):
 	time = request.session['time']
 
 
-	ride = Rides(start_destination = "PTON", end_destination=dest,
-				 date_time=date + " " + time, req_date_time=timezone.now(),
-				 seats = number_going, owner = name)
+	ride = Rides(ride_type="Airport", start_destination = "PTON", end_destination=dest, 
+				 other_destination="", date_time=date + " " + time, req_date_time=timezone.now(),
+				 seats = number_going, owner = user.username, full_name=name, own_car=False)
 
 	ride.save()
-	user = Users(full_name=name)
-	user.save()
-	user.pools.add(ride)
-	user.save()
-	ride.usrs.add(user)
+	rider, created = Users.objects.get_or_create(netid=user.username)
+	rider.save()
+	rider.pools.add(ride)
+	rider.save()
+	ride.usrs.add(rider)
 	ride.save()
-
-	user = request.user
 	context = {
 		'Title': 'New Airport Confirmation',
 		'name': name,
@@ -171,7 +173,7 @@ def confirm_join_airport(request, ride_id):
 	#user = Users(full_name=name)
 	#user = request.user
 	user = request.user
-	rider = Users(full_name=user.username)
+	rider, created = Users.objects.get_or_create(netid=user.username)
 	rider.save()
 	#rider.full_name
 	#user.pools.add(ride)

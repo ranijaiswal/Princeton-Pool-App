@@ -93,24 +93,6 @@ footer {
   <form action = "/airport/open/new/confirm" method="POST">
     {% csrf_token %}
     <table>{{ form.as_table }}</table>
-
-    <!--
-    Full Name <br>
-    <input type="text" name = "user-name" class="form-text">
-    <br><br>
-    NetID<br>
-    <input type="netid" name = "user-id" class="form-text">
-    <br><br>
-    How many go? <br>
-    <input type="number" name="pass-num" min="2" max="6" class="short-form-text">
-    <br><br>
-    Date <span class="glyphicon glyphicon-calendar"></span><br>
-    <input type="date" name="date_year" class="short-form-text">
-    <br><br>
-    Time <span class="glyphicon glyphicon-time"></span><br>
-    <input type="time" name="usr_time" class="short-form-text">
-
-    -->
     <hr>
     <button type="button" data-dismiss="modal" class="btn btn-primary" onClick = "history.go(-1);return true;">Back to Open Requests</button>
     <input type="submit" value="Next" class="btn btn-secondary">
