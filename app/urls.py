@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'airport/open/$', views.open_airport, name='open_airport'),
     url(r'airport/open/select/(?P<ride_id>[0-9]+)$', views.join_airport_ride, name='join_airport_ride'),
     url(r'airport/open/select/confirm/(?P<ride_id>[0-9]+)$', views.confirm_join_airport, name='confirm_join_airport'),
+    url(r'your-rides/drop/(?P<ride_id>[0-9]+)$', views.drop_ride, name='drop_ride'),
     url(r'airport/open/new$', views.open_airport_new, name='open_airport_new'),
     url(r'^airport/open/new/confirm$', views.confirm_new_airport, name='confirm_new_airport'),
     url(r'airport/open/new/confirm/confirmation$', views.confirmation_new_airport, name='confirmation_new_airport'),

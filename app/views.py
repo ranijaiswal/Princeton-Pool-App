@@ -199,7 +199,23 @@ def confirm_join_airport(request, ride_id):
 	# update DB
 
 	return render(request, 'app/confirmed_join.html', context)
+def drop_ride(request, ride_id):
+	user = request.user
+	ride = Rides.objects.get(pk=ride_id)
+	
+	context = {
+		'start': ride.start_destination,
+		'end': ride.end_destination,
+		'time': ride.date_time,
+		'netid': user.username,
+	}
 
+	rider, created = Users.objects.get_or_create(netid=user.username)
+	ride.usrs.remove(rider)
+	rider.pools.remove(ride)
+	ride.save()
+	rider.save()
+	return render(request, 'app/drop_ride.html', context)
 def open_shopping(request):
 	user = request.user
 	context = {
