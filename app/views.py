@@ -124,7 +124,7 @@ def confirmation_new_airport(request):
 
 	ride = Rides(ride_type="Airport", start_destination = start, end_destination=dest, 
 				 other_destination="", date_time=date + " " + time, req_date_time=timezone.now(),
-				 seats = number_going, owner = user.username, own_car=False)
+				 seats = number_going)
 
 	ride.save()
 	rider, created = Users.objects.get_or_create(netid=user.username)
