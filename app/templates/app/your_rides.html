@@ -87,6 +87,7 @@
         <br>
         <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>
         <small class="text-muted"><br>Current Owner: {{ride.owner}} </small>
+        <small class="text-muted"><br>Current Riders: {% for user in ride.usrs.all %} {{user.netid}} {% endfor %} </small>
         <button type='button' class='btn btn-danger pull-right' data-toggle="modal" data-target="#myModal" ><span class='glyphicon glyphicon-remove'></span> Drop</button>
         <!-- Modal -->
         <div id="myModal" class="modal fade" role="dialog">
