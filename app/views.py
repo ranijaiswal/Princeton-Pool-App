@@ -215,6 +215,8 @@ def drop_ride(request, ride_id):
 	rider.pools.remove(ride)
 	ride.save()
 	rider.save()
+	if (ride.usrs.count() == 0):
+		ride.delete()
 	return render(request, 'app/drop_ride.html', context)
 def open_shopping(request):
 	user = request.user
