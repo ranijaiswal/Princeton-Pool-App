@@ -35,7 +35,6 @@ class Rides(models.Model):
 
 class Users(models.Model):
     pools = models.ManyToManyField(Rides)
-    full_name = models.CharField(max_length=200, default="")
     netid = models.CharField(max_length=200, default="")
     def __str__(self):
         return self.netid
