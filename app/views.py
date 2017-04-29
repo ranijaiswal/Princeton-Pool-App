@@ -62,7 +62,7 @@ def feedback(request):
 
 def your_rides(request):
 	user = request.user
-	theUser = Users.objects.get(netid=user.username) 
+	theUser = Users.objects.get(netid=user.username)
 	rides = theUser.pools.all().order_by('date_time')
 	context = {
 		'Title': 'Your Rides',
@@ -75,7 +75,7 @@ def open_airport(request):
 	user = request.user
 	context = {
 		'Title': 'Open Airport Requests',
-		'rides': Rides.objects.all().order_by('date_time'),
+		'rides': Rides.objects.all().filter(date_time__gt=datetime.now()).order_by('date_time'),
 		'netid': user.username,
 	}
 	return render(request, 'app/open_req_list.html', context)
@@ -122,7 +122,7 @@ def confirmation_new_airport(request):
 	time = request.session['time']
 
 
-	ride = Rides(ride_type="Airport", start_destination = start, end_destination=dest, 
+	ride = Rides(ride_type="Airport", start_destination = start, end_destination=dest,
 				 other_destination="", date_time=date + " " + time, req_date_time=timezone.now(),
 				 seats = number_going)
 
@@ -202,7 +202,7 @@ def confirm_join_airport(request, ride_id):
 def drop_ride(request, ride_id):
 	user = request.user
 	ride = Rides.objects.get(pk=ride_id)
-	
+
 	context = {
 		'start': ride.start_destination,
 		'end': ride.end_destination,
