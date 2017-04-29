@@ -13,18 +13,25 @@ class Rides(models.Model):
         ('PHL', 'PHL'),
         ('PTON', 'Princeton'),
     )
+    RIDE_TYPES = (
+        ('Airport', 'Airport'),
+        ('Shopping', 'Shopping'),
+        ('Other', 'Other'),
+    )
+    ride_type = models.CharField(max_length=100, choices=RIDE_TYPES, default="")
     start_destination = models.CharField(max_length=100, choices = DESTINATIONS)
     end_destination = models.CharField(max_length=100, choices = DESTINATIONS)
+    other_destination = models.CharField(max_length=100, default="")
     date_time = models.DateTimeField('Date and time')
     req_date_time = models.DateTimeField(auto_now_add=True)
     usrs = models.ManyToManyField('Users')
     seats = models.IntegerField(default=0)
-    owner = models.CharField(max_length=200)
+
     def __int__(self):
         return self.id
 
 class Users(models.Model):
     pools = models.ManyToManyField(Rides)
-    full_name = models.CharField(max_length=200)
+    netid = models.CharField(max_length=200, default="")
     def __str__(self):
-        return self.full_name
+        return self.netid

@@ -1,0 +1,215 @@
+/*
+ * CSS file containing all CSS for all templates; 
+ * any file specific differences separated into sections by html file
+ */
+
+
+/* ---------------- general CSS (applies to all templates) */
+
+/* Google fonts */
+@import url('https://fonts.googleapis.com/css?family=Pavanam');
+
+body {
+	padding-top:50px;
+	background-color: white;
+	height: 100%;
+}
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6 {
+	font-family: 'Pavanam', Helvetica, sans-serif;
+}
+
+p {
+	font-family: 'Pavanam', Helvetica, sans-serif;
+	font-size: 20px;
+}
+
+a {
+	font-family: 'Pavanam', Helvetica, sans-serif;
+}
+
+footer {
+/*	position: relative;
+	left: 0;
+	right: 0;
+	bottom: 0;*/
+	font-family: 'Pavanam', Helvetica, sans-serif;
+	background-color: #222;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+footer .small {
+	font-size: 85%;
+}
+
+.topnav {
+	font-family: 'Pavanam', Helvetica, sans-serif;
+}
+
+.navbar a {
+	font-family: 'Pavanam', Helvetica, sans-serif;
+	font-size: 20px;
+}
+
+input {
+    border-radius: 8px;
+    background-color: white;
+}
+
+.btn-secondary {
+	border: solid;
+	border-width: 1px;
+	border-color: #444;
+	font-family: 'Pavanam', Helvetica, sans-serif;
+	font-size: 20px;
+}
+
+.btn-primary {
+	border: solid;
+	border-width: 1px;
+	border-color: #444;
+	font-family: 'Pavanam', Helvetica, sans-serif;
+	font-size: 20px;
+}
+
+/* ---------------- about.html */
+
+
+
+/* ---------------- confirm_join.html */
+
+/*#confirm-join-info-box {
+  background: url(../img/fast-car-muted.jpg);
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: left;
+}
+
+#confirm-join-user-info {
+  background-color: white;
+  border-radius: 25px;
+  padding: 15px;
+}*/
+
+/* ---------------- confirm_ride.html */
+
+#confirm-info-box {
+  background: url(../img/fast-car-muted-green.jpg);
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: left;
+}
+
+#confirm-user-info {
+  background-color: white;
+  border-radius: 25px;
+  padding: 25px;
+}
+
+/* ---------------- confirmed_join.html */
+
+
+
+/* ---------------- confirmed_ride.html */
+
+/* ---------------- faq.html */
+
+.panel-group a {
+	font-size: 20px;
+	font-weight: 900;
+}
+
+/* ---------------- form.html */
+
+.form-container {
+  background: url(../img/fast-car-muted-green.jpg);
+  background-color: white;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.form-container form {
+  font-family: Pavanam, sans-serif;
+  font-size:20px;
+  background-color: white;
+  padding: 25px;
+  border-radius: 25px;
+}
+
+/* ---------------- index.html */
+
+.intro-header {
+	font-family: 'Pavanam', Helvetica, sans-serif;
+	padding: 0px;
+}
+
+/* ---------------- open_req_list.html */
+
+.open_req_container {
+	background: url(../img/fast-car-muted-green.jpg);
+}
+
+.vertical-veil {
+	background: white;
+	width: 70%;
+	height:100%;
+	min-width: 500px;
+}
+
+.open_req_list {
+	text-align: left;
+	min-width: 400px;
+	width: 80%;
+}
+
+.list-group a {
+  font-size:20px;
+}
+
+.mb-1 {
+	font-size: 20px;
+}
+
+.mb-2 {
+	font-size: 18px;
+}
+
+.text-muted {
+	font-size:15px;
+}
+
+.list-group-item a {
+  font-size:20px;
+}
+
+/* ---------------- your_rides.html */
+.your_rides_container {
+	background: url(../img/fast-car-muted-green.jpg);
+}
+
+.your_rides_list {
+	text-align: left;
+	width:80%;
+	min-width: 400px;
+}
+
+.active {
+	background-color: white;
+}
+
+/*.lg-info {
+	padding-left: 50px;
+	padding-right: 50px;
+}*/

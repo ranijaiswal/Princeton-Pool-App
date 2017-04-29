@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head>
 <title>Confirm New Ride</title>
@@ -6,163 +7,87 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
+<link href="{% static 'css/master.css' %}" rel="stylesheet">
 </head>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Pavanam');
 
-header {
-  font-family: Pavanam, sans-serif;
-  background-color: #FF8C00;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 50px;
-  text-align: left;
-}
-
-h1 {
-  font-family: Pavanam, sans-serif;
-  font-size: 40px;
-}
-
-h2 {
-  font-family: Pavanam, sans-serif;
-  font-size: 35px;
-}
-
-p {
-    font-family: Pavanam, sans-serif;
-    font-size: 20px;
-}
-
-a {
-  font-family: Pavanam, sans-serif;
-  font-size: 18px; 
-}
-
-#info-box {
-  background-color: #FFE6CC;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  text-align: left;
-}
-
-#user-info {
-  background-color: white;
-  border-radius: 25px;
-  padding: 15px;
-}
-
-button {
-    border-radius: 8px;
-    background-color: white;
-}
-
-input {
-    border-radius: 8px;
-    background-color: white;
-}
-
-footer {
-  font-family: Pavanam, sans-serif;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background-color: #222;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
-
-li {
-    float: left;
-}
-
-li a, .dropbtn {
-    display: inline-block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover, .dropdown:hover .dropbtn {
-    background-color: red;
-}
-
-li.dropdown {
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
 
 </style>
 
 <header>
-  <h1><b>PRINCETON GO 
-    <!-- <span class="glyphicon glyphicon-user"></span> -->
-<!--     <i class="material-icons" style="font-size: 36px">&#xe531;</i> -->
-<i class="fa fa-automobile" style="font-size:40px;"></i>
-    <span class="glyphicon glyphicon-arrow-right"></span>
-    <span class="glyphicon glyphicon-plane"></span>
-    <span class="glyphicon glyphicon-shopping-cart"></span>
-  </b></h1>
+
 </header>
 
 <body>
-
-<ul style="padding-left:50px">
-  <li><a href="#home">Home</a></li>
-  <li><a href="#faq">FAQ</a></li>
-  <li><a href="#contact">Contact</a></li>
-</ul>
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="{% url 'index' %}">PRINCETON GO</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="feedback/">Feedback</a>
+                    </li>
+                    <li>
+                        <a href="faq/">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="about/">Team</a>
+                    </li>
+                    <!--Dropdown menu code modified from https://getbootstrap.com/components/#navbar-->
+                    <li class='dropdown'>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{netid}}<span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="your-rides/">Your Rides</a></li>
+                        <li><a href="accounts/logout">Log Out</a></li>
+                      </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
 <h2 style="padding-left:50px">Successfully Created Ride</h2>
-
-<div id="info-box">
-<p><b>You will also receive an email with the following information: </b></p>
-  <div id= "user-info">
-  <p>Destination: {{ dest }} </p>
+<div id="confirm-info-box">
+  <div id= "confirm-user-info">
+    <p><b>You will also receive an email with the following information: </b></p>
+    <hr>
+  <p>Your Journey: {{ start }} to {{ dest }} </p>
   <p>Date and time of ride: {{ date }} at {{ time }}</p>
-  <p>Current passenger(s): {{ name }} </p>
-  </div>
-  <br>
-  <p><b>Enjoy Your Carpool!</b></p>
+  <h3 style="text-align:center"<b>Enjoy Your Carpool!</b></p>
+  <hr>
   <form action="/airport/open/">
-    <input type="submit" value = "Back to Open Requests Page" />
+    <input type="submit" class="btn btn-primary"value = "Back to Open Requests" />
   </form>
+</div>
 </div>
 
 </body>
 
-<footer>
-</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Footer -->
+    <footer>
+        <div class="container">
+          <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
+        </div>
+    </footer>
 
 </html>

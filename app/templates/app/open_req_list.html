@@ -1,63 +1,129 @@
 <!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
 
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel = "stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
+<link href="{% static 'css/master.css' %}" rel="stylesheet">
 </head>
 
 <style>
-.list-group {
-  /*width: 1000px;*/
-}
+@import url('https://fonts.googleapis.com/css?family=Pavanam');
+
+/*a {
+  font-family: Pavanam, sans-serif;
+  font-size: 18px;
+}*/
 
 </style>
 
+<body class='open_req_container'>
 
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="{% url 'index' %}">PRINCETON GO</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="feedback/">Feedback</a>
+                    </li>
+                    <li>
+                        <a href="faq/">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="about/">Team</a>
+                    </li>
+                    <!--Dropdown menu code modified from https://getbootstrap.com/components/#navbar-->
+                    <li class='dropdown'>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{netid}}<span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="your-rides/">Your Rides</a></li>
+                        <li><a href="accounts/logout">Log Out</a></li>
+                      </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
-<body>
-<a href="/airport/open/new" class="btn btn-outline btn-lg"> <span class="network-name">Make A New Request</span></a>
-  <div class="list-group">
-  <h2 align="center">{{Title}}</h1>
-    <div class= "d-flex flex-column justify-content-center">
-      {% for ride in rides %}
+  <div align='center'>
+    <div class= "vertical-veil">
+    <a href="/airport/open/new" class="btn btn-outline btn-lg mb-1"> <span class="network-name"><b>Make A New Request</b></span></a>
+      <br>
+      <div class="list-group open_req_list">
+        <h1 align="center">{{Title}}</h1>
+        <div class= "d-flex flex-column justify-content-center">
+          {% for ride in rides %}
+          <a href="/airport/open/select/{{ride.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <div class='lg-info'>
+                <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right">1 day ago</small></h5>
+              
+                <small class="mb-2">Destination: {{ride.start_destination}} to {{ ride.end_destination}} </small>
+                <br>
+            <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>
+            <small class="text-muted"><br>Current Riders: {% for user in ride.usrs.all %} {{user.netid}} {% endfor %} </small>
+            {% if netid == ride.owner %}
+                <small class="text-muted"><br>You are already in this ride!</small>
+            {% endif %}
+            </div>
+            </div>
+          </a>
 
-      <a href="/airport/open/select/{{ride.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">Ride {{ride.id}}</h5>
-          <small>1 day ago</small>
-        </div>
-        <p class="mb-1">Destination: {{ ride.end_destination}} </p>
-        <small class="text-muted">Ride Departure Time: {{ ride.date_time}}</small>
-        <small class="text-muted">Current Owner: {{ride.owner}} </small>
-      </a>
-      {% endfor %}
-      <!--
-      <a href="/airport/open/select" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">Ride #2</h5>
-          <small class="text-muted">3 days ago</small>
-        </div>
-        <p class="mb-1">Destination: JFK Airport</p>
-        <small class="text-muted">Ride Departure Time: Sun, Apr 9, 2017 at 2:00 PM</small>
-      </a>
-      <a href="/airport/open/select" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">Ride #3</h5>
-          <small class="text-muted">5 days ago</small>
-        </div>
-        <p class="mb-1">Destination: JFK Airport</p>
-        <small class="text-muted">Ride Departure Time: Tues, Apr 11, 2017 at 2:00 PM</small>
-      </a>
-      -->
+        {% endfor %}
+      </div>
     </div>
   </div>
+<!-- </div> -->
 
-
-  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<body>
+
+</body>
+
+<!-- Footer -->
+    <footer>
+        <div class="container">
+        <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
+        </div>
+    </footer>
 
 </html>

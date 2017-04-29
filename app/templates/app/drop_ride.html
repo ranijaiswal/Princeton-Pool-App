@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<html>
+<html lang="en">
+
 <head>
-<title>Confirm To Join Ride</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel = "stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
 <link href="{% static 'css/master.css' %}" rel="stylesheet">
 </head>
 
-<style>
-@import url('https://fonts.googleapis.com/css?family=Pavanam');
+<style></style>
 
-
-</style>
-
-<header>
-
-</header>
-
-<body>
-
+<body class ='your_rides_container'>
 
 <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
@@ -52,9 +56,9 @@
                     </li>
                     <!--Dropdown menu code modified from https://getbootstrap.com/components/#navbar-->
                     <li class='dropdown'>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{netid}}<span class="caret"></span></a>
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{netid}}<span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li><a href="your-rides/">Your Rides</a></li>
+                        <li><a>Your Rides</a></li>
                         <li><a href="accounts/logout">Log Out</a></li>
                       </ul>
                     </li>
@@ -65,34 +69,20 @@
         <!-- /.container -->
     </nav>
 
-
-<h2 style="padding-left:50px">Successfully Joined Ride</h2>
-
-<div id="confirm-info-box">
-  <div id= "confirm-user-info">
-    <p><b>You will also receive an email with the following information: </b></p>
-    <hr>
-    <p>Destination: {{dest}} </p>
-    <p>Date and time of ride: {{date}}</p>
-    <p>Current passenger(s): {% for r in Riders %} <br> &emsp; {{ r.netid }} {% endfor %} </p>
+<div align = 'center'>
+  <div class='vertical-veil'>
     <br>
-    <p><b>Enjoy Your Carpool!</b></p>
-    <hr>
-    <form action="/airport/open/">
-      <input type="submit" class="btn btn-primary" value = "Back to Open Requests" />
-    </form>
+  <div class="list-group your_rides_list">
+  <h4 align="center">You have been dropped from this ride. Thank you for using Princeton Go!</h4>
+  </div>
 </div>
 </div>
-
 </body>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- Footer -->
     <footer>
         <div class="container">
-          <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
+            <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
         </div>
     </footer>
 

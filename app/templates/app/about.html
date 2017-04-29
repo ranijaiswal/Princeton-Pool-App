@@ -1,14 +1,5 @@
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#<title>About-PrincetonPool</title>#}
-{#</head>#}
-{#<body>#}
-{#<h1 align="center">{{Title}}</h1>#}
-{#</body>#}
-{#</html>#}
-
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 
 <head>
@@ -19,62 +10,64 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>1 Col Portfolio - Start Bootstrap Template</title>
+    <title>Meet the Team | Princeton Go</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
-    <link href="css/1-col-portfolio.css" rel="stylesheet">
-
-    <link rel = "stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
+    <link href="{% static 'css/master.css' %}" rel="stylesheet">
 
 </head>
 
+<style>
+@import url('https://fonts.googleapis.com/css?family=Pavanam');
+
+</style>
+
 <body>
 
-    <!-- Navigation -->
-
-{#    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">#}
-{#        <div class="container">#}
-{#            <!-- Brand and toggle get grouped for better mobile display -->#}
-{#            <div class="navbar-header">#}
-{#                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">#}
-{#                    <span class="sr-only">Toggle navigation</span>#}
-{#                    <span class="icon-bar"></span>#}
-{#                    <span class="icon-bar"></span>#}
-{#                    <span class="icon-bar"></span>#}
-{#                </button>#}
-{#                <a class="navbar-brand" href="#">Start Bootstrap</a>#}
-{#            </div>#}
-{#            <!-- Collect the nav links, forms, and other content for toggling -->#}
-{#            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
-{#                <ul class="nav navbar-nav">#}
-{#                    <li>#}
-{#                        <a href="#">About</a>#}
-{#                    </li>#}
-{#                    <li>#}
-{#                        <a href="#">Services</a>#}
-{#                    </li>#}
-{#                    <li>#}
-{#                        <a href="#">Contact</a>#}
-{#                    </li>#}
-{#                </ul>#}
-{#            </div>#}
-{#            <!-- /.navbar-collapse -->#}
-{#        </div>#}
-{#        <!-- /.container -->#}
-{#    </nav>#}
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="{% url 'index' %}">PRINCETON GO</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="feedback/">Feedback</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'faq' %}">FAQ</a>
+                    </li>
+                    <li class='active'>
+                        <a href="{% url 'about' %}">Team</a>
+                    </li>
+                    <!--Dropdown menu code modified from https://getbootstrap.com/components/#navbar-->
+                    <li class='dropdown'>
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{netid}}<span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="your-rides/">Your Rides</a></li>
+                        <li><a href="accounts/logout">Log Out</a></li>
+                      </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
 
     <!-- Page Content -->
@@ -83,7 +76,7 @@
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">About Us
+                <h1 class="page-header">About Princeton Go
                     <small>Meet the Team</small>
                 </h1>
             </div>
@@ -93,16 +86,13 @@
         <!-- Project One -->
         <div class="row">
             <div class="col-md-3">
-                <a href="#">
-                    {%load static%}
-                    <img class="img-responsive" src="{% static 'img/annie.jpg' %}" alt="">
-                </a>
+                {%load static%}
+                <img class="img-responsive" src="{% static 'img/annie.jpg' %}" alt="">
             </div>
             <div class="col-md-5">
                 <h3>Annie Chen</h3>
-                <h4>Class of 2018</h4>
+                <h4>Project Manager, Front End</h4>
                 <p>Annie is a junior in the COS department. She is also involved with club Ultimate frisbee, Princeton Writing Center, and the Institute of Chocolate Studies.</p>
-                <!-- <a class="btn btn-primary" href="#">See More <span class="glyphicon glyphicon-chevron-right"></span></a> -->
             </div>
         </div>
         <!-- /.row -->
@@ -112,16 +102,13 @@
         <!-- Project Two -->
         <div class="row">
             <div class="col-md-3">
-                <a href="#">
-                    {%load static%}
-                    <img class="img-responsive" src="{% static 'img/Raniphoto.jpg' %}" alt="">
-                </a>
+                {%load static%}
+                <img class="img-responsive" src="{% static 'img/Raniphoto.jpg' %}" alt="">
             </div>
             <div class="col-md-5">
                 <h3>Rani Jaiswal</h3>
-                <h4>Class of 2018</h4>
+                <h4>Back End</h4>
                 <p>Rani is a junior in the COS department. She has a unique (read: deprived) sleep schedule, but that does not impede her from rapping for Acapellago, being Careers Chair for ACM, and getting involved with PWiCS on campus.</p>
-                <!-- <a class="btn btn-primary" href="#">See More <span class="glyphicon glyphicon-chevron-right"></span></a> -->
             </div>
         </div>
         <!-- /.row -->
@@ -131,15 +118,13 @@
         <!-- Project Three -->
         <div class="row">
             <div class="col-md-3">
-                <a href="#">
-                    {%load static%}
-                    <img class="img-responsive" src="{% static 'img/cindy.jpg' %}" alt="">
-                </a>
+                {%load static%}
+                <img class="img-responsive" src="{% static 'img/cindy.jpg' %}" alt="">
             </div>
             <div class="col-md-5">
                 <h3>Cindy Liu</h3>
-                <h4>Class of 2018</h4>
-                <p>Cindy is a junior in the COS department. She dabbles in pro-level street photography and educational documentary production when she is not writing backend for projects like Princeton Go.</p>
+                <h4>Back End</h4>
+                <p>Cindy is a junior in the COS department. She dabbles in pro-level street photography and educational documentary production when she is not writing back end for projects like Princeton Go.</p>
                 <!-- <a class="btn btn-primary" href="#">See More <span class="glyphicon glyphicon-chevron-right"></span></a> -->
             </div>
         </div>
@@ -151,82 +136,18 @@
         <div class="row">
 
             <div class="col-md-3">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/300x300" alt="">
-                </a>
+                <img class="img-responsive" src="{% static 'img/Alice.jpg' %}" alt="">
             </div>
             <div class="col-md-5">
                 <h3>Alice Tang</h3>
-                <h4>Class of 2018</h4>
+                <h4>Front End</h4>
                 <p>Alice is a junior in the COS department. She is a part of the Edwards Collective, PPE, Chapel Choir, and Glee Club. She also masquerades as fat pink blobs on Facebook. Do not be deceived. She is an Asian woman.</p>
-                <!-- <a class="btn btn-primary" href="#">See More <span class="glyphicon glyphicon-chevron-right"></span></a> -->
             </div>
         </div>
-        <!-- /.row -->
-
-        <hr>
-
-        <!-- Project Five -->
-{#        <div class="row">#}
-{#            <div class="col-md-7">#}
-{#                <a href="#">#}
-{#                    <img class="img-responsive" src="http://placehold.it/700x300" alt="">#}
-{#                </a>#}
-{#            </div>#}
-{#            <div class="col-md-5">#}
-{#                <h3>Project Five</h3>#}
-{#                <h4>Subheading</h4>#}
-{#                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, quo, minima, inventore voluptatum saepe quos nostrum provident ex quisquam hic odio repellendus atque porro distinctio quae id laboriosam facilis dolorum.</p>#}
-{#                <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>#}
-{#            </div>#}
-{#        </div> #}
-        <!-- /.row -->
-
-        <hr>
-
-{#        <!-- Pagination -->#}
-{#        <div class="row text-center">#}
-{#            <div class="col-lg-12">#}
-{#                <ul class="pagination">#}
-{#                    <li>#}
-{#                        <a href="#">&laquo;</a>#}
-{#                    </li>#}
-{#                    <li class="active">#}
-{#                        <a href="#">1</a>#}
-{#                    </li>#}
-{#                    <li>#}
-{#                        <a href="#">2</a>#}
-{#                    </li>#}
-{#                    <li>#}
-{#                        <a href="#">3</a>#}
-{#                    </li>#}
-{#                    <li>#}
-{#                        <a href="#">4</a>#}
-{#                    </li>#}
-{#                    <li>#}
-{#                        <a href="#">5</a>#}
-{#                    </li>#}
-{#                    <li>#}
-{#                        <a href="#">&raquo;</a>#}
-{#                    </li>#}
-{#                </ul>#}
-{#            </div>#}
-{#        </div>#}
-        <!-- /.row -->
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Princeton Pool 2017</p>
-                </div>
-            </div>
-            <!-- /.row -->
-        </footer>
-
+                <!-- /.row -->
     </div>
+    <br>
+    <br>
     <!-- /.container -->
 
     <!-- jQuery -->
@@ -235,6 +156,14 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+</body>
+<!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
+        </div>
+    </footer>
 </html>
