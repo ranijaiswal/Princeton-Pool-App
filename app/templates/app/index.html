@@ -111,8 +111,9 @@ body {
         <div class="container index-container">
 
         <!--If logged in, display options-->
-
+         {% comment %}
         {% if user.is_authenticated %}
+        {% endcomment %}
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
@@ -133,7 +134,7 @@ body {
                     </div>
                 </div>
             </div>
-
+        {% comment %}
         {% else %}
         <div class="row">
                 <div class="col-lg-12">
@@ -148,7 +149,9 @@ body {
             </div>
 
         {% endif %}
+        {% endcomment %}
         </div>
+
         <!-- /.container -->
     </div>
 

@@ -14,7 +14,7 @@ from .models import Rides, Users
 from datetime import datetime
 import os
 # Create your views here.
-@login_required(login_url='/accounts/login/')
+
 
 #public facing index page
 # def public_index(request):
@@ -60,6 +60,7 @@ def feedback(request):
 	}
 	return render(request, 'app/feedback.html', context)
 
+@login_required(login_url='/accounts/login/')
 def your_rides(request):
 	user = request.user
 	theUser = Users.objects.get(netid=user.username)
@@ -95,6 +96,7 @@ def open_requests(request):
 		}
 	return render(request, 'app/open_req_list.html', context)
 
+@login_required(login_url='/accounts/login/')
 def create_new_request(request):
 	user = request.user
 	form = RequestForm()
@@ -105,6 +107,7 @@ def create_new_request(request):
 	}
 	return render(request, 'app/form.html', context)
 
+@login_required(login_url='/accounts/login/')
 def confirm_new_request(request):
 	form = RequestForm(request.POST)
 	user = request.user
@@ -127,6 +130,7 @@ def confirm_new_request(request):
 	else:
 		raise Http404
 
+@login_required(login_url='/accounts/login/')
 def confirmation_new_request(request):
 	user = request.user
 	start = request.session['start']
@@ -166,6 +170,7 @@ def confirmation_new_request(request):
 
 	return render(request, 'app/confirmed_ride.html', context)
 
+@login_required(login_url='/accounts/login/')
 def join_ride(request, ride_id):
 
 	ride = get_object_or_404(Rides, pk=ride_id)
@@ -180,6 +185,7 @@ def join_ride(request, ride_id):
 	}
 	return render(request, 'app/confirm_join.html', context)
 
+@login_required(login_url='/accounts/login/')
 def confirm_join_ride(request, ride_id):
 	ride = get_object_or_404(Rides, pk=ride_id)
 
@@ -215,6 +221,8 @@ def confirm_join_ride(request, ride_id):
 	# update DB
 
 	return render(request, 'app/confirmed_join.html', context)
+
+@login_required(login_url='/accounts/login/')
 def drop_ride(request, ride_id):
 	user = request.user
 	ride = Rides.objects.get(pk=ride_id)
