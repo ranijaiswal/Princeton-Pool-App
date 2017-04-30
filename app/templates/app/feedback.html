@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html>
+{% extends "app/base.html" %}
 
-<head>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% block title %} Feedback | Princeton Go {% endblock %}
 
-    <title>Meet the Team | Princeton Go</title>
-
+{% block links %}
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -18,49 +10,10 @@
     <!-- Custom CSS -->
     <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
     <link href="{% static 'css/master.css' %}" rel="stylesheet">
-</head>
 
-<body>
+{% endblock %}
 
-	<!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
-        <div class="container topnav">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand topnav" href="{% url 'index' %}">PRINCETON GO</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class='active'>
-                        <a href="feedback/">Feedback</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'faq' %}">FAQ</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'about' %}">Team</a>
-                    </li>
-                    <!--Dropdown menu code modified from https://getbootstrap.com/components/#navbar-->
-                    <li class='dropdown'>
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{netid}}<span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="your-rides/">Your Rides</a></li>
-                        <li><a href="accounts/logout">Log Out</a></li>
-                      </ul>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+{% block content %}
 
 	<div class='container'>
 <!-- Page Heading -->
@@ -75,21 +28,4 @@
 </div>
 </body>
 
-<!-- Footer -->
-    <footer>
-        <div class="container">
-        <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
-        </div>
-    </footer>
-
-<!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-</html>
+{% endblock %}

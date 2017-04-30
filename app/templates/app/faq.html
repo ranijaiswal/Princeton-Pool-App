@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html lang="en">
-<head>
-<title>FAQs | Princeton Go</title>
-    <meta charset="UTF-8">
+{% extends "app/base.html" %}
+
+{% block title %} FAQs | Princeton Go {% endblock %}
+    
+{% block links %}
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel = "stylesheet" href="style.css">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
@@ -14,8 +13,11 @@
     <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
     <link href="{% static 'css/master.css' %}" rel="stylesheet">
 
-</head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 
+{% endblock %}
+
+{% block style %}
 <style>
 @import url('https://fonts.googleapis.com/css?family=Pavanam');
 .faqHeader {
@@ -76,58 +78,15 @@ footer {
   left:0;
 }
 </style>
+{% endblock %}
 
-<body>
-
-<!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
-        <div class="container topnav">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand topnav" href="{% url 'index' %}">PRINCETON GO</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="feedback/">Feedback</a>
-                    </li>
-                    <li class='active'>
-                        <a href="{% url 'faq' %}">FAQ</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'about' %}">Team</a>
-                    </li>
-                    <!--Dropdown menu code modified from https://getbootstrap.com/components/#navbar-->
-                    <li class='dropdown'>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{netid}}<span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="your-rides/">Your Rides</a></li>
-                        <li><a href="accounts/logout">Log Out</a></li>
-                      </ul>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
+{% block content %}
 
 <h1 align="center" style="font-family: 'Pavanam'">FAQ</h1>
 
 <hr>
 
 <div class="container">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 <!-- Accordion START -->
 
     <div class="panel-group" id="accordion">
@@ -179,13 +138,6 @@ footer {
     </div>
 </div>
 
-</body>
+{% endblock %}
 
-<!-- Footer -->
-    <footer>
-        <div class="container">
-            <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
-        </div>
-    </footer>
 
-</html>
