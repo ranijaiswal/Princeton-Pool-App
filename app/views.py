@@ -73,17 +73,31 @@ def your_rides(request):
 
 def open_airport(request):
 	user = request.user
-	context = {
-		'Title': 'Open Airport Requests',
-		'rides': Rides.objects.all().filter(date_time__gt=datetime.now()),
-		'netid': user.username,
-	}
+	context = {}
+	rtype = request.path.split('/')[1]
+	if rtype == 'airport':
+		context = {
+			'Title': 'Open Airport Requests',
+			'rides': Rides.objects.all().filter(ride_type='Airport'),
+			'netid': user.username,
+		}
+	elif rtype == 'shopping':
+		context = {
+			'Title': 'Open Shopping Requests',
+			'rides': Rides.objects.all().filter(ride_type='Shopping'),
+			'netid': user.username,
+		}
+	else:
+		context = {
+			'Title': 'Open Miscellaneous Requests',
+			'rides': Rides.objects.all().filter(ride_type='Other'),
+			'netid': user.username,
+		}
 	return render(request, 'app/open_req_list.html', context)
 
 def open_airport_new(request):
 	user = request.user
 	form = RequestForm()
-	#form = RequestForm(initial={'netid': user.username})
 	context = {
 		'Title': 'New Airport Request',
 		'form': form,
@@ -120,9 +134,16 @@ def confirmation_new_airport(request):
 	number_going = request.session['number_going']
 	date = request.session['date']
 	time = request.session['time']
-
-
-	ride = Rides(ride_type="Airport", start_destination = start, end_destination=dest,
+	
+	rtype = request.path.split('/')[1]
+	r = ""
+	if rtype == 'airport':
+		r = "Airport"
+	elif rtype == 'shopping':
+		r = "Shopping"
+	else: 
+		r = "Other"
+	ride = Rides(ride_type=r, start_destination = start, end_destination=dest, 
 				 other_destination="", date_time=date + " " + time, req_date_time=timezone.now(),
 				 seats = number_going)
 
@@ -218,6 +239,7 @@ def drop_ride(request, ride_id):
 	if (ride.usrs.count() == 0):
 		ride.delete()
 	return render(request, 'app/drop_ride.html', context)
+'''
 def open_shopping(request):
 	user = request.user
 	context = {
@@ -233,3 +255,4 @@ def open_other(request):
 		'netid': user.username,
 	}
 	return render(request, 'app/open_req_list.html', context)
+'''

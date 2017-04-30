@@ -29,6 +29,8 @@ class Rides(models.Model):
 
     def __int__(self):
         return self.id
+    class Meta: 
+        ordering = ["date_time"]
 
     class Meta: 
         ordering = ["date_time"]
