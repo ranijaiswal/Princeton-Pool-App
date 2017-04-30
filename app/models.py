@@ -30,6 +30,9 @@ class Rides(models.Model):
     def __int__(self):
         return self.id
 
+    class Meta: 
+        ordering = ["date_time"]
+
 class Users(models.Model):
     pools = models.ManyToManyField(Rides)
     netid = models.CharField(max_length=200, default="")
