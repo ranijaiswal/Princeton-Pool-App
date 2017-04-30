@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cas_ng',
     'app.apps.AppConfig',
+    'django.contrib.humanize',
 ]
 
 '''MIDDLEWARE = [
