@@ -26,12 +26,14 @@ class Rides(models.Model):
     req_date_time = models.DateTimeField(auto_now_add=True)
     usrs = models.ManyToManyField('Users')
     seats = models.IntegerField(default=0)
-    owner = models.CharField(max_length=200) #netid
+    # owner = models.CharField(max_length=200) #netid
     full_name = models.CharField(max_length=200, default="")
     own_car = models.BooleanField(default=False)
 
     def __int__(self):
         return self.id
+    class Meta: 
+        ordering = ["date_time"]
 
 class Users(models.Model):
     pools = models.ManyToManyField(Rides)

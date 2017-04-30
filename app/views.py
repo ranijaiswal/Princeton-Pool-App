@@ -63,7 +63,7 @@ def feedback(request):
 def your_rides(request):
 	user = request.user
 	theUser = Users.objects.get(netid=user.username) 
-	rides = theUser.pools.all().order_by('date_time')
+	rides = theUser.pools.all()
 	context = {
 		'Title': 'Your Rides',
 		'rides': rides,
@@ -78,19 +78,19 @@ def open_airport(request):
 	if rtype == 'airport':
 		context = {
 			'Title': 'Open Airport Requests',
-			'rides': Rides.objects.all().filter(ride_type='Airport').order_by('date_time'),
+			'rides': Rides.objects.all().filter(ride_type='Airport'),
 			'netid': user.username,
 		}
 	elif rtype == 'shopping':
 		context = {
 			'Title': 'Open Shopping Requests',
-			'rides': Rides.objects.all().filter(ride_type='Shopping').order_by('date_time'),
+			'rides': Rides.objects.all().filter(ride_type='Shopping'),
 			'netid': user.username,
 		}
 	else:
 		context = {
 			'Title': 'Open Miscellaneous Requests',
-			'rides': Rides.objects.all().filter(ride_type='Other').order_by('date_time'),
+			'rides': Rides.objects.all().filter(ride_type='Other'),
 			'netid': user.username,
 		}
 	return render(request, 'app/open_req_list.html', context)

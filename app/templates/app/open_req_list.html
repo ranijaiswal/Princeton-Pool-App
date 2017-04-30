@@ -95,11 +95,11 @@
                 <small class="mb-2">Destination: {{ride.start_destination}} to {{ ride.end_destination}} </small>
                 <br>
             <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>
-            <small class="text-muted"><br>Current Owner: {{ride.owner}} </small>
+            <!-- <small class="text-muted"><br>Current Owner: {{ride.owner}} </small> -->
             <small class="text-muted"><br>Current Riders: {% for user in ride.usrs.all %} {{user.netid}} {% endfor %} </small>
-            {% if netid == ride.owner %}
+            <!--{% if netid == ride.owner %}
                 <small class="text-muted"><br>You are already in this ride!</small>
-            {% endif %}
+            {% endif %}-->
             </div>
             </div>
           </a>
