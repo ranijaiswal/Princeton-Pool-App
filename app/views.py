@@ -100,9 +100,18 @@ def open_requests(request):
 @login_required(login_url='/accounts/login/')
 def create_new_request(request):
 	user = request.user
-	form = RequestForm()
+	rtype = request.path.split('/')[1]
+
+	form = RequestForm(rtype=rtype)
+
+	
+	title = "New Request"
+	if rtype == 'airport':
+		title = 'New Airport Request'
+	elif rtype == 'shopping':
+		title = 'New Shopping Request'
 	context = {
-		'Title': 'New Airport Request',
+		'Title': title,
 		'form': form,
 		'netid': user.username,
 	}
@@ -110,7 +119,7 @@ def create_new_request(request):
 
 @login_required(login_url='/accounts/login/')
 def confirm_new_request(request):
-	form = RequestForm(request.POST or None)
+	form = RequestForm(request.POST or None, rtype="")
 	user = request.user
 
 	if request.method == 'POST':
