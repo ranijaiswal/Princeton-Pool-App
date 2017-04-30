@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- Custom CSS -->
+
 <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
 <link href="{% static 'css/master.css' %}" rel="stylesheet">
 {% endblock %} 
@@ -53,8 +54,8 @@ h3 {text-align:center;}
     {{ form.as_table }}
     </table>
     <hr>
-    <button type="button" data-dismiss="modal" class="btn btn-primary" onClick = "history.go(-1);return true;">Back to Open Requests</button>
-    <input type="submit" value="Next" class="btn btn-secondary">
+    <button type="button" class="btn btn-secondary" onClick = "history.go(-1);return true;">Back</button>
+    <input type="submit" value="Next" class="btn btn-primary">
       </form>
 </div>
 {% endblock %}

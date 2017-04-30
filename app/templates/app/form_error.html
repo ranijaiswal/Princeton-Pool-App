@@ -22,43 +22,23 @@
 {% endblock %}
 
 {% block content %}
-<body class='open_req_container'>
-  <div align='center'>
-    <div class= "vertical-veil">
-    <a href="new" class="btn btn-outline btn-lg mb-1"> <span class="network-name"><b>Make A New Request</b></span></a>
-      <br>
-      <div class="list-group open_req_list">
-        <h1 align="center">{{Title}}</h1>
-        <div class= "d-flex flex-column justify-content-center">
-          {% for ride in rides %}
-          <a href="select/{{ride.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-              <div class='lg-info'>
-                <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right">{{ride.req_date_time|naturaltime}}</small></h5>
 
-                <small class="mb-2">Destination: {{ride.start_destination}} to {{ ride.end_destination}} </small>
-                <br>
-            <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>
-            <br>
-            <small class="mb-2"># empty seats: {{ ride.seats }}</small>
-            <small class="text-muted"><br>Current Riders:
-            {% for user in ride.usrs.all %}
-            {{user.netid}}
-            {% endfor %} </small>
-            {% for user in ride.usrs.all %}
-            {%if netid == user.netid%}
-                <small class="text-muted"><br>You are already in this ride!</small>
-            {%endif%}
-            {% endfor %}
-
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
             </div>
-            </div>
-          </a>
-
         {% endfor %}
-      </div>
-    </div>
-  </div>
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+       <input type="submit" class="btn btn-warning" value = "Edit Request" onClick="history.go(-1);return true;">
 
 {% endblock %}
 <!-- </div> -->

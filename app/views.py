@@ -109,26 +109,31 @@ def create_new_request(request):
 
 @login_required(login_url='/accounts/login/')
 def confirm_new_request(request):
-	form = RequestForm(request.POST)
+	form = RequestForm(request.POST or None)
 	user = request.user
-	if form.is_valid():
-		context = {
-			'Title': 'Confirm New Airport',
-			'start': form.cleaned_data['starting_destination'],
-			'dest': form.cleaned_data['destination'],
-			'number_going': form.cleaned_data['number_going'],
-			'date': form.cleaned_data['date'],
-			'time': form.cleaned_data['time'],
-			'netid': user.username,
-		}
-		request.session['start'] = form.cleaned_data['starting_destination']
-		request.session['dest'] = form.cleaned_data['destination']
-		request.session['number_going'] = form.cleaned_data['number_going']
-		request.session['date'] = form.cleaned_data['date'].isoformat()
-		request.session['time'] = form.cleaned_data['time'].strftime("%H:%M")
-		return render(request, 'app/confirm_ride.html', context)
-	else:
-		raise Http404
+
+	if request.method == 'POST':
+		if form.is_valid():
+			context = {
+				'Title': 'Confirm New Airport',
+				'start': form.cleaned_data['starting_destination'],
+				'dest': form.cleaned_data['destination'],
+				'number_going': form.cleaned_data['number_going'],
+				'date': form.cleaned_data['date'],
+				'time': form.cleaned_data['time'],
+				'netid': user.username,
+			}
+			request.session['start'] = form.cleaned_data['starting_destination']
+			request.session['dest'] = form.cleaned_data['destination']
+			request.session['number_going'] = form.cleaned_data['number_going']
+			request.session['date'] = form.cleaned_data['date'].isoformat()
+			request.session['time'] = form.cleaned_data['time'].strftime("%H:%M")
+			return render(request, 'app/confirm_ride.html', context)
+
+	return render(request,'app/form_error.html', {'form': form})
+	# else:
+	# 	pass
+		#raise
 
 @login_required(login_url='/accounts/login/')
 def confirmation_new_request(request):
