@@ -81,13 +81,13 @@
 
   <div align='center'>
     <div class= "vertical-veil">
-    <a href="/airport/open/new" class="btn btn-outline btn-lg mb-1"> <span class="network-name"><b>Make A New Request</b></span></a>
+    <a href="new" class="btn btn-outline btn-lg mb-1"> <span class="network-name"><b>Make A New Request</b></span></a>
       <br>
       <div class="list-group open_req_list">
         <h1 align="center">{{Title}}</h1>
         <div class= "d-flex flex-column justify-content-center">
           {% for ride in rides %}
-          <a href="/airport/open/select/{{ride.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
+          <a href="select/{{ride.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
               <div class='lg-info'>
                 <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right">1 day ago</small></h5>

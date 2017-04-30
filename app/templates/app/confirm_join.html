@@ -83,7 +83,7 @@ footer {
   <p>Date and time of ride: {{Date}}</p>
   <p>Current passenger(s): {% for r in Riders %}  <br> &emsp; {{ r.netid }}  {% endfor %} </p>
   <hr>
-  <form action="/airport/open/select/confirm/{{id}}">
+  <form action="confirm/{{id}}">
     <input type="submit" class="btn btn-primary" value = "Back to Open Requests"
     onClick="history.go(-1);return true;">
     <input type="submit" class="btn btn-secondary" value = "Confirm" />

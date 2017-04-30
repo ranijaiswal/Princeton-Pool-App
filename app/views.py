@@ -71,31 +71,31 @@ def your_rides(request):
 	}
 	return render(request, 'app/your_rides.html', context)
 
-def open_airport(request):
+def open_requests(request):
 	user = request.user
 	context = {}
 	rtype = request.path.split('/')[1]
 	if rtype == 'airport':
 		context = {
 			'Title': 'Open Airport Requests',
-			'rides': Rides.objects.all().filter(ride_type='Airport'),
+			'rides': Rides.objects.all().filter(ride_type='airport'),
 			'netid': user.username,
 		}
 	elif rtype == 'shopping':
 		context = {
 			'Title': 'Open Shopping Requests',
-			'rides': Rides.objects.all().filter(ride_type='Shopping'),
+			'rides': Rides.objects.all().filter(ride_type='shopping'),
 			'netid': user.username,
 		}
 	else:
 		context = {
 			'Title': 'Open Miscellaneous Requests',
-			'rides': Rides.objects.all().filter(ride_type='Other'),
+			'rides': Rides.objects.all().filter(ride_type='other'),
 			'netid': user.username,
 		}
 	return render(request, 'app/open_req_list.html', context)
 
-def open_airport_new(request):
+def create_new_request(request):
 	user = request.user
 	form = RequestForm()
 	context = {
@@ -105,7 +105,7 @@ def open_airport_new(request):
 	}
 	return render(request, 'app/form.html', context)
 
-def confirm_new_airport(request):
+def confirm_new_request(request):
 	form = RequestForm(request.POST)
 	user = request.user
 	if form.is_valid():
@@ -127,7 +127,7 @@ def confirm_new_airport(request):
 	else:
 		raise Http404
 
-def confirmation_new_airport(request):
+def confirmation_new_request(request):
 	user = request.user
 	start = request.session['start']
 	dest = request.session['dest']
@@ -136,14 +136,7 @@ def confirmation_new_airport(request):
 	time = request.session['time']
 	
 	rtype = request.path.split('/')[1]
-	r = ""
-	if rtype == 'airport':
-		r = "Airport"
-	elif rtype == 'shopping':
-		r = "Shopping"
-	else: 
-		r = "Other"
-	ride = Rides(ride_type=r, start_destination = start, end_destination=dest, 
+	ride = Rides(ride_type=rtype, start_destination = start, end_destination=dest, 
 				 other_destination="", date_time=date + " " + time, req_date_time=timezone.now(),
 				 seats = number_going)
 
@@ -162,6 +155,7 @@ def confirmation_new_airport(request):
 		'date': date,
 		'time': time,
 		'netid': user.username,
+		'rtype': request.path.split('/')[1],
 	}
 	subject_line = 'Your Ride Request from ' + start + ' to ' + dest
 	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + date + ' at ' + time + ', from ' + start + ' to ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the \"Your Rides\" page on our website.\n' + 'Thank you for using Princeton Go!'
@@ -172,7 +166,7 @@ def confirmation_new_airport(request):
 
 	return render(request, 'app/confirmed_ride.html', context)
 
-def join_airport_ride(request, ride_id):
+def join_ride(request, ride_id):
 
 	ride = get_object_or_404(Rides, pk=ride_id)
 	user = request.user
@@ -186,7 +180,7 @@ def join_airport_ride(request, ride_id):
 	}
 	return render(request, 'app/confirm_join.html', context)
 
-def confirm_join_airport(request, ride_id):
+def confirm_join_ride(request, ride_id):
 	ride = get_object_or_404(Rides, pk=ride_id)
 
 	name = "netid"+str(ride_id)
@@ -206,6 +200,7 @@ def confirm_join_airport(request, ride_id):
 		'dest': ride.end_destination,
 		'date': ride.date_time,
 		'netid': user.username,
+		'rtype': request.path.split('/')[1],
 	}
 	# email notif
 
@@ -239,20 +234,3 @@ def drop_ride(request, ride_id):
 	if (ride.usrs.count() == 0):
 		ride.delete()
 	return render(request, 'app/drop_ride.html', context)
-'''
-def open_shopping(request):
-	user = request.user
-	context = {
-		'Title': 'Open Shopping Requests',
-		'netid': user.username,
-	}
-	return render(request, 'app/open_req_list.html', context)
-
-def open_other(request):
-	user = request.user
-	context = {
-		'Title': 'Open Miscellaneous Requests',
-		'netid': user.username,
-	}
-	return render(request, 'app/open_req_list.html', context)
-'''
