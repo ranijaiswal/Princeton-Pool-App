@@ -79,19 +79,19 @@ def open_requests(request):
 	if rtype == 'airport':
 		context = {
 			'Title': 'Open Airport Requests',
-			'rides': Rides.objects.all().filter(ride_type='airport'),
+			'rides': Rides.objects.all().filter(ride_type='airport', seats__gt=0),
 			'netid': user.username,
 		}
 	elif rtype == 'shopping':
 		context = {
 			'Title': 'Open Shopping Requests',
-			'rides': Rides.objects.all().filter(ride_type='shopping'),
+			'rides': Rides.objects.all().filter(ride_type='shopping', seats__gt=0),
 			'netid': user.username,
 		}
 	else:
 		context = {
 			'Title': 'Open Miscellaneous Requests',
-			'rides': Rides.objects.all().filter(ride_type='other'),
+			'rides': Rides.objects.all().filter(ride_type='other', seats__gt=0),
 			'netid': user.username,
 		}
 	return render(request, 'app/open_req_list.html', context)
@@ -138,9 +138,9 @@ def confirmation_new_request(request):
 	number_going = request.session['number_going']
 	date = request.session['date']
 	time = request.session['time']
-	
+
 	rtype = request.path.split('/')[1]
-	ride = Rides(ride_type=rtype, start_destination = start, end_destination=dest, 
+	ride = Rides(ride_type=rtype, start_destination = start, end_destination=dest,
 				 other_destination="", date_time=date + " " + time, req_date_time=timezone.now(),
 				 seats = number_going)
 
@@ -193,10 +193,10 @@ def confirm_join_ride(request, ride_id):
 	user = request.user
 	rider, created = Users.objects.get_or_create(netid=user.username)
 	rider.save()
-
 	rider.pools.add(ride)
 	rider.save()
 	ride.usrs.add(rider)
+	ride.seats -= 1
 	ride.save()
 
 	context = {
@@ -236,6 +236,7 @@ def drop_ride(request, ride_id):
 
 	rider, created = Users.objects.get_or_create(netid=user.username)
 	ride.usrs.remove(rider)
+	ride.seats += 1
 	rider.pools.remove(ride)
 	ride.save()
 	rider.save()
