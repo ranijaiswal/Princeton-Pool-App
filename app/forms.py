@@ -48,14 +48,14 @@ class RequestForm(forms.Form):
         self.fields['date'] = forms.DateField(widget=SelectDateWidget, label="When go (MM/DD/YYYY)?")
         self.fields['time'] = forms.TimeField(label="What time go (HH:MM)?")
 
-    def clean_date_time(self):
-        ride_date = self.cleaned_data['date']
-        ride_time = self.cleaned_data['time']
-        date_time = ('%s %s' % (ride_date, ride_time))
-        date_time = datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S')
-        if datetime.now() >= date_time:
-            raise forms.ValidationError(u'Invalid Date or Time! "%s"' % date_time)
-        return date_time
+    # def clean_date_time(self):
+    #     ride_date = self.cleaned_data['date']
+    #     ride_time = self.cleaned_data['time']
+    #     date_time = ('%s %s' % (ride_date, ride_time))
+    #     date_time = datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S')
+    #     if datetime.now() >= date_time:
+    #         raise forms.ValidationError(u'Invalid Date or Time! "%s"' % date_time)
+    #     return date_time
 
     def clean(self):
         cleaned_data = self.cleaned_data;
@@ -68,13 +68,13 @@ class RequestForm(forms.Form):
 
         if (number_going > 200):
             raise forms.ValidationError(u'Sorry, we are not handling large rideshares. ')
-        # ride_date = cleaned_data.get('date')
-        # ride_time = cleaned_data.get('time')
-        # date_time = ('%s %s' % (ride_date, ride_time))
-        # date_time = datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S')
-        # if datetime.now() >= date_time:
-        #     raise forms.ValidationError(u'Invalid Date or Time! "%s"' % date_time)
-        #
+        ride_date = cleaned_data.get('date')
+        ride_time = cleaned_data.get('time')
+        date_time = ('%s %s' % (ride_date, ride_time))
+        date_time = datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S')
+        if datetime.now() >= date_time:
+            raise forms.ValidationError(u'Invalid Date or Time! "%s"' % date_time)
+
 
         if (starting_destination == destination):
             raise forms.ValidationError(u'Starting and end location cannot be the same!')
