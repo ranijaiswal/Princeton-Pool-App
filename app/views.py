@@ -72,6 +72,7 @@ def your_rides(request):
 	}
 	return render(request, 'app/your_rides.html', context)
 
+@login_required(login_url='/accounts/login/')
 def open_requests(request):
 	user = request.user
 	context = {}
@@ -79,7 +80,7 @@ def open_requests(request):
 	if rtype == 'airport':
 		context = {
 			'Title': 'Open Airport Requests',
-			'rides': Rides.objects.all().filter(ride_type='airport', seats__gt=0),
+			'rides': Rides.objects.all().filter(ride_type='airport', seats__gt=0).exclude(usrs__netid__contains = user.username),
 			'netid': user.username,
 		}
 	elif rtype == 'shopping':
@@ -99,9 +100,18 @@ def open_requests(request):
 @login_required(login_url='/accounts/login/')
 def create_new_request(request):
 	user = request.user
-	form = RequestForm()
+	rtype = request.path.split('/')[1]
+
+	form = RequestForm(rtype=rtype)
+	#form = RequestForm()
+
+	title = "New Request"
+	if rtype == 'airport':
+		title = 'New Airport Request'
+	elif rtype == 'shopping':
+		title = 'New Shopping Request'
 	context = {
-		'Title': 'New Airport Request',
+		'Title': title,
 		'form': form,
 		'netid': user.username,
 	}
@@ -109,7 +119,8 @@ def create_new_request(request):
 
 @login_required(login_url='/accounts/login/')
 def confirm_new_request(request):
-	form = RequestForm(request.POST or None)
+	rtype = request.path.split('/')[1]
+	form = RequestForm(request.POST or None, rtype=rtype)
 	user = request.user
 
 	if request.method == 'POST':
