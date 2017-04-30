@@ -1,4 +1,5 @@
 {% extends "app/base.html" %}
+{% load humanize %}
 
 {% block title %} Open Requests {% endblock %}
 
@@ -33,7 +34,7 @@
           <a href="select/{{ride.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
               <div class='lg-info'>
-                <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right">1 day ago</small></h5>
+                <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right">{{ride.req_date_time|naturaltime}}</small></h5>
 
                 <small class="mb-2">Destination: {{ride.start_destination}} to {{ ride.end_destination}} </small>
                 <br>
