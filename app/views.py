@@ -103,7 +103,7 @@ def create_new_request(request):
 	rtype = request.path.split('/')[1]
 
 	form = RequestForm(rtype=rtype)
-
+	#form = RequestForm()
 	
 	title = "New Request"
 	if rtype == 'airport':
@@ -119,7 +119,8 @@ def create_new_request(request):
 
 @login_required(login_url='/accounts/login/')
 def confirm_new_request(request):
-	form = RequestForm(request.POST or None, rtype="")
+	rtype = request.path.split('/')[1]
+	form = RequestForm(request.POST or None, rtype=rtype)
 	user = request.user
 
 	if request.method == 'POST':

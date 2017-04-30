@@ -7,14 +7,15 @@ from datetime import datetime
 from django.forms.extras.widgets import SelectDateWidget
 
 AIRPORT_DESTINATIONS = (
+    ('PTON', 'Princeton'),
     ('EWR', 'EWR'),
     ('JFK', 'JFK'),
     ('LGA', 'LGA'),
     ('PHL', 'PHL'),
-    ('PTON', 'Princeton'),
 )
 
 SHOPPING_DESTINATIONS = (
+    ('Princeton', 'Princeton'),
     ('Wegman\'s', 'Wegman\'s'),
     ('Shop Rite', 'Shop Rite'),
     ('Trader Joe\'s', 'Trader Joe\'s'),
@@ -28,23 +29,24 @@ class RequestForm(forms.Form):
 
     # class Meta:
     #     widgets = {'date': SelectDateWidget()}
+
     def __init__(self,*args,**kwargs):
         rtype = kwargs.pop("rtype")
         super(RequestForm, self).__init__(*args, **kwargs)
+        
         if rtype == 'airport':
             self.fields['starting_destination'] = forms.ChoiceField(label='Starting Destination?', choices=AIRPORT_DESTINATIONS)
             self.fields['destination'] = forms.ChoiceField(label='Where go?', choices=AIRPORT_DESTINATIONS)
+        
         elif rtype == 'shopping':
             self.fields['starting_destination'] = forms.ChoiceField(label='Starting Destination?', choices=SHOPPING_DESTINATIONS)
             self.fields['destination'] = forms.ChoiceField(label='Where go?', choices=SHOPPING_DESTINATIONS)
         elif rtype == 'other':
             self.fields['starting_destination'] = forms.CharField(label='Starting Destination?')
             self.fields['destination'] = forms.CharField(label='Where go?')
-  
         self.fields['number_going'] = forms.IntegerField(label = 'How many go?')
         self.fields['date'] = forms.DateField(widget=SelectDateWidget, label="When go (MM/DD/YYYY)?")
         self.fields['time'] = forms.TimeField(label="What time go (HH:MM)?")
-
 
     def clean_date_time(self):
         ride_date = self.cleaned_data['date']
