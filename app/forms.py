@@ -44,7 +44,7 @@ class RequestForm(forms.Form):
         elif rtype == 'other':
             self.fields['starting_destination'] = forms.CharField(label='Starting Destination?')
             self.fields['destination'] = forms.CharField(label='Where go?')
-        self.fields['number_going'] = forms.IntegerField(label = 'How many go?')
+        self.fields['number_going'] = forms.IntegerField(label = 'How many others can go?')
         self.fields['date'] = forms.DateField(widget=SelectDateWidget, label="When go (MM/DD/YYYY)?")
         self.fields['time'] = forms.TimeField(label="What time go (HH:MM)?")
 
