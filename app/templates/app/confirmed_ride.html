@@ -3,33 +3,33 @@
 {% block title %} Confirm New Ride | Princeton Go {% endblock %}
 
 {% block links %}
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
-<link href="{% static 'css/master.css' %}" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
+    <link href="{% static 'css/master.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-<h2 style="padding-left:50px">Successfully Created Ride</h2>
-<div id="confirm-info-box">
-  <div id= "confirm-user-info">
-    <p><b>You will also receive an email with the following information: </b></p>
-    <hr>
-  <p>Your Journey: {{ start }} to {{ dest }} </p>
-  <p>Date and time of ride: {{ date }} at {{ time }}</p>
-      <h3 style="text-align:center"><b>Enjoy Your Carpool!</b></h3>
-  <hr>
-  <form action="/{{rtype}}/open/">
-    <input type="submit" class="btn btn-primary"value = "Back to Open Requests" />
-  </form>
-</div>
-</div>
+    <h2 style="padding-left:50px">Successfully Created Ride</h2>
+    <div id="confirm-info-box">
+        <div id= "confirm-user-info">
+            <p><b>You will also receive an email with the following information: </b></p>
+            <hr>
+            <p>Your Journey: {{ start }} to {{ dest }} </p>
+            <p>Date and time of ride: {{ date }} at {{ time }}</p>
+            <h3 style="text-align:center"><b>Enjoy Your Carpool!</b></h3>
+            <hr>
+            <form action="/{{rtype}}/open/">
+                <input type="submit" class="btn btn-primary"value = "Back to Open Requests" />
+            </form>
+        </div>
+    </div>
 
 {% endblock %}
 
 {% block endscripts %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 {% endblock %}

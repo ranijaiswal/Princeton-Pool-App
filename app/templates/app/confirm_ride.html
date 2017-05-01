@@ -3,47 +3,47 @@
 {% block title %} Confirm New Request | Princeton Go {% endblock %}
 
 {% block links %}
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
-<!-- Custom CSS -->
-<link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
-<link href="{% static 'css/master.css' %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
+    <link href="{% static 'css/master.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-<h2 style="padding-left:50px">Confirm New Request</h2>
+    <h2 style="padding-left:50px">Confirm New Request</h2>
 
-<div id="confirm-info-box">
-  <div id= "confirm-user-info">
-  <p><b>Please confirm the following information is correct: </b></p>
-  <hr>
-  <p>Who go? {{ netid }}</p>
-      <p>How many go?: {{ number_going }}</p>
-  <p>Where go? {{ start }} to {{ dest }}</p>
-  <p>When go? {{date}} at {{ time }}</p>
-
-
-  <hr>
-  <form action = "confirmation">
-    <input type="submit" class="btn btn-secondary" value = "Edit Request"
-    onClick="history.go(-1);return true;">
-    <input type="submit" class="btn btn-primary" value = "Confirm" />
-  </form>
-  </div>
-  <br>
+    <div id="confirm-info-box">
+        <div id= "confirm-user-info">
+            <p><b>Please confirm the following information is correct: </b></p>
+            <hr>
+            <p>Who go? {{ netid }}</p>
+            <p>How many go?: {{ number_going }}</p>
+            <p>Where go? {{ start }} to {{ dest }}</p>
+            <p>When go? {{date}} at {{ time }}</p>
 
 
-</div>
+            <hr>
+            <form action = "confirmation">
+                <input type="submit" class="btn btn-secondary" value = "Edit Request"
+                       onClick="history.go(-1);return true;">
+                <input type="submit" class="btn btn-primary" value = "Confirm" />
+            </form>
+        </div>
+        <br>
+
+
+    </div>
 
 {% endblock %}
 
 {% block endscripts %}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 {% endblock %}
