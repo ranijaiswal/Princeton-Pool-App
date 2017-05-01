@@ -7,8 +7,26 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
+<!-- <link href="{% static 'css/landing-page.css' %}" rel="stylesheet"> -->
 <link href="{% static 'css/master.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block style %}
+<style>
+@import url('https://fonts.googleapis.com/css?family=Pavanam');
+
+/*footer {
+  font-family: Pavanam, sans-serif;
+  background-color: #222;
+}*/
+
+form .btn {
+  font-family: Pavanam;
+  font-size: 20px;
+}
+
+</style>
+
 {% endblock %}
 
 {% block content %}
@@ -23,6 +41,7 @@
   <hr>
   <form action="/{{rtype}}/open/">
     <input type="submit" class="btn btn-primary"value = "Back to Open Requests" />
+    <a href={% url 'your_rides'%} class='btn btn-default'>Your Rides</a>
   </form>
 </div>
 </div>

@@ -5,11 +5,11 @@
 {% block links %}
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 <!-- Custom CSS -->
 
-<link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
+<!-- <link href="{% static 'css/landing-page.css' %}" rel="stylesheet"> -->
 <link href="{% static 'css/master.css' %}" rel="stylesheet">
 {% endblock %} 
 
@@ -28,11 +28,12 @@
   border-radius: 5px;
 }
 
-
-.button {
-    border-radius: 8px;
-    background-color: white;
+form .btn .btn-secondary {
+  font-family: Pavanam;
+  font-size: 20px;
+  background-color: white;
 }
+
 
 footer {
   font-family: Pavanam, sans-serif;
@@ -47,16 +48,16 @@ h3 {text-align:center;}
 <h2 style="padding-left:50px">Create New Request</h2>
 
 <div class="form-container">
-  <form action = "confirm/" method="POST">
-    {% csrf_token %}
-    <h3>Hello, {{netid}}!</h3>
-    <table> 
-    {{ form.as_table }}
-    </table>
-    <hr>
-    <button type="button" class="btn btn-warning" onClick = "history.go(-1);return true;">Back</button>
-    <input type="submit" value="Next" class="btn btn-primary">
-      </form>
+    <form action = "confirm/" method="POST">
+        {% csrf_token %}
+        <h3>Hello, {{netid}}!</h3>
+        <table> 
+        {{ form.as_table }}
+        </table>
+        <hr>
+        <input type="button" class="btn btn-secondary" value="Back" onClick = "history.go(-1);return true;">
+        <input type="submit" value="Next" class="btn btn-primary">
+    </form>
 </div>
 {% endblock %}
 
