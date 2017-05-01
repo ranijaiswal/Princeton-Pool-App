@@ -89,6 +89,9 @@ hr.style2 {
                                     <small class="mb-2">Destination: {{ride.start_destination}} to {{ ride.end_destination}} </small>
                                     <br>
                                     <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>
+                                    <br>
+                                     <small class="mb-2"># empty seats: {{ ride.seats }}</small>
+                                     
                                     <small class="text-muted"><br>Current Riders: {% for user in ride.usrs.all %} {{user.netid}} {% endfor %} </small>
                                     <br><hr class='style2'>
 
