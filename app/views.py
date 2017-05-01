@@ -86,13 +86,13 @@ def open_requests(request):
 	elif rtype == 'shopping':
 		context = {
 			'Title': 'Open Shopping Requests',
-			'rides': Rides.objects.all().filter(ride_type='shopping', seats__gt=0),
+			'rides': Rides.objects.all().filter(ride_type='shopping', seats__gt=0).exclude(usrs__netid__contains = user.username),
 			'netid': user.username,
 		}
 	else:
 		context = {
 			'Title': 'Open Miscellaneous Requests',
-			'rides': Rides.objects.all().filter(ride_type='other', seats__gt=0),
+			'rides': Rides.objects.all().filter(ride_type='other', seats__gt=0).exclude(usrs__netid__contains = user.username),
 			'netid': user.username,
 		}
 	return render(request, 'app/open_req_list.html', context)
