@@ -24,25 +24,57 @@
     {#    <link rel = "stylesheet" href="style.css">#}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
+    <!-- <link href="{% static 'css/landing-page.css' %}" rel="stylesheet"> -->
     <link href="{% static 'css/master.css' %}" rel="stylesheet">
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <!-- <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"> -->
 
 {% endblock %}
 
 {% block content %}
-    <body class ='your_rides_container' >
-    <div align = 'center'>
-        <div class='vertical-veil' style="height: 100px;">
-            <br>
-            <div class="list-group your_rides_list">
-                <h4 align="center">You have been dropped from this ride. Thank you for using Princeton Go!</h4>
-            </div>
-        </div>
-    </div>
-    </body>
+
+<body class ='your_rides_container' >
+<div align = 'center'>
+  <div class='vertical-veil' style="height: 100px;">
+    <br>
+  <div class="list-group your_rides_list">
+  <h4 align="center">You have been dropped from this ride. Thank you for using Princeton Go!</h4>
+  <a href={% url 'your_rides'%} class='btn btn-default'>Your Rides</a>
+  </div>
+</div>
+</div>
+</body>
+
 {% endblock %}
 
+{% block style %}
+<style>
+@import url('https://fonts.googleapis.com/css?family=Pavanam');
+
+footer {
+  font-family: Pavanam, sans-serif;
+  background-color: #222;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+body {
+    font-family: 'Pavanam', Helvetica, sans-serif;
+}
+.navbar a {
+    font-size: 20px;
+}
+
+#myModal {
+    padding: 20px;
+}
+
+.modal-header .close {
+  font-size: 30px; //bigger
+}
+
+
+</style>
+{% endblock %}
 
 {% block endscripts %}
 <!-- jQuery -->
