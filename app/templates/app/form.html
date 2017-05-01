@@ -2,6 +2,7 @@
 
 {% block title %} Create New Request | Princeton Go {% endblock %}
 
+
 {% block links %}
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -13,20 +14,20 @@
 <link href="{% static 'css/master.css' %}" rel="stylesheet">
 {% endblock %} 
 
-{% block style %}
-<style>
-@import url('https://fonts.googleapis.com/css?family=Pavanam');
 
-.form-text {
-  width: 300px;
-  border-radius: 5px;
-  border-width: 2px;
-}
 
-.short-form-text {
-  width: 200px;
-  border-radius: 5px;
-}
+{% block endscripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block links %}
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Custom CSS -->
+
 
 form .btn .btn-secondary {
   font-family: Pavanam;
@@ -41,11 +42,14 @@ footer {
 }
 h3 {text-align:center;}
 
-</style>
+    <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
+    <link href="{% static 'css/master.css' %}" rel="stylesheet">
 {% endblock %}
 
+
 {% block content %}
-<h2 style="padding-left:50px">Create New Request</h2>
+    <h2 style="padding-left:50px">Create New Request</h2>
+
 
 <div class="form-container">
     <form action = "confirm/" method="POST">
@@ -59,9 +63,10 @@ h3 {text-align:center;}
         <input type="submit" value="Next" class="btn btn-primary">
     </form>
 </div>
+
 {% endblock %}
 
-{% block endscripts %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-{% endblock %}
+{#{% block endscripts %}#}
+{#<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>#}
+{#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+{#{% endblock %}#}

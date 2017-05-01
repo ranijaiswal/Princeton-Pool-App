@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
     <!-- Latest compiled and minified JavaScript -->
-{#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>#}
+    {#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>#}
 
     <!-- Bootstrap Core CSS -->
     {#    <link href="../static/css/bootstrap.min.css" rel="stylesheet">#}
@@ -76,6 +76,7 @@ hr.style2 {
                 <h1 align="center">{{Title}}</h1><hr class='style2'>
                 <div class= "d-flex flex-column justify-content-center">
 
+
                         {% for ride in rides %}
                         <!-- <a class="list-group-item list-group-item-action flex-column align-items-start"> -->
                             <!-- <div class="d-flex w-100 justify-content-between"> -->
@@ -83,6 +84,7 @@ hr.style2 {
                                 <!-- <div class='lg-info'> -->
                                     <button type='button' class='btn btn-danger pull-right' data-toggle="modal" data-target="#myModal"><span class='glyphicon glyphicon-remove'></span> Drop</button>
                                     <h5 class="mb-1">Ride #{{ride.id}}</h5>
+
 
                                     <small class="mb-2">Destination: {{ride.start_destination}} to {{ ride.end_destination}} </small>
                                     <br>
@@ -117,7 +119,7 @@ hr.style2 {
                                 <!-- </div>
                             </div> -->
                         </a>
-                {% endfor %}
+                    {% endfor %}
 
                 </div>
             </div>

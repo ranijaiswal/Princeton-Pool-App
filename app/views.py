@@ -27,7 +27,6 @@ import os
 #inside index page
 def index(request):
 	user = request.user
-	#Rides.objects.filter(date_time__lt=datetime.now()).delete()
 	rider, created = Users.objects.get_or_create(netid=user.username)
 	context = {
 		'Title': 'Welcome to Princeton Pool!',
@@ -142,9 +141,6 @@ def confirm_new_request(request):
 			return render(request, 'app/confirm_ride.html', context)
 
 	return render(request,'app/form_error.html', {'form': form})
-	# else:
-	# 	pass
-		#raise
 
 @login_required(login_url='/accounts/login/')
 def confirmation_new_request(request):
@@ -177,13 +173,14 @@ def confirmation_new_request(request):
 		'netid': user.username,
 		'rtype': request.path.split('/')[1],
 	}
-	subject_line = 'Your Ride Request from ' + start + ' to ' + dest
-	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + date + ' at ' + time + ', from ' + start + ' to ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the \"Your Rides\" page on our website.\n' + 'Thank you for using Princeton Go!'
+	subject_line = 'Your Ride #' + str(ride.id) + ' Request from ' + start + ' to ' + dest
+
+	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + date + ' at ' + time + ', from ' + start + ' to ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
 	send_mail(subject_line, message,
 			  'Princeton Go <princetongo333@gmail.com>', [user.username + '@princeton.edu'],
+			  html_message=message,
 			  fail_silently=False,
 			  )
-
 	return render(request, 'app/confirmed_ride.html', context)
 
 @login_required(login_url='/accounts/login/')
@@ -227,13 +224,23 @@ def confirm_join_ride(request, ride_id):
 	# email notif
 
 
-	subject_line = 'Your Ride Request to ' + ride.end_destination
-	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + str(ride.date_time) + ', for destination ' + ride.end_destination + '. To make any changes, please visit the \"Your Rides\" page on our website.\n' + 'Thank you for using Princeton Go!'
-	send_mail(subject_line, message,
-			  'Princeton Go <princetongo333@gmail.com>', [user.username + '@princeton.edu'],
+	# email to joiner
+	subject_line = 'You Have Joined Ride #' + str(ride.id) + ' To ' + ride.end_destination
+	message = 'Hello!\n\nYou have joined a ride!\n\n' + 'For your records, this ride is for ' + str(ride.date_time) + ', from ' + ride.start_destination + ' to ' + ride.end_destination + '. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
+	send_mail(subject_line, message, 'Princeton Go <princetongo333@gmail.com>', 
+			  [user.username + '@princeton.edu'], html_message=message,
 			  fail_silently=False,
 			  )
 
+	# email to everyone in the ride
+	subject_line = 'New Rider for Ride #' + str(ride.id) + "!"
+
+	# list of all the riders
+	riders = []
+	for rider in ride.usrs.all():
+		riders.append(rider.netid + '@princeton.edu')
+	message = 'Hello!\n\n' + user.username + ' has joined your ride. Happy travels!'
+	send_mail(subject_line, message, 'Princeton Go <princetongo333@gmail.com>', riders, fail_silently=False)
 	# update DB
 
 	return render(request, 'app/confirmed_join.html', context)
@@ -242,7 +249,7 @@ def confirm_join_ride(request, ride_id):
 def drop_ride(request, ride_id):
 	user = request.user
 	ride = Rides.objects.get(pk=ride_id)
-
+	idnum = str(ride.id)
 	context = {
 		'start': ride.start_destination,
 		'end': ride.end_destination,
@@ -256,6 +263,26 @@ def drop_ride(request, ride_id):
 	rider.pools.remove(ride)
 	ride.save()
 	rider.save()
+
+	# email to dropper
+	subject_line = 'You Have Dropped Ride #' + idnum
+	message = 'Hello!\n\nYou have dropped a ride.\n\n' + 'For your records, this ride was for ' + str(ride.date_time) + ', from ' + ride.start_destination + ' to ' + ride.end_destination + '. Thank you for using Princeton Go!'
+	send_mail(subject_line, message, 'Princeton Go <princetongo333@gmail.com>', 
+			  [user.username + '@princeton.edu'],
+			  fail_silently=False,
+			  )
+
+	# email to everyone in the ride
+	subject_line = 'Someone dropped Ride #' + idnum
+
+	# list of all the riders
+	riders = []
+	for rider in ride.usrs.all():
+		riders.append(rider.netid + '@princeton.edu')
+	message = 'Hello!\n\n' + user.username + ' has dropped your ride. We have increased the number of available seats. Happy travels!'
+	send_mail(subject_line, message, 'Princeton Go <princetongo333@gmail.com>', riders, fail_silently=False)
+
+	#make sure this is the last thing done in the view
 	if (ride.usrs.count() == 0):
 		ride.delete()
 	return render(request, 'app/drop_ride.html', context)
