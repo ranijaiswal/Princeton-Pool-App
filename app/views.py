@@ -13,18 +13,7 @@ from django.db import models
 from .models import Rides, Users
 from datetime import datetime
 import os
-# Create your views here.
 
-
-#public facing index page
-# def public_index(request):
-# 	context = {
-# 		'Title': 'Welcome to Princeton Pool!',
-# 	}
-
-# 	return render(request, 'app/pre_login.html', context)
-
-#inside index page
 def index(request):
 	user = request.user
 	rider, created = Users.objects.get_or_create(netid=user.username)
