@@ -1,23 +1,6 @@
 {% extends "app/base.html" %}
 
-{% block title %} Feedback | Princeton Go {% endblock %}
-
-{% block style %}
-<style>
-form .btn .btn-secondary {
-  font-family: Pavanam;
-  font-size: 20px;
-  background-color: white;
-}
-
-
-footer {
-  font-family: Pavanam, sans-serif;
-  background-color: #222;
-}
-
- </style>
-{% endblock %}
+{% block title %} Thanks! | Princeton Go {% endblock %}
 
 {% block links %}
     <!-- Bootstrap Core CSS -->
@@ -36,18 +19,13 @@ footer {
 <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">{{ Title }}
+                <h1 class="page-header">{{ Title }}
                 </h1>
             </div>
         </div>
 
 <p> 
-<form action="thanks/" method="POST">
-    {% csrf_token %}
-    <table>
-    {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit" class="btn btn-primary">
+If you left your email address, we will get back to you shortly. Thank you for making this project better!
 </p>
 </div>
 </body>

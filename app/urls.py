@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'about/$', views.about, name='about'),
     url(r'faq/$', views.faq, name='faq'),
     url(r'feedback/$', views.feedback, name='feedback'),
+    url(r'feedback/thanks/$', views.feedback_thanks, name='feedback_thanks'),
     url(r'your-rides/$', views.your_rides, name='your_rides'),
     url(r'open/$', views.open_requests, name='open_requests'),
     url(r'open/select/(?P<ride_id>[0-9]+)$', views.join_ride, name='join_ride'),
