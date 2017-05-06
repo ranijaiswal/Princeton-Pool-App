@@ -7,24 +7,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.conf import settings
 from django.core.mail import send_mail, EmailMultiAlternatives
-from .forms import RequestForm
+from .forms import RequestForm, FeedbackForm
 from time import strftime
 from django.db import models
 from .models import Rides, Users
 from datetime import datetime
 import os
-# Create your views here.
 
-
-#public facing index page
-# def public_index(request):
-# 	context = {
-# 		'Title': 'Welcome to Princeton Pool!',
-# 	}
-
-# 	return render(request, 'app/pre_login.html', context)
-
-#inside index page
 def index(request):
 	user = request.user
 	rider, created = Users.objects.get_or_create(netid=user.username)
@@ -53,11 +42,37 @@ def faq(request):
 
 def feedback(request):
 	user = request.user
+	form = FeedbackForm()
 	context = {
-		'Title': 'Feedback',
+		'Title': 'Anonymous Feedback',
 		'netid': user.username,
+		'form': form
 	}
 	return render(request, 'app/feedback.html', context)
+
+def feedback_thanks(request):
+	user = request.user
+	form = FeedbackForm(request.POST or None)
+	if form.is_valid():
+
+		message_name = form.cleaned_data['name']
+		if message_name == "":
+			message_name = "anonymous"
+
+		message_email = ", whose email address is " + form.cleaned_data['email']
+		if message_email == ", whose email address is ":
+			message_email = ", who did not give an email address"
+
+		message = form.cleaned_data['feedback']
+		send_mail("Feedback", 
+				  "You have received feedback from " + message_name + message_email + ". They left the following message: \n\n" + message,
+				  'Princeton Go <princetongo333@gmail.com>', ['princetongo333@gmail.com'],
+				  fail_silently=False,
+				  )
+	context = {
+		'Title': 'Thank you for the feedback!'
+	}
+	return render(request, 'app/feedback_thanks.html', context)
 
 @login_required(login_url='/accounts/login/')
 def your_rides(request):

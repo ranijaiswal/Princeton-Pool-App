@@ -12,23 +12,19 @@
 
 <!-- <link href="{% static 'css/landing-page.css' %}" rel="stylesheet"> -->
 <link href="{% static 'css/master.css' %}" rel="stylesheet">
-{% endblock %} 
 
-
-
-{% block endscripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-{% endblock %}
-
-{% block links %}
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+       <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
+    <link href="{% static 'css/master.css' %}" rel="stylesheet">
     <!-- Custom CSS -->
 
+{% endblock %}
 
+{% block style %}
+<style>
 form .btn .btn-secondary {
   font-family: Pavanam;
   font-size: 20px;
@@ -42,8 +38,7 @@ footer {
 }
 h3 {text-align:center;}
 
-    <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
-    <link href="{% static 'css/master.css' %}" rel="stylesheet">
+ </style>
 {% endblock %}
 
 
@@ -66,7 +61,9 @@ h3 {text-align:center;}
 
 {% endblock %}
 
-{#{% block endscripts %}#}
-{#<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>#}
-{#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
-{#{% endblock %}#}
+
+{% block endscripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock %}
+

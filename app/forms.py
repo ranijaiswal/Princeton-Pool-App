@@ -24,6 +24,10 @@ SHOPPING_DESTINATIONS = (
     ('Costco', 'Costco'),
     ('Asian Foods Market Plainsboro', 'Asian Foods Market Plainsboro')
 )
+class FeedbackForm(forms.Form):
+    name=forms.CharField(label="Name (optional)", required=False)
+    email=forms.EmailField(label = "Email (optional)", required=False)
+    feedback = forms.CharField(widget=forms.Textarea)
 
 class RequestForm(forms.Form):
 
