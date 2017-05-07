@@ -7,7 +7,7 @@ from datetime import datetime
 from django.forms.extras.widgets import SelectDateWidget
 
 AIRPORT_DESTINATIONS = (
-    ('PTON', 'Princeton'),
+    ('Princeton', 'Princeton'),
     ('EWR', 'EWR'),
     ('JFK', 'JFK'),
     ('LGA', 'LGA'),

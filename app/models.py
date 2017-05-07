@@ -12,6 +12,13 @@ class Rides(models.Model):
         ('LGA', 'LGA'),
         ('PHL', 'PHL'),
         ('PTON', 'Princeton'),
+        ('Wegman\'s', 'Wegman\'s'),
+        ('Shop Rite', 'Shop Rite'),
+        ('Trader Joe\'s', 'Trader Joe\'s'),
+        ('Target', 'Target'),
+        ('Walmart', 'Walmart'),
+        ('Costco', 'Costco'),
+        ('Asian Foods Market Plainsboro', 'Asian Foods Market Plainsboro')
     )
     RIDE_TYPES = (
         ('Airport', 'Airport'),
