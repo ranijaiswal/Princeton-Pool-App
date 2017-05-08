@@ -93,7 +93,7 @@ def your_rides(request):
 		'rides': rides,
 		'netid': user.username,
 	}
-	return render(request, 'app/your_rides.html', context)
+	return render(request, 'app/my_rides.html', context)
 
 @login_required(login_url='/accounts/login/')
 def open_requests(request):
