@@ -89,7 +89,7 @@ def your_rides(request):
 	theUser = Users.objects.get(netid=user.username)
 	rides = theUser.pools.all()
 	context = {
-		'Title': 'Your Rides',
+		'Title': 'My Rides',
 		'rides': rides,
 		'netid': user.username,
 	}
