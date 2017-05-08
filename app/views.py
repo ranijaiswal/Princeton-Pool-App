@@ -84,7 +84,7 @@ def feedback_thanks(request):
 	return render(request, 'app/feedback_thanks.html', context)
 
 @login_required(login_url='/accounts/login/')
-def your_rides(request):
+def my_rides(request):
 	user = request.user
 	theUser = Users.objects.get(netid=user.username)
 	rides = theUser.pools.all()
