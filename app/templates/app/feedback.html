@@ -4,10 +4,17 @@
 
 {% block style %}
 <style>
-form .btn .btn-secondary {
-  font-family: Pavanam;
+form {
+  font-family: 'Pavanam';
   font-size: 20px;
   background-color: white;
+}
+
+footer {
+  position: fixed;
+  width: 100%;
+  left: 0px;
+  bottom: 0px;
 }
 
  </style>
@@ -42,6 +49,8 @@ form .btn .btn-secondary {
     {{ form.as_table }}
     </table>
     <input type="submit" value="Submit" class="btn btn-primary">
+    <input type="submit" class="btn btn-secondary" value = "Go Back"
+                       onClick="history.go(-1);return true;">
 </p>
 </div>
 </body>
