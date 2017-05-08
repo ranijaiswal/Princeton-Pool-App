@@ -1,5 +1,5 @@
 /*
- * CSS file containing all CSS for all templates; 
+ * CSS file containing all CSS for all templates;
  * any file specific differences separated into sections by html file
  */
 
@@ -15,11 +15,11 @@ body {
 	height: 100%;
 }
 
-h1, 
-h2, 
-h3, 
-h4, 
-h5, 
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
 	font-family: 'Pavanam', Helvetica, sans-serif;
 }
@@ -195,11 +195,11 @@ input {
 }
 
 /* ---------------- your_rides.html */
-.your_rides_container {
+.my_rides_container {
 	background: url(../img/fast-car-muted-green.jpg);
 }
 
-.your_rides_list {
+.my_rides_list {
 	text-align: left;
 	width:80%;
 	min-width: 400px;
