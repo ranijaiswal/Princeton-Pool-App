@@ -21,9 +21,22 @@ input {
     background-color: white;
 }
 
+body {
+  height: 100%;
+}
+
 footer {
   font-family: Pavanam, sans-serif;
   background-color: #222;
+  position: fixed;
+  width: 100%;
+  left: 0px;
+  bottom: 0px;
+}
+
+form .btn {
+  font-family: Pavanam;
+  font-size: 20px;
 }
 
 </style>
@@ -43,9 +56,9 @@ footer {
   <p>Current passenger(s): {% for r in Riders %}  <br> &emsp; {{ r.netid }}  {% endfor %} </p>
   <hr>
   <form action="confirm/{{id}}">
-    <input type="submit" class="btn btn-primary" value = "Back to Open Requests"
+    <input type="submit" class="btn btn-secondary" value = "Back"
     onClick="history.go(-1);return true;">
-    <input type="submit" class="btn btn-secondary" value = "Confirm" />
+    <input type="submit" class="btn btn-primary" value = "Confirm" />
   </form>
   </div>
   <br>

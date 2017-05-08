@@ -10,6 +10,18 @@
 <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
 <link href="{% static 'css/master.css' %}" rel="stylesheet">
 
+<style>
+
+footer {
+    position: fixed;
+    width: 100%;
+    left: 0px;
+    bottom: 0px;
+}
+
+
+</style>
+
 {% endblock %}
 
 {% block content %}
@@ -27,7 +39,9 @@
     <hr>
     <form action="/{{rtype}}/open/">
       <input type="submit" class="btn btn-primary" value = "Back to Open Requests" />
+      <a href={% url 'your_rides' %} class='btn btn-secondary'>Your Rides</a>
     </form>
+
 </div>
 </div>
 

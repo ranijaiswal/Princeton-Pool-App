@@ -7,7 +7,7 @@ from datetime import datetime
 from django.forms.extras.widgets import SelectDateWidget
 
 AIRPORT_DESTINATIONS = (
-    ('PTON', 'Princeton'),
+    ('Princeton', 'Princeton'),
     ('EWR', 'EWR'),
     ('JFK', 'JFK'),
     ('LGA', 'LGA'),
@@ -24,6 +24,10 @@ SHOPPING_DESTINATIONS = (
     ('Costco', 'Costco'),
     ('Asian Foods Market Plainsboro', 'Asian Foods Market Plainsboro')
 )
+class FeedbackForm(forms.Form):
+    name=forms.CharField(label="Name (optional)", required=False)
+    email=forms.EmailField(label = "Email (optional)", required=False)
+    feedback = forms.CharField(widget=forms.Textarea)
 
 class RequestForm(forms.Form):
 
@@ -44,7 +48,7 @@ class RequestForm(forms.Form):
         elif rtype == 'other':
             self.fields['starting_destination'] = forms.CharField(label='Starting Destination?')
             self.fields['destination'] = forms.CharField(label='Where go?')
-        self.fields['number_going'] = forms.IntegerField(label = 'How many go?')
+        self.fields['number_going'] = forms.IntegerField(label = 'How many others can go?')
         self.fields['date'] = forms.DateField(widget=SelectDateWidget, label="When go (MM/DD/YYYY)?")
         self.fields['time'] = forms.TimeField(label="What time go (HH:MM)?")
 

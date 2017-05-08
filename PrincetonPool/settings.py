@@ -28,12 +28,13 @@ EMAIL_BACKEND = "sgbackend.SendGridBackend"
 SENDGRID_API_KEY = os.environ.get("SENDGRID_KEY")
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-#STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 #BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'), ]
 
 # Quick-start development settings - unsuitable for production
@@ -44,6 +45,7 @@ SECRET_KEY = '5&&pdcj_!61pw*6btg9v)br&2v*oju37#ro5*7s=jt9-i8&)8y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+USE_TZ = True
 
 ALLOWED_HOSTS = [u'princeton-pool.herokuapp.com', 'localhost', u'127.0.0.1']
 CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
@@ -165,7 +167,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'EST'
+TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 
