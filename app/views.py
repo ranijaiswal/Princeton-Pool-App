@@ -14,7 +14,8 @@ from .models import Rides, Users
 from datetime import datetime
 import os
 
-from scrape_name import scrape_name	#scrape names from Pton website
+from bs4 import BeautifulSoup
+from .scrape_name import scrape_name
 
 def index(request):
 	user = request.user
