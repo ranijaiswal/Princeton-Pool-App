@@ -240,7 +240,7 @@ def confirm_join_ride(request, ride_id):
 
 
 	# email to joiner
-	subject_line = 'You Have Joined Ride #' + str(ride.id) + ' To ' + ride.end_destination
+	subject_line = 'Ride #' + str(ride.id) + ' To ' + ride.end_destination
 	message = 'Hello!\n\nYou have joined a ride!\n\n' + 'For your records, this ride is for ' + str(ride.date_time) + ', from ' + ride.start_destination + ' to ' + ride.end_destination + '. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
 	send_mail(subject_line, message, 'Princeton Go <princetongo333@gmail.com>',
 			  [user.username + '@princeton.edu'], html_message=message,
@@ -248,7 +248,7 @@ def confirm_join_ride(request, ride_id):
 			  )
 
 	# email to everyone in the ride
-	subject_line = 'New Rider for Ride #' + str(ride.id) + "!"
+	subject_line = 'Ride #' + str(ride.id) + ' To ' + ride.end_destination
 
 	# list of all the riders
 	riders = []
