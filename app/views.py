@@ -124,6 +124,7 @@ def open_requests(request):
 def create_new_request(request):
 	user = request.user
 	rtype = request.path.split('/')[1]
+	full_name = scrape_name(user.username)
 
 	form = RequestForm(rtype=rtype)
 	#form = RequestForm()
@@ -137,7 +138,7 @@ def create_new_request(request):
 		'Title': title,
 		'form': form,
 		'netid': user.username,
-		'name': scrape_name(user.username),
+		'first_name': full_name[0],
 	}
 	return render(request, 'app/form.html', context)
 
