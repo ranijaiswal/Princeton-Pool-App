@@ -13,6 +13,12 @@ from django.db import models
 from .models import Rides, Users
 from datetime import datetime
 import os
+from django.utils.timezone import activate
+
+
+activate(settings.TIME_ZONE)
+date_length=10
+
 
 from bs4 import BeautifulSoup
 from .scrape_name import scrape_name
@@ -83,7 +89,7 @@ def your_rides(request):
 	theUser = Users.objects.get(netid=user.username)
 	rides = theUser.pools.all()
 	context = {
-		'Title': 'Your Rides',
+		'Title': 'My Rides',
 		'rides': rides,
 		'netid': user.username,
 	}
@@ -192,9 +198,14 @@ def confirmation_new_request(request):
 		'netid': user.username,
 		'rtype': request.path.split('/')[1],
 	}
+
+
+	datetime_object = datetime.strptime(ride.date_time, '%Y-%m-%d %H:%M')
+
 	subject_line = 'Ride #' + str(ride.id) + ' To ' + ride.end_destination
 
-	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + date + ' at ' + time + ', from ' + start + ' to ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
+	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + datetime_object.strftime('%m/%d/%Y %I:%M %p')[0:date_length] + ' at ' + \
+			  datetime_object.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ', from ' + start + ' to ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
 	send_mail(subject_line, message,
 			  'Princeton Go <princetongo333@gmail.com>', [user.username + '@princeton.edu'],
 			  html_message=message,
@@ -244,8 +255,10 @@ def confirm_join_ride(request, ride_id):
 
 
 	# email to joiner
-	subject_line = 'Ride #' + str(ride.id) + ' To ' + ride.end_destination
-	message = 'Hello!\n\nYou have joined a ride!\n\n' + 'For your records, this ride is for ' + str(ride.date_time) + ', from ' + ride.start_destination + ' to ' + ride.end_destination + '. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
+	subject_line = 'You Have Joined Ride #' + str(ride.id) + ' To ' + ride.end_destination
+	message = 'Hello!\n\nYou have joined a ride!\n\n' + 'For your records, this ride is for ' + ride.date_time.strftime('%m/%d/%Y %I:%M %p')[0:date_length] + ' at ' + \
+			  ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST' + ', from ' + ride.start_destination + ' to ' + ride.end_destination +\
+			  '. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
 	send_mail(subject_line, message, 'Princeton Go <princetongo333@gmail.com>',
 			  [user.username + '@princeton.edu'], html_message=message,
 			  fail_silently=False,
@@ -285,7 +298,8 @@ def drop_ride(request, ride_id):
 
 	# email to dropper
 	subject_line = 'You Have Dropped Ride #' + idnum
-	message = 'Hello!\n\nYou have dropped a ride.\n\n' + 'For your records, this ride was for ' + str(ride.date_time) + ', from ' + ride.start_destination + ' to ' + ride.end_destination + '. Thank you for using Princeton Go!'
+	message = 'Hello!\n\nYou have dropped a ride.\n\n' + 'For your records, this ride was for ' + ride.date_time.strftime('%m/%d/%Y %I:%M %p')[0:date_length] + ' at ' + \
+			  ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST' + ', from ' + ride.start_destination + ' to ' + ride.end_destination + '. Thank you for using Princeton Go!'
 	send_mail(subject_line, message, 'Princeton Go <princetongo333@gmail.com>',
 			  [user.username + '@princeton.edu'],
 			  fail_silently=False,
