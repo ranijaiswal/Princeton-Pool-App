@@ -54,7 +54,7 @@ h3 {text-align:center;}
 <div class="form-container">
     <form action = "confirm/" method="POST">
         {% csrf_token %}
-        <h3>Hello, {{netid}}!</h3>
+        <h3>Hello, {{name}}!</h3>
         <table> 
         {{ form.as_table }}
         </table>
