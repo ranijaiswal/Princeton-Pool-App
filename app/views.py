@@ -14,6 +14,8 @@ from .models import Rides, Users
 from datetime import datetime
 import os
 
+from scrape_name import scrape_name	#scrape names from Pton website
+
 def index(request):
 	user = request.user
 	rider, created = Users.objects.get_or_create(netid=user.username)
@@ -128,6 +130,7 @@ def create_new_request(request):
 		'Title': title,
 		'form': form,
 		'netid': user.username,
+		'name': scrape_name(user.username),
 	}
 	return render(request, 'app/form.html', context)
 
@@ -241,7 +244,7 @@ def confirm_join_ride(request, ride_id):
 
 	# email to joiner
 	subject_line = 'Ride #' + str(ride.id) + ' To ' + ride.end_destination
-	message = 'Hello!\n\nYou have joined a ride!\n\n' + 'For your records, this ride is for ' + ride.date_time.date().__str__() + ' at ' + ride.date_time.time().__str__() + ', from ' + ride.start_destination + ' to ' + ride.end_destination + '. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
+	message = 'Hello!\n\nYou have joined a ride!\n\n' + 'For your records, this ride is for ' + str(ride.date_time) + ', from ' + ride.start_destination + ' to ' + ride.end_destination + '. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
 	send_mail(subject_line, message, 'Princeton Go <princetongo333@gmail.com>',
 			  [user.username + '@princeton.edu'], html_message=message,
 			  fail_silently=False,
