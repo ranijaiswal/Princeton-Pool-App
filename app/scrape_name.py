@@ -8,7 +8,7 @@ def scrape_name(netid):
 
 	r = requests.get(search_url + netid)
 	data=r.text
-	soup=BeautifulSoup(data, 'lxml')
+	soup=BeautifulSoup(data)
 
 	name = soup.find(id = 'people-row-link-3')
 	just_name = str(name).split("\n")[1]
