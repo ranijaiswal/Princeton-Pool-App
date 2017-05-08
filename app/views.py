@@ -188,7 +188,7 @@ def confirmation_new_request(request):
 		'netid': user.username,
 		'rtype': request.path.split('/')[1],
 	}
-	subject_line = 'Your Ride #' + str(ride.id) + ' Request from ' + start + ' to ' + dest
+	subject_line = 'Ride #' + str(ride.id) + ' To ' + ride.end_destination
 
 	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + date + ' at ' + time + ', from ' + start + ' to ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
 	send_mail(subject_line, message,
@@ -288,7 +288,7 @@ def drop_ride(request, ride_id):
 			  )
 
 	# email to everyone in the ride
-	subject_line = 'Someone dropped Ride #' + idnum
+	subject_line = 'Ride #' + str(ride.id) + ' To ' + ride.end_destination
 
 	# list of all the riders
 	riders = []
