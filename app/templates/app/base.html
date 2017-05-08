@@ -71,22 +71,30 @@ body {
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/feedback/">Feedback</a>
+                    <li class='dropdown'>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About<span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="/faq/">FAQ</a></li>
+                        <li><a href="/about/">Team</a></li>
+                        <li><a href="/feedback/">Feedback</a></li>
+                      </ul>
                     </li>
-                    <li>
-                        <a href="/faq/">FAQ</a>
-                    </li>
-                    <li>
-                        <a href="/about/">Team</a>
-                    </li>
+
                     <!--Dropdown menu code modified from https://getbootstrap.com/components/#navbar-->
                     {% if user.is_authenticated %}
-                    <li><a href="your-rides/">Your Rides</a></li>
+                    <li class='dropdown'>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Where Go?<span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="/airport/open/">Airport</a></li>
+                        <li><a href="/shopping/open/">Shopping</a></li>
+                        <li><a href="/other/open/">Other</a></li>
+                      </ul>
+                    </li>
+
+                    <li><a href="/your-rides/">My Rides</a></li>
                     <li class='dropdown'>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{netid}}<span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        
                         <li><a href="accounts/logout">Log Out</a></li>
                       </ul>
                     </li>
@@ -117,10 +125,10 @@ body {
 </body>
 
 <!-- Footer -->
-    <footer>
+<!--     <footer>
         <div class="container">
           <p class="copyright text-muted small">Copyright &copy; Annie Chen, Rani Jaiswal, Cindy Liu, Alice Tang</p>
         </div>
-    </footer>
+    </footer> -->
 
 </html>
