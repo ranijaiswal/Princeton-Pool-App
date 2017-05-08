@@ -200,12 +200,12 @@ def confirmation_new_request(request):
 	}
 
 
-	datetime_object = date_time = datetime.strptime(ride.date_time, '%Y-%m-%d %H:%M:%S')
+	datetime_object = datetime.strptime(ride.date_time, '%Y-%m-%d %H:%M')
 
 	subject_line = 'Ride #' + str(ride.id) + ' To ' + ride.end_destination
 
-	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + ride.date_time.strftime('%m/%d/%Y %I:%M %p')[0:date_length] + ' at ' + \
-			  ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ', from ' + start + ' to ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
+	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + datetime_object.strftime('%m/%d/%Y %I:%M %p')[0:date_length] + ' at ' + \
+			  datetime_object.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ', from ' + start + ' to ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
 	send_mail(subject_line, message,
 			  'Princeton Go <princetongo333@gmail.com>', [user.username + '@princeton.edu'],
 			  html_message=message,
