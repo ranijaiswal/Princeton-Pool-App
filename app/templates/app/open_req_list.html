@@ -110,9 +110,9 @@
             {#                                <br>#}
             {#                                <small class="mb-2"># empty seats: {{ ride.seats }}</small>#}
             {#                                <small class="text-muted"><br>Current Riders:#}
-            {#                                    {% for user in ride.usrs.all %}#}
-            {#                                        {{user.netid}}#}
-            {#                                    {% endfor %} </small>#}
+            {#                                    {% for user in Riders %} 
+                                                    <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
+                                                  {% endfor %}  </small>#}
             {#                                {% for user in ride.usrs.all %}#}
             {#                                    {%if netid == user.netid%}#}
             {#                                        <small class="text-muted"><br>You are already in this ride!</small>#}
