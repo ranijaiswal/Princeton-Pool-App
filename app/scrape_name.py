@@ -4,7 +4,7 @@ import requests
 
 def scrape_name(netid):
 	search_url="http://www.princeton.edu/main/tools/search/?q="
-	netid = str("rjaiswal")
+	netid = str(netid)
 
 	r = requests.get(search_url + netid)
 	data=r.text
@@ -33,5 +33,3 @@ def scrape_name(netid):
 	name_list.append(last_name)
 
 	return name_list
-
-print(scrape_name("rjaiswal"))
