@@ -62,7 +62,18 @@
 {#    <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">#}
 {#    <link href="{% static 'css/master.css' %}" rel="stylesheet">#}
 {#{% endblock %}#}
+{% block style %}
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Pavanam');
+        .search-bar
+        {
+            color: steelblue;
+            margin-top: 25px;
+            margin-bottom: 25px;
 
+        }
+    </style>
+{% endblock %}
 {% block content %}
     <body class='open_req_container'>
     <div align='center'>
@@ -72,38 +83,46 @@
         <div class="list-group open_req_list">
             <h1 align="center">{{Title}}</h1>
             <br>
-            <div class="search_section">
-                <input type="text" id="rides_search_text" name="search_text"/>
-                <div id="rides_search_results"></div>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="search_section">
+                        <input class="form-control search-bar" placeholder="Search by destination..." type="text" id="rides_search_text" name="search_text"/>
+                        <div id="rides_search_results"></div>
+                    </div>
+                </div>
             </div>
-            <div class= "d-flex flex-column justify-content-center">
-                {% for ride in rides %}
-                    <a href="select/{{ride.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <div class='lg-info'>
-                                <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right">leaving {{ride.date_time|naturaltime}}</small></h5>
 
-                                <small class="mb-2">Destination: {{ride.get_start_destination_display}} to {{ ride.end_destination}} </small>
-                                <br>
-                                <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>
-                                <br>
-                                <small class="mb-2"># empty seats: {{ ride.seats }}</small>
-                                <small class="text-muted"><br>Current Riders:
-                                    {% for user in ride.usrs.all %}
-                                        {{user.netid}}
-                                    {% endfor %} </small>
-                                {% for user in ride.usrs.all %}
-                                    {%if netid == user.netid%}
-                                        <small class="text-muted"><br>You are already in this ride!</small>
-                                    {%endif%}
-                                {% endfor %}
 
-                            </div>
-                        </div>
-                    </a>
 
-                {% endfor %}
-            </div>
+            {#            <div class= "d-flex flex-column justify-content-center">#}
+            {#                {% for ride in rides %}#}
+            {#                    <a href="select/{{ride.id}}" class="list-group-item list-group-item-action flex-column align-items-start">#}
+            {#                        <div class="d-flex w-100 justify-content-between">#}
+            {#                            <div class='lg-info'>#}
+            {#                                <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right">leaving {{ride.date_time|naturaltime}}</small></h5>#}
+            {##}
+            {#                                <small class="mb-2">Destination: {{ride.get_start_destination_display}} to {{ ride.end_destination}} </small>#}
+            {#                                <br>#}
+            {#                                <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>#}
+            {#                                <br>#}
+            {#                                <small class="mb-2"># empty seats: {{ ride.seats }}</small>#}
+            {#                                <small class="text-muted"><br>Current Riders:#}
+            {#                                    {% for user in ride.usrs.all %}#}
+            {#                                        {{user.netid}}#}
+            {#                                    {% endfor %} </small>#}
+            {#                                {% for user in ride.usrs.all %}#}
+            {#                                    {%if netid == user.netid%}#}
+            {#                                        <small class="text-muted"><br>You are already in this ride!</small>#}
+            {#                                    {%endif%}#}
+            {#                                {% endfor %}#}
+            {##}
+            {#                            </div>#}
+            {#                        </div>#}
+            {#                    </a>#}
+            {##}
+            {#                {% endfor %}#}
+            {#            </div>#}
 
             <script language="javascript">
                 /*

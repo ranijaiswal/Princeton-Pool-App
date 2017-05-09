@@ -20,12 +20,12 @@ var processSearch = function()  {
   //
     var processServerResponse = function(serverResponse_data, textStatus_ignored,jqXHR_ignored)
     {
-      //alert("sersverResponse_data='" + sersverResponse_data + "', textStatus_ignored='" + textStatus_ignored + "', jqXHR_ignored='" + jqXHR_ignored + "'");
+       // alert("serverResponse_data='" + serverResponse_data + "', textStatus_ignored='" + textStatus_ignored + "', jqXHR_ignored='" + jqXHR_ignored + "'");
       $('#rides_search_results').html(serverResponse_data);
     }
 
-    console.log(SUBMIT_URL)
-
+    var ride_type = window.location.pathname.split('/')[1];
+    console.log(ride_type);
     var config = {
       /*
         Using GET allows you to directly call the search page in
@@ -39,9 +39,13 @@ var processSearch = function()  {
       url: SUBMIT_URL,
       data: {
         'rides_search_text' : searchText,
+          'ride_type': ride_type
       },
       dataType: 'html',
-      success: processServerResponse
+      failure:function(){
+        alert('server request failed');
+      },
+      success: processServerResponse,
     };
     $.ajax(config);
 };

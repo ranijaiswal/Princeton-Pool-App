@@ -4,7 +4,9 @@ from .models import Users
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from datetime import datetime
+from datetime import date
 from django.forms.extras.widgets import SelectDateWidget
+from .SelectTimeWidget import SelectTimeWidget
 
 AIRPORT_DESTINATIONS = (
     ('Princeton', 'Princeton'),
@@ -49,8 +51,10 @@ class RequestForm(forms.Form):
             self.fields['starting_destination'] = forms.CharField(label='Starting Destination?')
             self.fields['destination'] = forms.CharField(label='Where go?')
         self.fields['number_going'] = forms.IntegerField(label = 'How many others can go?')
-        self.fields['date'] = forms.DateField(widget=SelectDateWidget, label="When go (MM/DD/YYYY)?")
-        self.fields['time'] = forms.TimeField(label="What time go (HH:MM)?")
+        self.fields['date'] = forms.DateField(widget=SelectDateWidget, label="When go (MM/DD/YYYY)?",
+                                              initial=date.today())
+        self.fields['time'] = forms.TimeField(widget=SelectTimeWidget(twelve_hr=True, minute_step=5, use_seconds=False), label="What time go (HH:MM)?")
+        #forms.TimeField(widget=Select label="What time go (HH:MM)?")
 
     # def clean_date_time(self):
     #     ride_date = self.cleaned_data['date']

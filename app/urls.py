@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'open/new/confirm/confirmation/$', views.confirmation_new_request, name='confirmation_new_request'),
    	url(r'accounts/login/$', django_cas_ng.views.login, name='login_view'),
    	url(r'accounts/logout/$', django_cas_ng.views.logout, name='logout_view'),
-    url(r'^search/', RidesList.as_view(), name='rides_list')
+    url(r'^search/', views.submit_search_from_ajax, name='rides_list')
    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

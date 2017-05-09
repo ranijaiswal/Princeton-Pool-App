@@ -3,21 +3,21 @@
 {% block title %} Feedback | Princeton Go {% endblock %}
 
 {% block style %}
-<style>
-form {
-  font-family: 'Pavanam';
-  font-size: 20px;
-  background-color: white;
-}
+    <style>
+        form {
+            font-family: 'Pavanam';
+            font-size: 20px;
+            background-color: white;
+        }
 
-footer {
-  position: fixed;
-  width: 100%;
-  left: 0px;
-  bottom: 0px;
-}
+        footer {
+            position: fixed;
+            width: 100%;
+            left: 0px;
+            bottom: 0px;
+        }
 
- </style>
+    </style>
 {% endblock %}
 
 {% block links %}
@@ -32,27 +32,26 @@ footer {
 {% endblock %}
 
 {% block content %}
-
-	<div class='container'>
-<!-- Page Heading -->
+    <body>
+    <div class='container'>
+        <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="page-header">{{ Title }}
-                </h1>
+                </h2>
             </div>
         </div>
+    </div>
 
-<p> 
-<form action="thanks/" method="POST">
-    {% csrf_token %}
-    <table>
-    {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit" class="btn btn-primary">
-    <input type="submit" class="btn btn-secondary" value = "Go Back"
-                       onClick="history.go(-1);return true;">
-</p>
-</div>
-</body>
+    <form action="thanks/" method="POST">
+        {% csrf_token %}
+        <table class = "form-control">
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit" class="btn btn-primary">
+        <input type="submit" class="btn btn-secondary" value = "Go Back" onClick="history.go(-1);return true;">
+    </form>
+
+    </body>
 
 {% endblock %}

@@ -11,7 +11,8 @@
 
   Equal to <code>100</code>.
  */
-var MILLS_TO_IGNORE_SEARCH = 100;
+var MILLS_TO_IGNORE_SEARCH = 0.01;
+var FIRST_TIME = true
 /**
   The number of milliseconds to ignore clicks on the *same* like
   button, after a button *that was not ignored* was clicked. Used by
@@ -48,29 +49,62 @@ $(document).ready(function() {
 
      results in "TypeError: e.handler.apply is not a function"
      */
-       var config = {
-           /*
-            Using GET allows you to directly call the search page in
-            the browser:
+    //    var config = {
+    //        /*
+    //         Using GET allows you to directly call the search page in
+    //         the browser:
+    //
+    //         http://the.url/search/?color_search_text=bl
+    //
+    //         Also, GET-s do not require the csrf_token
+    //         */
+    //        type: "GET",
+    //        url: SUBMIT_URL,
+    //        dataType: 'json',
+    //        success: function (data) {
+    //        //     alert(data)
+    //        // }
+    //              var trHTML = '';
+    //              $('#results_section').append(
+    //                  $.map($.makeArray(data.Rides), function(item, index){
+    //                      return '<tr><td>' + item +  '</td></tr>' + data.Rides[index] + '</td></tr>';}).join());
+    //                }
+    //
+    //        };
+    // $.ajax(config);
 
-            http://the.url/search/?color_search_text=bl
+        var processInitialResponse = function(serverResponse_data, textStatus_ignored,jqXHR_ignored)
+    {
+       // alert("serverResponse_data='" + serverResponse_data + "', textStatus_ignored='" + textStatus_ignored + "', jqXHR_ignored='" + jqXHR_ignored + "'");
+      $('#rides_search_results').html(serverResponse_data);
+      FIRST_TIME=false
+    }
 
-            Also, GET-s do not require the csrf_token
-            */
-           type: "GET",
-           url: SUBMIT_URL,
-           dataType: 'json',
-           success: function (data) {
-           //     alert(data)
-           // }
-                 var trHTML = '';
-                 $('#results_section').append(
-                     $.map($.makeArray(data.Rides), function(item, index){
-                         return '<tr><td>' + item +  '</td></tr>' + data.Rides[index] + '</td></tr>';}).join());
-                   }
+    var ride_type = window.location.pathname.split('/')[1];
+    console.log(ride_type);
+    var config = {
+      /*
+        Using GET allows you to directly call the search page in
+        the browser:
 
-           };
+        http://the.url/search/?color_search_text=bl
+
+        Also, GET-s do not require the csrf_token
+       */
+      type: "GET",
+      url: SUBMIT_URL,
+      data: {
+        'rides_search_text' : "",
+          'ride_type': ride_type
+      },
+      dataType: 'html',
+      failure:function(){
+        alert('server request failed');
+      },
+      success: processInitialResponse,
+    };
     $.ajax(config);
+
 
     $('#rides_search_text').keyup(_.debounce(processSearch,
         MILLS_TO_IGNORE_SEARCH, true));
