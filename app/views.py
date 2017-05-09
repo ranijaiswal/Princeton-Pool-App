@@ -223,7 +223,7 @@ def confirmation_new_request(request):
 	closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
 	mail.substitutions = {'%names%': theUser.first_name, '%body%': message, '%date%': date_obj_str, 
 						  '%time%': time_obj_str, '%destination%': start + ' to ' + dest, 
-						  '%riders%': theUser.first_name + " " + theUser.last_name, '%seats%': number_going
+						  '%riders%': theUser.first_name + " " + theUser.last_name, '%seats%': number_going,
 						  '%closing%': closing}
 
 	mail.attach_alternative(
