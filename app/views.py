@@ -15,7 +15,20 @@ from datetime import datetime
 import os
 from django.utils.timezone import activate
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import generics
+from .serializers import RideSerializer
+
+
 activate(settings.TIME_ZONE)
+date_length=10
+
+# jquery.autocomplete
+# web request to web url - hits django function - parameter of query - django function - wrap in json blob (django query data to json) - send back w/ ajax ()
+# jquery autocomplete django example
+
+
 
 from bs4 import BeautifulSoup
 from .scrape_name import scrape_name
@@ -195,9 +208,14 @@ def confirmation_new_request(request):
 		'netid': user.username,
 		'rtype': request.path.split('/')[1],
 	}
+
+
+	datetime_object = datetime.strptime(ride.date_time, '%Y-%m-%d %H:%M')
+
 	subject_line = 'Ride #' + str(ride.id) + ' To ' + ride.end_destination
 
-	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + date + ' at ' + time + ', from ' + start + ' to ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
+	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + datetime_object.strftime('%m/%d/%Y %I:%M %p')[0:date_length] + ' at ' + \
+			  datetime_object.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ', from ' + start + ' to ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
 	send_mail(subject_line, message,
 			  'Princeton Go <princetongo333@gmail.com>', [user.username + '@princeton.edu'],
 			  html_message=message,
@@ -248,7 +266,9 @@ def confirm_join_ride(request, ride_id):
 
 	# email to joiner
 	subject_line = 'You Have Joined Ride #' + str(ride.id) + ' To ' + ride.end_destination
-	message = 'Hello!\n\nYou have joined a ride!\n\n' + 'For your records, this ride is for ' + ride.date_time.date().__str__() + ' ' + ride.date_time.time().__str__() + 'EST' + ', from ' + ride.start_destination + ' to ' + ride.end_destination + '. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
+	message = 'Hello!\n\nYou have joined a ride!\n\n' + 'For your records, this ride is for ' + ride.date_time.strftime('%m/%d/%Y %I:%M %p')[0:date_length] + ' at ' + \
+			  ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST' + ', from ' + ride.start_destination + ' to ' + ride.end_destination +\
+			  '. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
 	send_mail(subject_line, message, 'Princeton Go <princetongo333@gmail.com>',
 			  [user.username + '@princeton.edu'], html_message=message,
 			  fail_silently=False,
@@ -288,7 +308,8 @@ def drop_ride(request, ride_id):
 
 	# email to dropper
 	subject_line = 'You Have Dropped Ride #' + idnum
-	message = 'Hello!\n\nYou have dropped a ride.\n\n' + 'For your records, this ride was for ' + str(ride.date_time) + ', from ' + ride.start_destination + ' to ' + ride.end_destination + '. Thank you for using Princeton Go!'
+	message = 'Hello!\n\nYou have dropped a ride.\n\n' + 'For your records, this ride was for ' + ride.date_time.strftime('%m/%d/%Y %I:%M %p')[0:date_length] + ' at ' + \
+			  ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST' + ', from ' + ride.start_destination + ' to ' + ride.end_destination + '. Thank you for using Princeton Go!'
 	send_mail(subject_line, message, 'Princeton Go <princetongo333@gmail.com>',
 			  [user.username + '@princeton.edu'],
 			  fail_silently=False,
@@ -308,3 +329,33 @@ def drop_ride(request, ride_id):
 	if (ride.usrs.count() == 0):
 		ride.delete()
 	return render(request, 'app/drop_ride.html', context)
+
+
+class RidesList(generics.ListAPIView):
+	# model = Rides
+	# context_object_name = "rides"
+
+	serializer_class = RideSerializer
+
+	def get_queryset(self):
+		query_ride_type = self.kwargs['ride_type']
+		return Rides.objects.filter(ride_type=query_ride_type)
+
+
+def submit_search_from_ajax(request):
+	rides=[]
+	search_text=""
+	if (request.method == "GET"):
+		search_text = request.GET.get("rides_search_text", "").strip().upper()
+	search_results=[]
+	if (search_text != ""):
+		search_results = Rides.objects.all()#filter(end_destination__contains=search_text)
+
+	context = {
+		"search_text": search_text,
+		"search_results": search_results,
+	}
+
+
+	return render(request, 'app/open_req_list_snippet.html',
+						  context)
