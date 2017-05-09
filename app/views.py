@@ -23,12 +23,9 @@ date_length=10
 from bs4 import BeautifulSoup
 from .scrape_name import scrape_name
 
-@login_required(login_url='/accounts/login/') # DO NOT DELETE THIS LINE
+
 def index(request):
 	user = request.user
-	full_name = scrape_name(user.username)
-	if not Users.objects.filter(netid=user.username).exists():
-		Users.objects.create(netid=user.username, first_name=full_name[0], last_name=full_name[1])
 	context = {
 		'Title': 'Welcome to Princeton Pool!',
 		'netid': user.username
@@ -86,9 +83,16 @@ def feedback_thanks(request):
 	}
 	return render(request, 'app/feedback_thanks.html', context)
 
+def init_User(netid):
+	if not Users.objects.filter(netid=netid).exists():
+		full_name = scrape_name(netid)
+		Users.objects.create(netid=netid, first_name=full_name[0], last_name=full_name[1])
+
 @login_required(login_url='/accounts/login/')
 def my_rides(request):
 	user = request.user
+	init_User(user.username)
+
 	theUser = Users.objects.get(netid=user.username)
 	rides = theUser.pools.all()
 	context = {
@@ -101,6 +105,8 @@ def my_rides(request):
 @login_required(login_url='/accounts/login/')
 def open_requests(request):
 	user = request.user
+	init_User(user.username)
+
 	context = {}
 	rtype = request.path.split('/')[1]
 	if rtype == 'airport':
@@ -126,6 +132,7 @@ def open_requests(request):
 @login_required(login_url='/accounts/login/')
 def create_new_request(request):
 	user = request.user
+	init_User(user.username)
 	rtype = request.path.split('/')[1]
 	theUser = Users.objects.get(netid=user.username)
 
@@ -150,7 +157,7 @@ def confirm_new_request(request):
 	rtype = request.path.split('/')[1]
 	form = RequestForm(request.POST or None, rtype=rtype)
 	user = request.user
-
+	init_User(user.username)
 	if request.method == 'POST':
 		if form.is_valid():
 			context = {
@@ -174,6 +181,7 @@ def confirm_new_request(request):
 @login_required(login_url='/accounts/login/')
 def confirmation_new_request(request):
 	user = request.user
+	init_User(user.username)
 	start = request.session['start']
 	dest = request.session['dest']
 	number_going = request.session['number_going']
@@ -237,6 +245,7 @@ def join_ride(request, ride_id):
 
 	ride = get_object_or_404(Rides, pk=ride_id)
 	user = request.user
+	init_User(user.username)
 	context = {
 		'Title': 'Join Airport Ride',
 		'Dest': ride.end_destination,
@@ -253,6 +262,7 @@ def confirm_join_ride(request, ride_id):
 
 	name = "netid"+str(ride_id)
 	user = request.user
+	init_User(user.username)
 	rider = Users.objects.get(netid=user.username)
 	rider.save()
 	rider.pools.add(ride)
@@ -323,6 +333,7 @@ def confirm_join_ride(request, ride_id):
 @login_required(login_url='/accounts/login/')
 def drop_ride(request, ride_id):
 	user = request.user
+	init_User(user.username)
 	ride = Rides.objects.get(pk=ride_id)
 	idnum = str(ride.id)
 	context = {
