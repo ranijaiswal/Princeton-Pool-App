@@ -25,7 +25,8 @@ from .scrape_name import scrape_name
 
 def index(request):
 	user = request.user
-	rider, created = Users.objects.get_or_create(netid=user.username)
+	full_name = scrape_name(user.username)
+	rider, created = Users.objects.get_or_create(netid=user.username, first_name=full_name[0], last_name=full_name[1])
 	context = {
 		'Title': 'Welcome to Princeton Pool!',
 		'netid': user.username
@@ -124,7 +125,7 @@ def open_requests(request):
 def create_new_request(request):
 	user = request.user
 	rtype = request.path.split('/')[1]
-	full_name = scrape_name(user.username)
+	theUser = Users.objects.get(netid=user.username)
 
 	form = RequestForm(rtype=rtype)
 	#form = RequestForm()
@@ -138,7 +139,7 @@ def create_new_request(request):
 		'Title': title,
 		'form': form,
 		'netid': user.username,
-		'first_name': full_name[0],
+		'first_name': theUser.first_name,
 	}
 	return render(request, 'app/form.html', context)
 
@@ -272,7 +273,7 @@ def confirm_join_ride(request, ride_id):
 	riders = []
 	for rider in ride.usrs.all():
 		riders.append(rider.netid + '@princeton.edu')
-	message = 'Hello!\n\n' + user.username + ' has joined your ride. Happy travels!'
+	message = 'Hello!\n\n' + rider.first_name + " " + rider.last_name + ' has joined your ride. Happy travels!'
 	send_mail(subject_line, message, 'Princeton Go <princetongo333@gmail.com>', riders, fail_silently=False)
 	# update DB
 
@@ -313,7 +314,7 @@ def drop_ride(request, ride_id):
 	riders = []
 	for rider in ride.usrs.all():
 		riders.append(rider.netid + '@princeton.edu')
-	message = 'Hello!\n\n' + user.username + ' has dropped your ride. We have increased the number of available seats. Happy travels!'
+	message = 'Hello!\n\n' + rider.first_name + " " + rider.last_name + ' has dropped your ride. We have increased the number of available seats. Happy travels!'
 	send_mail(subject_line, message, 'Princeton Go <princetongo333@gmail.com>', riders, fail_silently=False)
 
 	#make sure this is the last thing done in the view
