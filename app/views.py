@@ -23,6 +23,7 @@ date_length=10
 from bs4 import BeautifulSoup
 from .scrape_name import scrape_name
 
+@login_required(login_url='/accounts/login/')
 def index(request):
 	user = request.user
 	full_name = scrape_name(user.username)
