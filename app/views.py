@@ -284,7 +284,7 @@ def confirm_join_ride(request, ride_id):
 		riders_firstnames = (' and ').join(split_firsts)
 	else:
 		riders_firstnames = (', ').join(split_firsts[0:(num_riders - 1)])
-		riders_firstnames = riders_firstnames + ' and ' + split_firsts[num_riders - 1]
+		riders_firstnames = riders_firstnames + ', and ' + split_firsts[num_riders - 1]
 
 	riders_fullnames = riders_fullnames.rstrip(', ')
 	
@@ -348,7 +348,7 @@ def drop_ride(request, ride_id):
 		riders_firstnames = (' and ').join(split_firsts)
 	elif num_riders > 2:
 		riders_firstnames = (', ').join(split_firsts[0:(num_riders - 1)])
-		riders_firstnames = riders_firstnames + ' and ' + split_firsts[num_riders - 1]
+		riders_firstnames = riders_firstnames + ', and ' + split_firsts[num_riders - 1]
 
 	riders_fullnames = riders_fullnames.rstrip(', ')
 
