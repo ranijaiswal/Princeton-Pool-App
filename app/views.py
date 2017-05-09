@@ -27,7 +27,8 @@ from .scrape_name import scrape_name
 def index(request):
 	user = request.user
 	full_name = scrape_name(user.username)
-	rider, created = Users.objects.get_or_create(netid=user.username, first_name=full_name[0], last_name=full_name[1])
+	if not Users.objects.filter(netid=user.username).exists():
+		Users.objects.create(netid=user.username, first_name=full_name[0], last_name=full_name[1])
 	context = {
 		'Title': 'Welcome to Princeton Pool!',
 		'netid': user.username
@@ -185,7 +186,7 @@ def confirmation_new_request(request):
 				 seats = number_going)
 
 	ride.save()
-	rider, created = Users.objects.get_or_create(netid=user.username)
+	rider = Users.objects.get(netid=user.username)
 	rider.save()
 	rider.pools.add(ride)
 	rider.save()
@@ -248,7 +249,7 @@ def confirm_join_ride(request, ride_id):
 
 	name = "netid"+str(ride_id)
 	user = request.user
-	rider, created = Users.objects.get_or_create(netid=user.username)
+	rider = Users.objects.get(netid=user.username)
 	rider.save()
 	rider.pools.add(ride)
 	rider.save()
@@ -324,7 +325,7 @@ def drop_ride(request, ride_id):
 		'netid': user.username,
 	}
 
-	rider, created = Users.objects.get_or_create(netid=user.username)
+	rider = Users.objects.get(netid=user.username)
 	ride.usrs.remove(rider)
 	ride.seats += 1
 	rider.pools.remove(ride)
