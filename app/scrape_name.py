@@ -33,4 +33,3 @@ def scrape_name(netid):
 	name_list.append(last_name)
 
 	return name_list
-

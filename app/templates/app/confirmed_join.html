@@ -1,6 +1,6 @@
 {% extends "app/base.html" %}
 
-{% block title %} Confirm To Join Ride {% endblock %}
+{% block title %} {{Title}} {% endblock %}
 
 {% block links %}
 <!-- Latest compiled and minified CSS -->
@@ -25,7 +25,7 @@ footer {
 {% endblock %}
 
 {% block content %}
-<h2 style="padding-left:50px">Successfully Joined Ride</h2>
+<h2 style="padding-left:50px">{{Title}}</h2>
 
 <div id="confirm-info-box">
   <div id= "confirm-user-info">
@@ -33,7 +33,10 @@ footer {
     <hr>
     <p>Destination: {{dest}} </p>
     <p>Date and time of ride: {{date}}</p>
-    <p>Current passenger(s): {% for r in Riders %} <br> &emsp; {{ r.netid }} {% endfor %} </p>
+    <p>Current passenger(s): 
+    {% for user in Riders %} 
+        <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
+        {% endfor %} </p>
     <br>
     <p><b>Enjoy Your Carpool!</b></p>
     <hr>

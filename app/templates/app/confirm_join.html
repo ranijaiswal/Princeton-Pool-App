@@ -53,7 +53,10 @@ form .btn {
   <hr>
   <p>Destination: {{Dest}} </p>
   <p>Date and time of ride: {{Date}}</p>
-  <p>Current passenger(s): {% for r in Riders %}  <br> &emsp; {{ r.netid }}  {% endfor %} </p>
+  <p>Current passenger(s): 
+    {% for user in Riders %}  
+    <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})  
+    {% endfor %} </p>
   <hr>
   <form action="confirm/{{id}}">
     <input type="submit" class="btn btn-secondary" value = "Back"
