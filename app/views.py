@@ -15,9 +15,17 @@ from datetime import datetime
 import os
 from django.utils.timezone import activate
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import generics
+from .serializers import RideSerializer
 
 activate(settings.TIME_ZONE)
 date_length=10
+
+# jquery.autocomplete
+# web request to web url - hits django function - parameter of query - django function - wrap in json blob (django query data to json) - send back w/ ajax ()
+# jquery autocomplete django example
 
 
 from bs4 import BeautifulSoup
@@ -200,17 +208,19 @@ def confirmation_new_request(request):
 	rider.save()
 	ride.usrs.add(rider)
 	ride.save()
+
+	datetime_object = datetime.strptime(ride.date_time, '%Y-%m-%d %H:%M')
+
 	context = {
 		'Title': 'New Airport Confirmation',
 		'start': start,
 		'dest': dest,
 		'number_going': number_going,
-		'date': date,
-		'time': time,
+		'date': datetime_object.date(),
+		'time': datetime_object.time(),
 		'netid': user.username,
 		'rtype': request.path.split('/')[1],
 	}
-
 
 	datetime_object = datetime.strptime(ride.date_time, '%Y-%m-%d %H:%M')
 	date_obj_str = datetime_object.strftime('%m/%d/%Y %I:%M %p')[0:date_length]
@@ -424,3 +434,45 @@ def drop_ride(request, ride_id):
 	if (ride.usrs.count() == 0):
 		ride.delete()
 	return render(request, 'app/drop_ride.html', context)
+
+
+class RidesList(generics.ListAPIView):
+	# model = Rides
+	# context_object_name = "rides"
+
+	serializer_class = RideSerializer
+
+	def get_queryset(self):
+		query_ride_type = self.kwargs['ride_type']
+		return Rides.objects.filter(ride_type=query_ride_type)
+
+
+def submit_search_from_ajax(request):
+	rides=[]
+	search_text=""
+	search_terms=[]
+	if (request.method == "GET"):
+		search_text = request.GET.get("rides_search_text", "").strip().upper()
+		search_terms = search_text.split(" ")
+		print(search_terms)
+		#if (len(search_terms) > 1):
+
+	ride_type = request.GET.get('ride_type')
+
+
+	user = request.user
+	search_results=Rides.objects.all().filter(ride_type=ride_type, seats__gt=0, date_time__gt=datetime.now()).exclude(usrs__netid__contains = user.username)
+	print(user)
+	if (search_text != ""):
+		#search_results = Rides.objects.all().filter(ride_type=ride_type, seats__gt=0, date_time__gt=datetime.now(), end_destination__contains=search_text).exclude(usrs__netid__contains = user.username)
+		for term in search_terms:
+			search_results = search_results.filter(end_destination__icontains=term) | search_results.filter(start_destination__icontains=term)
+	print (search_results)
+	context = {
+		"search_text": search_text,
+		"search_results": search_results,
+	}
+
+
+	return render(request, 'app/open_req_list_snippet.html',
+						  context)

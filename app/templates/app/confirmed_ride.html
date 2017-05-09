@@ -1,5 +1,5 @@
 {% extends "app/base.html" %}
-
+{% load humanize %}
 {% block title %} Confirm New Ride | Princeton Go {% endblock %}
 
 {% block links %}
@@ -59,8 +59,9 @@ form .btn {
             <p><b>You will also receive an email with the following information: </b></p>
             <hr>
             <p>Your Journey: {{ start }} to {{ dest }} </p>
-            <p>Date and time of ride: {{ date }} at {{ time }}</p>
+            <p>Date and time of ride: {{ date}} at {{ time }} </p>
             <h3 style="text-align:center"><b>Enjoy Your Carpool!</b></h3>
+            {#{{ date }} at {{ time }}#}
             <hr>
             <form action="/{{rtype}}/open/">
                 <input type="submit" class="btn btn-primary"value = "Back to Open Requests" />

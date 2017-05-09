@@ -45,7 +45,7 @@ SECRET_KEY = '5&&pdcj_!61pw*6btg9v)br&2v*oju37#ro5*7s=jt9-i8&)8y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-USE_TZ = True
+USE_TZ = False
 
 ALLOWED_HOSTS = [u'princeton-pool.herokuapp.com', 'localhost', u'127.0.0.1', 'princetongo.es', 'www.princetongo.es']
 CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
