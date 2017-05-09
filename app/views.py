@@ -264,7 +264,7 @@ def confirm_join_ride(request, ride_id):
 	context = {
 
 		'Riders': ride.usrs.all(),
-		'title': 'Confirm Join Airport',
+		'title': 'Successfully Joined Ride',
 		'dest': ride.end_destination,
 		'date': ride.date_time,
 		'netid': user.username,

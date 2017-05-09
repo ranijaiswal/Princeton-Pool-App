@@ -1,6 +1,6 @@
 {% extends "app/base.html" %}
 
-{% block title %} Confirm To Join Ride {% endblock %}
+{% block title %} {{Title}} {% endblock %}
 
 {% block links %}
 <!-- Latest compiled and minified CSS -->
@@ -25,7 +25,7 @@ footer {
 {% endblock %}
 
 {% block content %}
-<h2 style="padding-left:50px">Successfully Joined Ride</h2>
+<h2 style="padding-left:50px">{{Title}}</h2>
 
 <div id="confirm-info-box">
   <div id= "confirm-user-info">
