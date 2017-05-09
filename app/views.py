@@ -20,14 +20,12 @@ from rest_framework.response import Response
 from rest_framework import generics
 from .serializers import RideSerializer
 
-
 activate(settings.TIME_ZONE)
 date_length=10
 
 # jquery.autocomplete
 # web request to web url - hits django function - parameter of query - django function - wrap in json blob (django query data to json) - send back w/ ajax ()
 # jquery autocomplete django example
-
 
 
 from bs4 import BeautifulSoup
@@ -94,16 +92,16 @@ def feedback_thanks(request):
 	return render(request, 'app/feedback_thanks.html', context)
 
 @login_required(login_url='/accounts/login/')
-def your_rides(request):
+def my_rides(request):
 	user = request.user
 	theUser = Users.objects.get(netid=user.username)
 	rides = theUser.pools.all()
 	context = {
-		'Title': 'Your Rides',
+		'Title': 'My Rides',
 		'rides': rides,
 		'netid': user.username,
 	}
-	return render(request, 'app/your_rides.html', context)
+	return render(request, 'app/my_rides.html', context)
 
 @login_required(login_url='/accounts/login/')
 def open_requests(request):
@@ -134,6 +132,7 @@ def open_requests(request):
 def create_new_request(request):
 	user = request.user
 	rtype = request.path.split('/')[1]
+	full_name = scrape_name(user.username)
 
 	form = RequestForm(rtype=rtype)
 	#form = RequestForm()
@@ -147,7 +146,7 @@ def create_new_request(request):
 		'Title': title,
 		'form': form,
 		'netid': user.username,
-		'name': scrape_name(user.username),
+		'first_name': full_name[0],
 	}
 	return render(request, 'app/form.html', context)
 
@@ -215,7 +214,7 @@ def confirmation_new_request(request):
 	subject_line = 'Ride #' + str(ride.id) + ' To ' + ride.end_destination
 
 	message = 'Hello!\n\nYour ride request has been created.\n\n' + 'For your records, we have created a request for ' + datetime_object.strftime('%m/%d/%Y %I:%M %p')[0:date_length] + ' at ' + \
-			  datetime_object.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ', from ' + start + ' to ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
+			  datetime_object.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ', from ' + start + ' to ' + dest + '. You have indicated that you have ' + str(number_going) + ' seats. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/my-rides"> My Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
 	send_mail(subject_line, message,
 			  'Princeton Go <princetongo333@gmail.com>', [user.username + '@princeton.edu'],
 			  html_message=message,
@@ -268,7 +267,7 @@ def confirm_join_ride(request, ride_id):
 	subject_line = 'You Have Joined Ride #' + str(ride.id) + ' To ' + ride.end_destination
 	message = 'Hello!\n\nYou have joined a ride!\n\n' + 'For your records, this ride is for ' + ride.date_time.strftime('%m/%d/%Y %I:%M %p')[0:date_length] + ' at ' + \
 			  ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST' + ', from ' + ride.start_destination + ' to ' + ride.end_destination +\
-			  '. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/your-rides"> Your Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
+			  '. To make any changes, please visit the <a href="http://princeton-pool.herokuapp.com/my-rides"> My Rides</a> page on our website.\n' + 'Thank you for using Princeton Go!'
 	send_mail(subject_line, message, 'Princeton Go <princetongo333@gmail.com>',
 			  [user.username + '@princeton.edu'], html_message=message,
 			  fail_silently=False,
