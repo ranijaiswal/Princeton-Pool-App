@@ -102,7 +102,7 @@ def my_rides(request):
 	init_User(user.username)
 
 	theUser = Users.objects.get(netid=user.username)
-	rides = theUser.pools.all().filter(seats__gt=0)
+	rides = theUser.pools.all().filter(seats__gte=0)
 	context = {
 		'Title': 'My Rides',
 		'rides': rides,
@@ -266,7 +266,9 @@ def join_ride(request, ride_id):
 		in_ride = "True"
 	context = {
 		'Title': 'Join Airport Ride',
-		'Dest': ride.get_end_destination_display(),
+
+		'start': ride.start_destination,
+		'dest': ride.get_end_destination_display(),
 		'Date': ride.date_time,
 		'id': ride_id,
 		'Riders': ride.usrs.all(),
@@ -295,6 +297,7 @@ def confirm_join_ride(request, ride_id):
 
 		'Riders': ride.usrs.all(),
 		'title': 'Successfully Joined Ride',
+		'start': ride.start_destination,
 		'dest': ride.get_end_destination_display(),
 		'date': ride.date_time,
 		'netid': user.username,
@@ -369,12 +372,7 @@ def drop_ride(request, ride_id):
 	rider.pools.remove(ride)
 	ride.save()
 	rider.save()
-
-	#make sure this is the last thing done in the view
-	if (ride.usrs.count() == 0):
-		ride.delete()
-	return render(request, 'app/drop_ride.html', context)
-
+	
 	# list of all the riders
 	riders_emails = []
 	riders_firstnames = ""
@@ -444,6 +442,12 @@ def drop_ride(request, ride_id):
     "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
 	)
 	mail_to_riders.send()
+
+	#make sure this is the last thing done in the view
+	if (ride.usrs.count() == 0):
+		ride.delete()
+	return render(request, 'app/drop_ride.html', context)
+
 
 class RidesList(generics.ListAPIView):
 	# model = Rides
