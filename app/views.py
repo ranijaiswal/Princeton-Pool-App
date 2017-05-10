@@ -120,19 +120,19 @@ def open_requests(request):
 	if rtype == 'airport':
 		context = {
 			'Title': 'Open Airport Requests',
-			'rides': Rides.objects.all().filter(ride_type='airport', seats__gt=0, date_time__gt=datetime.now()).exclude(usrs__netid__contains = user.username),
+			'rides': Rides.objects.all().filter(ride_type='airport', seats__gt=0, date_time__gt=datetime.now()),
 			'netid': user.username,
 		}
 	elif rtype == 'shopping':
 		context = {
 			'Title': 'Open Shopping Requests',
-			'rides': Rides.objects.all().filter(ride_type='shopping', seats__gt=0, date_time__gt=datetime.now()).exclude(usrs__netid__contains = user.username),
+			'rides': Rides.objects.all().filter(ride_type='shopping', seats__gt=0, date_time__gt=datetime.now()),
 			'netid': user.username,
 		}
 	else:
 		context = {
 			'Title': 'Open Miscellaneous Requests',
-			'rides': Rides.objects.all().filter(ride_type='other', seats__gt=0, date_time__gt=datetime.now()).exclude(usrs__netid__contains = user.username),
+			'rides': Rides.objects.all().filter(ride_type='other', seats__gt=0, date_time__gt=datetime.now()),
 			'netid': user.username,
 		}
 	return render(request, 'app/open_req_list.html', context)
@@ -256,6 +256,10 @@ def join_ride(request, ride_id):
 	ride = get_object_or_404(Rides, pk=ride_id)
 	user = request.user
 	init_User(user.username)
+	theUser = Users.objects.get(netid=user.username)
+	in_ride = "False"
+	if theUser.pools.filter(id=ride_id).exists():
+		in_ride = "True"
 	context = {
 		'Title': 'Join Airport Ride',
 		'Dest': ride.end_destination,
@@ -263,6 +267,8 @@ def join_ride(request, ride_id):
 		'id': ride_id,
 		'Riders': ride.usrs.all(),
 		'netid': user.username,
+		'in_ride': in_ride,
+
 	}
 	return render(request, 'app/confirm_join.html', context)
 
@@ -448,6 +454,7 @@ class RidesList(generics.ListAPIView):
 
 
 def submit_search_from_ajax(request):
+	user = request.user
 	rides=[]
 	search_text=""
 	search_terms=[]
@@ -460,7 +467,7 @@ def submit_search_from_ajax(request):
 
 
 	user = request.user
-	search_results=Rides.objects.all().filter(ride_type=ride_type, seats__gt=0, date_time__gt=datetime.now()).exclude(usrs__netid__contains = user.username)
+	search_results=Rides.objects.all().filter(ride_type=ride_type, seats__gt=0, date_time__gt=datetime.now())
 	if (search_text != ""):
 		#search_results = Rides.objects.all().filter(ride_type=ride_type, seats__gt=0, date_time__gt=datetime.now(), end_destination__contains=search_text).exclude(usrs__netid__contains = user.username)
 		for term in search_terms:
@@ -468,6 +475,7 @@ def submit_search_from_ajax(request):
 	context = {
 		"search_text": search_text,
 		"search_results": search_results,
+		'netid': user.username
 	}
 
 

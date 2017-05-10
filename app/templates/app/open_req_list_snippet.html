@@ -13,11 +13,11 @@
                                 <br>
                                 <small class="mb-2"># empty seats: {{ ride.seats }}</small>
                                 <small class="text-muted"><br>Current Riders:
-                                   {% for user in ride.usrs.all %} 
+                                {% for user in ride.usrs.all %} 
                                         <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
                                     {% endfor %} </small>
                                 {% for user in ride.usrs.all %}
-                                    {%if netid == user.netid%}
+                                    {%if netid == user.netid %}
                                         <small class="text-muted"><br>You are already in this ride!</small>
                                     {%endif%}
                                 {% endfor %}
@@ -27,12 +27,4 @@
                     </a>
 
                 {% endfor %}
-            </div>
-
-{#</p>#}
-{#      <ul>#}
-{#         {% for  ride in search_results %} {# No colon after "color_search_results" #}
-{#            <li>{{ ride.end_destination }}</li>#}
-{#         {% endfor %}#}
-{#      </ul>#}
-{#</p>#}
+</div>
