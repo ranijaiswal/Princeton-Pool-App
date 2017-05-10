@@ -42,13 +42,16 @@ form .btn {
 {% endblock %}
 
 {% block content %}
-    <h2 style="padding-left:50px">Confirm New Request</h2>
+    
 
     <div id="confirm-info-box">
         <div id= "confirm-user-info">
+          <h2><strong>Confirm New Request</strong></h2>
             <p><strong>Please confirm the following information is correct: </strong></p>
             <hr>
-            <p>Who go? <span class="user-entered">{{ netid }}</p></span>
+            <p>Who go?
+            <span class = "user-entered">
+            {{first_name}} {{last_name}} ({{netid}})</span></p>
             <p>How many go?: <span class="user-entered">{{ number_going }}</p></span>
             <p>Where go? <span class="user-entered">{{ start }} to {{ dest }}</p></span>
             <p>When go? <span class="user-entered">{{date}} at {{ time }}</p></span>

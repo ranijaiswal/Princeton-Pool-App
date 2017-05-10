@@ -34,9 +34,11 @@ form .btn {
 
 {% block content %}
 
-<h2 style="padding-left:50px">Successfully Created Ride</h2>
+
 <div id="confirm-info-box">
   <div id= "confirm-user-info">
+    <h2><strong>Successfully Created Ride</strong></h2>
+    <br>
     <p><b>You will also receive an email with the following information: </b></p>
     <hr>
   <p>Your Journey: <span class="user-entered">{{ start }} to {{ dest }} </p></span>
@@ -44,12 +46,12 @@ form .btn {
       <h3 style="text-align:center"><b>Enjoy Your Carpool!</b></h3>
   <hr>
   <form action="/{{rtype}}/open/">
-    <input type="submit" class="btn btn-primary"value = "Back to Open Requests" />
-    <a href="{% url 'my_rides' %}" class='btn btn-default'>My Rides</a>
+    <input type="submit" class="btn btn-secondary"value = "Back to Open Requests" />
+    <a href="{% url 'my_rides' %}" class='btn btn-primary'>My Rides</a>
   </form>
 </div>
 </div>
-<!-- =======
+<!-- 
     <h2 style="padding-left:50px">Successfully Created Ride</h2>
     <div id="confirm-info-box">
         <div id= "confirm-user-info">
