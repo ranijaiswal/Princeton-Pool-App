@@ -33,16 +33,22 @@
 
 {% block content %}
 
-<body class ='my_rides_container' >
-<div align = 'center'>
-  <div class='vertical-veil' style="height: 100px;">
-    <br>
-  <div class="list-group my_rides_list">
-  <h4 align="center">You have been dropped from this ride. Thank you for using Princeton Go!</h4>
-  <a href="{% url 'my_rides'%}" class='btn btn-default my-rides'>My Rides</a>
-  </div>
-</div>
-</div>
+<body class ='my_rides_container'>
+    <div align = 'center'>
+        <div class='vertical-veil'>
+            <br>
+            <div class="my_rides_list">
+                <h3 align="center">You have been dropped from this ride. Thank you for using Princeton Go!</h3>
+                <div align="center">
+                    <a href="{% url 'my_rides'%}" class='btn btn-secondary my-rides'>My Rides</a>
+                    <br><br>
+                    <a href="/airport/open/" class='btn btn-secondary my-rides'>Open Airport Rides</a>
+                    <a href="/shopping/open/" class='btn btn-secondary my-rides'>Open Shopping Rides</a>
+                    <a href="/other/open/" class='btn btn-secondary my-rides'>Open Miscellaneous Rides</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 {% endblock %}

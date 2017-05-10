@@ -55,6 +55,7 @@ form .btn {
   {% else %}
     <h2><strong>Confirm To Join Ride</strong></h2>
   {% endif %}
+
   <hr>
   <p>Destination: <span class = "user-entered">{{Dest}}</span> </p>
   <p>Date and time of ride: <span class = "user-entered">{{Date}}</span> </p>
@@ -62,8 +63,9 @@ form .btn {
     <span class = "user-entered">
     {% for user in Riders %}
     <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
-    {% endfor %} </p>
+     </p>
     </span>
+  {% endfor %}
   <hr>
 
     {% if in_ride == 'True' %}
@@ -72,7 +74,7 @@ form .btn {
       <form action="confirm/{{id}}">
         <input type="submit" class="btn btn-secondary" value = "Back"
         onClick="history.go(-1);return true;">
-         <button type='button' class='btn btn-danger btn-danger-join' data-toggle="modal" data-target="#myModal{{id}}"></span> Drop</button>
+         <button type='button' class='btn btn-danger btn-danger-join' data-toggle="modal" data-target="#myModal{{id}}"> Drop</button>
 
          <!-- Modal -->
                                     <div id="myModal{{id}}" class="modal fade" role="dialog">
@@ -106,6 +108,7 @@ form .btn {
         <input type="submit" class="btn btn-primary" value = "Confirm" />
       </form>
   {% endif %}
+
   </div>
   <br>
 </div>
