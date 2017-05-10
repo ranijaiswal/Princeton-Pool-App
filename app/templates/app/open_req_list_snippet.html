@@ -12,7 +12,7 @@
                     <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right">leaving {{ride.date_time|naturaltime}}</small></h5>
                 {% endif %}
 
-                <small class="mb-2">Destination: {{ride.get_start_destination_display}} to {{ ride.end_destination_display}} </small>
+                <small class="mb-2">Destination: {{ride.start_destination}} to {{ ride.end_destination}} </small>
                 <br>
                 <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>
                 <br>
