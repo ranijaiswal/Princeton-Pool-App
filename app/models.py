@@ -7,10 +7,10 @@ from django.utils import timezone
 
 class Rides(models.Model):
     DESTINATIONS = (
-        ('EWR', 'EWR'),
-        ('JFK', 'JFK'),
-        ('LGA', 'LGA'),
-        ('PHL', 'PHL'),
+        ('EWR', 'Newark (EWR)'),
+        ('JFK', 'John F. Kennedy (JFK)'),
+        ('LGA', 'LaGuardia (LGA)'),
+        ('PHL', 'Philadelphia (PHL)'),
         ('PTON', 'Princeton'),
         ('Wegman\'s', 'Wegman\'s'),
         ('Shop Rite', 'Shop Rite'),
@@ -18,7 +18,7 @@ class Rides(models.Model):
         ('Target', 'Target'),
         ('Walmart', 'Walmart'),
         ('Costco', 'Costco'),
-        ('Asian Foods Market Plainsboro', 'Asian Foods Market Plainsboro')
+        ('Asian Food Markets (Plainsboro)', 'Asian Food Markets (Plainsboro)')
     )
     RIDE_TYPES = (
         ('Airport', 'Airport'),

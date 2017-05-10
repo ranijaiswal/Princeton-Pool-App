@@ -9,11 +9,11 @@ from django.forms.extras.widgets import SelectDateWidget
 from .SelectTimeWidget import SelectTimeWidget
 
 AIRPORT_DESTINATIONS = (
-    ('Princeton', 'Princeton'),
-    ('EWR', 'EWR'),
-    ('JFK', 'JFK'),
-    ('LGA', 'LGA'),
-    ('PHL', 'PHL'),
+    ('PTON', 'Princeton'),
+    ('EWR', 'Newark (EWR)'),
+    ('JFK', 'John F. Kennedy (JFK)'),
+    ('LGA', 'LaGuardia (LGA)'),
+    ('PHL', 'Philadelphia (PHL)'),
 )
 
 SHOPPING_DESTINATIONS = (
@@ -24,7 +24,7 @@ SHOPPING_DESTINATIONS = (
     ('Target', 'Target'),
     ('Walmart', 'Walmart'),
     ('Costco', 'Costco'),
-    ('Asian Foods Market Plainsboro', 'Asian Foods Market Plainsboro')
+    ('Asian Food Markets (Plainsboro)', 'Asian Food Markets (Plainsboro)')
 )
 class FeedbackForm(forms.Form):
     name=forms.CharField(label="Name (optional)", required=False)
@@ -39,18 +39,18 @@ class RequestForm(forms.Form):
     def __init__(self,*args,**kwargs):
         rtype = kwargs.pop("rtype")
         super(RequestForm, self).__init__(*args, **kwargs)
-        
+
         if rtype == 'airport':
             self.fields['starting_destination'] = forms.ChoiceField(label='Starting Destination?', choices=AIRPORT_DESTINATIONS)
             self.fields['destination'] = forms.ChoiceField(label='Where go?', choices=AIRPORT_DESTINATIONS)
-        
+
         elif rtype == 'shopping':
             self.fields['starting_destination'] = forms.ChoiceField(label='Starting Destination?', choices=SHOPPING_DESTINATIONS)
             self.fields['destination'] = forms.ChoiceField(label='Where go?', choices=SHOPPING_DESTINATIONS)
         elif rtype == 'other':
             self.fields['starting_destination'] = forms.CharField(label='Starting Destination?')
             self.fields['destination'] = forms.CharField(label='Where go?')
-        self.fields['number_going'] = forms.IntegerField(label = 'How many others can go?')
+        self.fields['number_going'] = forms.IntegerField(label = 'How many others can go?', min_value=1, max_value=10)
         self.fields['date'] = forms.DateField(widget=SelectDateWidget, label="When go (MM/DD/YYYY)?",
                                               initial=date.today())
         self.fields['time'] = forms.TimeField(widget=SelectTimeWidget(twelve_hr=True, minute_step=5, use_seconds=False), label="What time go (HH:MM)?")
@@ -71,11 +71,6 @@ class RequestForm(forms.Form):
         destination = cleaned_data.get('destination')
         number_going = cleaned_data.get('number_going')
 
-        if (number_going < 1):
-            raise forms.ValidationError(u'So lonely. Only room for yourself?')
-
-        if (number_going > 200):
-            raise forms.ValidationError(u'Sorry, we are not handling large rideshares. ')
         ride_date = cleaned_data.get('date')
         ride_time = cleaned_data.get('time')
         date_time = ('%s %s' % (ride_date, ride_time))

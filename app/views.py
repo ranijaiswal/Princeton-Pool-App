@@ -102,7 +102,7 @@ def my_rides(request):
 	init_User(user.username)
 
 	theUser = Users.objects.get(netid=user.username)
-	rides = theUser.pools.all()
+	rides = theUser.pools.all().filter(seats__gt=0)
 	context = {
 		'Title': 'My Rides',
 		'rides': rides,
@@ -225,7 +225,7 @@ def confirmation_new_request(request):
 	datetime_object = datetime.strptime(ride.date_time, '%Y-%m-%d %H:%M')
 	date_obj_str = datetime_object.strftime('%m/%d/%Y %I:%M %p')[0:date_length]
 	time_obj_str = datetime_object.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST'
-	
+
 	mail = EmailMultiAlternatives(
 		subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
 		body= 'Idk what goes here?',
@@ -239,8 +239,8 @@ def confirmation_new_request(request):
 	message = 'Your ride request has been created! Below you can find the information for your ride.'
 	theUser = Users.objects.get(netid=user.username)
 	closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
-	mail.substitutions = {'%names%': theUser.first_name, '%body%': message, '%date%': date_obj_str, 
-						  '%time%': time_obj_str, '%destination%': start + ' to ' + dest, 
+	mail.substitutions = {'%names%': theUser.first_name, '%body%': message, '%date%': date_obj_str,
+						  '%time%': time_obj_str, '%destination%': start + ' to ' + dest,
 						  '%riders%': theUser.first_name + " " + theUser.last_name, '%seats%': number_going,
 						  '%closing%': closing}
 
@@ -311,17 +311,17 @@ def confirm_join_ride(request, ride_id):
 	# put 'and' and delete comma if only two riders
 	split_firsts = riders_firstnames.split(', ')
 	num_riders = len(split_firsts)
-	if num_riders == 2: 
+	if num_riders == 2:
 		riders_firstnames = (' and ').join(split_firsts)
 	else:
 		riders_firstnames = (', ').join(split_firsts[0:(num_riders - 1)])
 		riders_firstnames = riders_firstnames + ', and ' + split_firsts[num_riders - 1]
 
 	riders_fullnames = riders_fullnames.rstrip(', ')
-	
+
 	date_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[0:date_length]
 	time_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST'
-	
+
 	mail_to_riders = EmailMultiAlternatives(
 		subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
 		body= 'Idk what goes here?',
@@ -335,8 +335,8 @@ def confirm_join_ride(request, ride_id):
 	theUser = Users.objects.get(netid=user.username)
 	message = theUser.first_name + ' ' + theUser.last_name +' has joined your ride! Below you can find the information for this ride.'
 	closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
-	mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str, 
-									'%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination, 
+	mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str,
+									'%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination,
 									'%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
 
 	mail_to_riders.attach_alternative(
@@ -366,6 +366,11 @@ def drop_ride(request, ride_id):
 	ride.save()
 	rider.save()
 
+	#make sure this is the last thing done in the view
+	if (ride.usrs.count() == 0):
+		ride.delete()
+	return render(request, 'app/drop_ride.html', context)
+
 	# list of all the riders
 	riders_emails = []
 	riders_firstnames = ""
@@ -379,7 +384,7 @@ def drop_ride(request, ride_id):
 	# put 'and' and delete comma if only two riders
 	split_firsts = riders_firstnames.split(', ')
 	num_riders = len(split_firsts)
-	if num_riders == 2: 
+	if num_riders == 2:
 		riders_firstnames = (' and ').join(split_firsts)
 	elif num_riders > 2:
 		riders_firstnames = (', ').join(split_firsts[0:(num_riders - 1)])
@@ -390,7 +395,7 @@ def drop_ride(request, ride_id):
 	# email to dropper
 	date_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[0:date_length]
 	time_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST'
-	
+
 	mail_to_dropper= EmailMultiAlternatives(
 		subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
 		body= 'Idk what goes here?',
@@ -404,8 +409,8 @@ def drop_ride(request, ride_id):
 	message = 'You have dropped a ride. For your records, below you can find the ride information.'
 	theUser = Users.objects.get(netid=user.username)
 	closing = 'Thank you for using Princeton Go!'
-	mail_to_dropper.substitutions = {'%names%': theUser.first_name, '%body%': message, '%date%': date_obj_str, 
-									 '%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination, 
+	mail_to_dropper.substitutions = {'%names%': theUser.first_name, '%body%': message, '%date%': date_obj_str,
+									 '%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination,
 									 '%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
 
 	mail_to_dropper.attach_alternative(
@@ -414,7 +419,7 @@ def drop_ride(request, ride_id):
 	mail_to_dropper.send()
 
 	# email to everyone in the ride
-	
+
 	mail_to_riders = EmailMultiAlternatives(
 		subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
 		body= 'Idk what goes here?',
@@ -427,19 +432,14 @@ def drop_ride(request, ride_id):
 	# Replace substitutions in template
 	message = theUser.first_name + ' ' + theUser.last_name +' has dropped your ride. We have increased the number of available seats, as you can see below in the ride information.'
 	closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
-	mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str, 
-									'%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination, 
+	mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str,
+									'%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination,
 									'%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
 
 	mail_to_riders.attach_alternative(
     "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
 	)
 	mail_to_riders.send()
-
-	#make sure this is the last thing done in the view
-	if (ride.usrs.count() == 0):
-		ride.delete()
-	return render(request, 'app/drop_ride.html', context)
 
 
 class RidesList(generics.ListAPIView):
@@ -476,10 +476,9 @@ def submit_search_from_ajax(request):
 		for term in search_terms:
 			search_results = search_results.filter(end_destination__icontains=term) | search_results.filter(start_destination__icontains=term)
 
-	soon_list=search_results.filter(date_time__lte=datetime.now()-timedelta(days=300))
-
-	for result in soon_list:
-		result.soon = True
+	for result in search_results:
+		if (result.date_time<=datetime.now()+timedelta(minutes=60)):
+			result.soon = True
 
 	print (search_results)
 
