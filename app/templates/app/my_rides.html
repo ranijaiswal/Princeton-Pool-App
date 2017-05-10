@@ -54,7 +54,7 @@ hr.style2 {
 }
 
 .modal-header .close {
-  font-size: 30px; 
+  font-size: 30px;
 }
 
 </style>
@@ -75,7 +75,8 @@ hr.style2 {
                             <!-- <div class="d-flex w-100 justify-content-between"> -->
 
                               <!--   <div class='lg-info'> -->
-                                    <button type='button' class='btn btn-danger pull-right' data-toggle="modal" data-target="#myModal{{ride.id}}"><span class='glyphicon glyphicon-remove'></span> Drop</button>
+                                    <button type='button' class='btn btn-danger btn-danger-join pull-right' data-toggle="modal" data-target="#myModal{{ride.id}}"><span class='glyphicon glyphicon-remove'></span>
+                                      Drop</button>
                                     <h5 class="mb-1">Ride #{{ride.id}}</h5>
 
 
@@ -85,9 +86,9 @@ hr.style2 {
                                     <br>
                                      <small class="mb-2"># Empty Seats: {{ ride.seats }}</small>
 
-                                    <small class="text-muted"><br>Current Riders: {% for user in ride.usrs.all %} 
-                                    <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}}) 
-                                        
+                                    <small class="text-muted"><br>Current Riders: {% for user in ride.usrs.all %}
+                                    <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
+
                                     {% endfor %} </small>
                                     <br><hr class='style2'>
 
