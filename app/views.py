@@ -454,7 +454,6 @@ def submit_search_from_ajax(request):
 	if (request.method == "GET"):
 		search_text = request.GET.get("rides_search_text", "").strip().upper()
 		search_terms = search_text.split(" ")
-		print(search_terms)
 		#if (len(search_terms) > 1):
 
 	ride_type = request.GET.get('ride_type')
@@ -463,14 +462,15 @@ def submit_search_from_ajax(request):
 	#where filtering/querysetting for search bar occurs
 	user = request.user
 	search_results=Rides.objects.all().filter(ride_type=ride_type, seats__gt=0, date_time__gt=datetime.now()).exclude(usrs__netid__contains = user.username)
+
 	soon_list = []
 
 	print(user)
+
 	if (search_text != ""):
 		#search_results = Rides.objects.all().filter(ride_type=ride_type, seats__gt=0, date_time__gt=datetime.now(), end_destination__contains=search_text).exclude(usrs__netid__contains = user.username)
 		for term in search_terms:
 			search_results = search_results.filter(end_destination__icontains=term) | search_results.filter(start_destination__icontains=term)
-
 
 	soon_list=search_results.filter(date_time__lte=datetime.now()-timedelta(days=300))
 
@@ -478,6 +478,7 @@ def submit_search_from_ajax(request):
 		result.soon = True
 
 	print (search_results)
+
 	context = {
 		"search_text": search_text,
 		"search_results": search_results,
