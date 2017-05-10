@@ -11,7 +11,7 @@ from .forms import RequestForm, FeedbackForm
 from time import strftime
 from django.db import models
 from .models import Rides, Users
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 from django.utils.timezone import activate
 
@@ -199,7 +199,7 @@ def confirmation_new_request(request):
 	rtype = request.path.split('/')[1]
 	ride = Rides(ride_type=rtype, start_destination = start, end_destination=dest,
 				 other_destination="", date_time=date + " " + time, req_date_time=timezone.now(),
-				 seats = number_going)
+				 seats = number_going, soon=False)
 
 	ride.save()
 	rider = Users.objects.get(netid=user.username)
@@ -460,13 +460,23 @@ def submit_search_from_ajax(request):
 	ride_type = request.GET.get('ride_type')
 
 
+	#where filtering/querysetting for search bar occurs
 	user = request.user
 	search_results=Rides.objects.all().filter(ride_type=ride_type, seats__gt=0, date_time__gt=datetime.now()).exclude(usrs__netid__contains = user.username)
+	soon_list = []
+
 	print(user)
 	if (search_text != ""):
 		#search_results = Rides.objects.all().filter(ride_type=ride_type, seats__gt=0, date_time__gt=datetime.now(), end_destination__contains=search_text).exclude(usrs__netid__contains = user.username)
 		for term in search_terms:
 			search_results = search_results.filter(end_destination__icontains=term) | search_results.filter(start_destination__icontains=term)
+
+
+	soon_list=search_results.filter(date_time__lte=datetime.now()-timedelta(days=300))
+
+	for result in soon_list:
+		result.soon = True
+
 	print (search_results)
 	context = {
 		"search_text": search_text,

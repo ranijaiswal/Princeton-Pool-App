@@ -33,6 +33,7 @@ class Rides(models.Model):
     req_date_time = models.DateTimeField(auto_now_add=True)
     usrs = models.ManyToManyField('Users')
     seats = models.IntegerField(default=0)
+    soon = models.BooleanField(default=False)
 
     def __int__(self):
         return self.id
