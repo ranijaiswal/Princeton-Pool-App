@@ -81,6 +81,9 @@ input {
 .btn-danger {
 	font-family: Source Sans Pro, 'Pavanam', Helvetica, sans-serif;
     font-size: 20px;
+    border: solid;
+	border-width: 1px;
+	border-color: #444;
 }
 
 .btn-primary {
