@@ -472,10 +472,9 @@ def submit_search_from_ajax(request):
 		for term in search_terms:
 			search_results = search_results.filter(end_destination__icontains=term) | search_results.filter(start_destination__icontains=term)
 
-	soon_list=search_results.filter(date_time__lte=datetime.now()-timedelta(days=300))
-
-	for result in soon_list:
-		result.soon = True
+	for result in search_results:
+		if (result.date_time<=datetime.now()+timedelta(minutes=60)):
+			result.soon = True
 
 	print (search_results)
 
