@@ -96,7 +96,7 @@ def init_User(netid):
 		full_name = scrape_name(netid)
 		Users.objects.create(netid=netid, first_name=full_name[0], last_name=full_name[1])
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/') 
 def my_rides(request):
 	user = request.user
 	init_User(user.username)

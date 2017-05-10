@@ -87,6 +87,10 @@ input {
 	background-color: #8c0d26;
 }
 
+.btn-danger-my-rides {
+    font-size: 16px;
+}
+
 .btn-primary {
 	border: solid;
 	border-width: 1px;

@@ -26,6 +26,7 @@
 
     <!-- <link href="{% static 'css/landing-page.css' %}" rel="stylesheet"> -->
     <link href="{% static 'css/master.css' %}" rel="stylesheet">
+    <link href="{% static 'css/userlist.css' %}" rel="stylesheet">
 <!--     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"> -->
 
 {% endblock %}
@@ -85,10 +86,14 @@ hr.style2 {
                                     <br>
                                      <small class="mb-2"># Empty Seats: {{ ride.seats }}</small>
 
-                                    <small class="text-muted"><br>Current Riders: {% for user in ride.usrs.all %} 
-                                    <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}}) 
-                                        
-                                    {% endfor %} </small>
+                                    <small class="text-muted"><br>Current Riders: 
+                                    <ul id="userlist">
+                                    <br>
+                                    {% for user in ride.usrs.all %}
+                                    <li>{{user.first_name}} {{user.last_name}} ({{user.netid}})</li>
+                                    {% endfor %} 
+                                    </ul>
+                                     </small>
                                     <br><hr class='style2'>
 
                                     <!-- Modal -->
