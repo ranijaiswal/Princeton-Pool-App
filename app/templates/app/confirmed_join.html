@@ -24,13 +24,13 @@
 <div id="confirm-info-box">
   <div id= "confirm-user-info">
     <h2><strong>Successfully Joined Ride</strong></h2>
-    <p><b>You will also receive an email with the following information: </b></p>
+    <p>You will also receive an email with the following information:</p>
     <hr>
-    <p>Destination: <span class="user-entered">{{dest}} </p></span>
+    <p>Trip: <span class="user-entered">{{ start }} to {{ dest }} </p></span>
     <p>Date and time of ride: <span class="user-entered">{{date}}</p></span>
-    <p>Current passenger(s): 
+    <p>Current passenger(s):
         <span class="user-entered">
-    {% for user in Riders %} 
+    {% for user in Riders %}
         <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
         {% endfor %} </p></span>
     <br>
