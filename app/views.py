@@ -61,7 +61,7 @@ def feedback(request):
 	user = request.user
 	form = FeedbackForm()
 	context = {
-		'Title': 'Anonymous Feedback',
+		'Title': 'Feedback',
 		'netid': user.username,
 		'form': form
 	}
@@ -80,12 +80,12 @@ def feedback_thanks(request):
 		if message_email == ", whose email address is ":
 			message_email = ", who did not give an email address"
 
-		message = form.cleaned_data['feedback']
-		send_mail("Feedback",
-				  "You have received feedback from " + message_name + message_email + ". They left the following message: \n\n" + message,
-				  'Princeton Go <princetongo333@gmail.com>', ['princetongo333@gmail.com'],
-				  fail_silently=False,
-				  )
+		# message = form.cleaned_data['feedback']
+		# send_mail("Feedback",
+		# 		  "You have received feedback from " + message_name + message_email + ". They left the following message: \n\n" + message,
+		# 		  'Princeton Go <princetongo333@gmail.com>', ['princetongo333@gmail.com'],
+		# 		  fail_silently=False,
+		# 		  )
 	context = {
 		'Title': 'Thank you for the feedback!'
 	}
@@ -166,6 +166,7 @@ def confirm_new_request(request):
 	form = RequestForm(request.POST or None, rtype=rtype)
 	user = request.user
 	init_User(user.username)
+	theUser = Users.objects.get(netid=user.username)
 	if request.method == 'POST':
 		if form.is_valid():
 			context = {
@@ -176,6 +177,8 @@ def confirm_new_request(request):
 				'date': form.cleaned_data['date'],
 				'time': form.cleaned_data['time'],
 				'netid': user.username,
+				'first_name': theUser.first_name,
+				'last_name': theUser.last_name,
 			}
 			request.session['start'] = form.cleaned_data['starting_destination']
 			request.session['dest'] = form.cleaned_data['destination']
@@ -248,6 +251,7 @@ def confirmation_new_request(request):
     "<p>This is a simple HTML email body</p>", "text/html"
 	)
 	mail.send()
+
 	return render(request, 'app/confirmed_ride.html', context)
 
 @login_required(login_url='/accounts/login/')
@@ -441,7 +445,6 @@ def drop_ride(request, ride_id):
 	)
 	mail_to_riders.send()
 
-
 class RidesList(generics.ListAPIView):
 	# model = Rides
 	# context_object_name = "rides"
@@ -485,7 +488,8 @@ def submit_search_from_ajax(request):
 	context = {
 		"search_text": search_text,
 		"search_results": search_results,
-		'netid': user.username
+		"ride_type": ride_type,
+		'netid': user.username,
 	}
 
 

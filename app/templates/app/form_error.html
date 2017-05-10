@@ -12,8 +12,6 @@
 
     {#    <link rel = "stylesheet" href="style.css">#}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
     <link href="{% static 'css/master.css' %}" rel="stylesheet">
 {% endblock %}
 
@@ -36,29 +34,31 @@
     </style>
 
 {% endblock %}
-
+<body>
 {% block content %}
-
+<div align='center'>
     {% if form.errors %}
         {% for field in form %}
             {% for error in field.errors %}
                 <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
+                    <p><small><strong>{{ error|escape }}</strong></small></p>
                 </div>
             {% endfor %}
         {% endfor %}
         {% for error in form.non_field_errors %}
             <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
+                <p><small><strong>{{ error|escape }}</strong></small><p>
             </div>
         {% endfor %}
     {% endif %}
 
     <div class="return-footer">
-    <button type = "button" class="btn btn-warning" onClick="history.go(-1);return true;">Edit Request</button>
+        <button type = "submit" style='font-family: Source Sans Pro' class="btn btn-warning" onClick="history.go(-1);return true;">Edit Request</button><br><br>
+    <img src = "https://s-media-cache-ak0.pinimg.com/originals/b5/c7/0f/b5c70f8b411b3f76fb6619cad8b4c036.gif">
+    
     </div>
-
-
+</div>
+</body>
 {% endblock %}
 <!-- </div> -->
 {% block endscripts %}
