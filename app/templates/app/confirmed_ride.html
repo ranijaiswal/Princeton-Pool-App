@@ -15,10 +15,8 @@
 
 {% block style %}
 <style>
-@import url('https://fonts.googleapis.com/css?family=Pavanam');
 
 footer {
-  font-family: Pavanam, sans-serif;
   background-color: #222;
   position: fixed;
   width: 100%;
@@ -27,7 +25,6 @@ footer {
 }
 
 form .btn {
-  font-family: Pavanam;
   font-size: 20px;
 }
 
@@ -42,8 +39,8 @@ form .btn {
   <div id= "confirm-user-info">
     <p><b>You will also receive an email with the following information: </b></p>
     <hr>
-  <p>Your Journey: {{ start }} to {{ dest }} </p>
-  <p>Date and time of ride: {{ date }} at {{ time }}</p>
+  <p>Your Journey: <span class="user-entered">{{ start }} to {{ dest }} </p></span>
+  <p>Date and time of ride: <span class="user-entered">{{ date }} at {{ time }}</p></span>
       <h3 style="text-align:center"><b>Enjoy Your Carpool!</b></h3>
   <hr>
   <form action="/{{rtype}}/open/">

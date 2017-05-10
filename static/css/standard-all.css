@@ -5,6 +5,7 @@
  */
 
 @import url('https://fonts.googleapis.com/css?family=Pavanam');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 body,
 html {
@@ -19,7 +20,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Pavanam", "Lato", "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Source Sans Pro, "Pavanam", "Lato", "Helvetica Neue",Helvetica,Arial,sans-serif;
     /*font-weight: 700;*/
 }
 
@@ -29,7 +30,7 @@ body {
 
 p,
 a {
-    font-family: "Pavanam", "Lato", "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Source Sans Pro, "Pavanam", "Lato", "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 footer {

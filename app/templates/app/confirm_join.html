@@ -14,7 +14,8 @@
 
 {% block style %}
 <style>
-@import url('https://fonts.googleapis.com/css?family=Pavanam');
+@import url('https://fonts.googleapis.com/css?family=Arimo');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 input {
     border-radius: 8px;
@@ -26,7 +27,7 @@ body {
 }
 
 footer {
-  font-family: Pavanam, sans-serif;
+  font-family: Source Sans Pro, Arimo, Pavanam, sans-serif;
   background-color: #222;
   position: fixed;
   width: 100%;
@@ -35,7 +36,7 @@ footer {
 }
 
 form .btn {
-  font-family: Pavanam;
+  font-family: Arimo, Pavanam;
   font-size: 20px;
 }
 
@@ -45,18 +46,21 @@ form .btn {
 
 {% block content %}
 
-<h2 style="padding-left:50px">Confirm To Join Ride</h2>
+
 
 <div id="confirm-info-box">
   <div id= "confirm-user-info">
-  <p><b>Would you like to join this ride? </b></p>
+    <h2><strong>Confirm To Join Ride</strong></h2>
+  <p>Would you like to join this ride?</p>
   <hr>
-  <p>Destination: {{Dest}} </p>
-  <p>Date and time of ride: {{Date}}</p>
+  <p>Destination: <span class = "user-entered">{{Dest}}</span> </p>
+  <p>Date and time of ride: <span class = "user-entered">{{Date}}</span> </p>
   <p>Current passenger(s): 
+    <span class = "user-entered">
     {% for user in Riders %}  
     <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})  
     {% endfor %} </p>
+    </span> 
   <hr>
   <form action="confirm/{{id}}">
     <input type="submit" class="btn btn-secondary" value = "Back"

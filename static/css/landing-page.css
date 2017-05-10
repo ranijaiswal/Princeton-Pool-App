@@ -3,6 +3,7 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 body,
 html {
@@ -17,7 +18,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Source Sans Pro";
 }
 
 .topnav {
@@ -36,6 +37,9 @@ h6 {
     color: #f8f8f8;
     background: url(../img/fast-car.jpg) no-repeat center center;
     background-size: cover;
+    bottom:0;
+    top:0;
+    height: 100%;
 }
 
 .intro-message {

@@ -26,7 +26,6 @@ input {
 }
 
 footer {
-  font-family: Pavanam, sans-serif;
   background-color: #222;
   position: fixed;
   width: 100%;
@@ -35,7 +34,6 @@ footer {
 }
 
 form .btn {
-  font-family: Pavanam;
   font-size: 20px;
 }
 
@@ -48,12 +46,12 @@ form .btn {
 
     <div id="confirm-info-box">
         <div id= "confirm-user-info">
-            <p><b>Please confirm the following information is correct: </b></p>
+            <p><strong>Please confirm the following information is correct: </strong></p>
             <hr>
-            <p>Who go? {{ netid }}</p>
-            <p>How many go?: {{ number_going }}</p>
-            <p>Where go? {{ start }} to {{ dest }}</p>
-            <p>When go? {{date}} at {{ time }}</p>
+            <p>Who go? <span class="user-entered">{{ netid }}</p></span>
+            <p>How many go?: <span class="user-entered">{{ number_going }}</p></span>
+            <p>Where go? <span class="user-entered">{{ start }} to {{ dest }}</p></span>
+            <p>When go? <span class="user-entered">{{date}} at {{ time }}</p></span>
 
 
             <hr>
