@@ -45,7 +45,7 @@ form .btn {
   <p>Date and time of ride: <span class="user-entered">{{ date }} at {{ time }}</p></span>
       <h3 style="text-align:center"><b>Enjoy Your Carpool!</b></h3>
   <hr>
-  <form action="/{{rtype}}/open/">
+  <form style="text-align:center" action="/{{rtype}}/open/">
     <input type="submit" class="btn btn-secondary"value = "Back to Open Requests" />
     <a href="{% url 'my_rides' %}" class='btn btn-primary'>My Rides</a>
   </form>

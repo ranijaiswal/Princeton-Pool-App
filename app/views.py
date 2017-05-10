@@ -266,6 +266,7 @@ def join_ride(request, ride_id):
 		in_ride = "True"
 	context = {
 		'Title': 'Join Airport Ride',
+
 		'start': ride.start_destination,
 		'dest': ride.get_end_destination_display(),
 		'Date': ride.date_time,
