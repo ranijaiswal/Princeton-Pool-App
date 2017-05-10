@@ -1,6 +1,7 @@
 {% load humanize %}
 
 <div class= "d-flex flex-column justify-content-center">
+    {% if search_results %}
                 {% for ride in search_results %}
                     <a href="select/{{ride.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
@@ -27,6 +28,16 @@
                     </a>
 
                 {% endfor %}
+
+
+                {% else %}
+                <div align="center">
+                    <hr>
+                    <h3>There are currently no open {{ride_type}} rides!<br>Please make a new ride or try again later.</h3>                  
+                    <img src = "https://s-media-cache-ak0.pinimg.com/originals/c9/eb/6c/c9eb6cc67b97ec85e3be12b8e39b7d6d.gif">
+                    <br><br>
+                </div>
+            {% endif %}
             </div>
 
 {#</p>#}
@@ -36,3 +47,4 @@
 {#         {% endfor %}#}
 {#      </ul>#}
 {#</p>#}
+

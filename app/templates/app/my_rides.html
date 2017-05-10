@@ -73,27 +73,29 @@ hr.style2 {
                 <h1 align="center">{{Title}}</h1><hr class='style2'>
                 <div class= "d-flex flex-column justify-content-center">
 
-
+                    {% if rides %}
                         {% for ride in rides %}
                         <!-- <a class="list-group-item list-group-item-action flex-column align-items-start"> -->
                             <!-- <div class="d-flex w-100 justify-content-between"> -->
 
                               <!--   <div class='lg-info'> -->
                                     <button type='button' class='btn btn-danger pull-right' data-toggle="modal" data-target="#myModal{{ride.id}}"><span class='glyphicon glyphicon-remove'></span> Drop</button>
-                                    <h5 class="mb-1">Ride #{{ride.id}}</h5>
+                                    <div style='padding-left:40px'>
+                                    <h3 >Ride #{{ride.id}}</h3>
 
+                                    
+                                        <small class="mb-1">Trip: <span class='user-entered'>{{ride.get_start_destination_display}} to {{ ride.get_end_destination_display}} </span></small>
+                                        <br>
+                                        <small class="mb-1">Ride Departure Time: <span class='user-entered'>{{ ride.date_time}}</span></small>
+                                        <br>
+                                         <small class="mb-1"># Empty Seats: <span class='user-entered'>{{ ride.seats }}</span></small>
 
-                                    <small class="mb-2">Trip: {{ride.get_start_destination_display}} to {{ ride.get_end_destination_display}} </small>
-                                    <br>
-                                    <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>
-                                    <br>
-                                     <small class="mb-2"># Empty Seats: {{ ride.seats }}</small>
-
-                                    <small class="text-muted"><br>Current Riders: {% for user in ride.usrs.all %} 
-                                    <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}}) 
-                                        
-                                    {% endfor %} </small>
-                                    <br><hr class='style2'>
+                                        <small class="text-muted mb-1"><br><span class='user-entered'>Current Riders: {% for user in ride.usrs.all %} 
+                                        <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}}) 
+                                            
+                                        {% endfor %} </span></small>
+                                    </div>
+                                    <hr class='style2'>
 
                                     <!-- Modal -->
                                     <div id="myModal{{ride.id}}" class="modal fade" role="dialog">
@@ -110,8 +112,8 @@ hr.style2 {
 
                                                 <div id="modal-btns">
                                                 <!-- <div class="modal-footer"> -->
-                                                    <a class="btn btn-warning" role="button" href="drop/{{ride.id}}">Yes, I want to drop this ride.</a>
-                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">No, I want to keep it.</button><br>
+                                                    <a class="btn btn-primary" role="button" href="drop/{{ride.id}}">Yes, I want to drop this ride.</a>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I want to keep it.</button><br>
                                                     </div>
                                                 </div>
                                                 <!-- </div> -->
@@ -122,7 +124,17 @@ hr.style2 {
                                 <!-- </div>
                             </div> -->
                     {% endfor %}
-
+                    {% else %}
+                    <div align='center'>
+                        <p>You are currently not in any rides.</p>
+                        <a href="/airport/open/" class='btn btn-secondary my-rides'>Open Airport Rides</a>
+                        <a href="/shopping/open/" class='btn btn-secondary my-rides'>Open Shopping Rides</a>
+                        <a href="/other/open/" class='btn btn-secondary my-rides'>Open Miscellaneous Rides</a>
+                        <br><br>
+                        <img src = "https://media.giphy.com/media/11t5Rt8nhfl0Wc/giphy.gif">
+                    <br><br>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

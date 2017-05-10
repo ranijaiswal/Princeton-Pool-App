@@ -51,7 +51,6 @@ form .btn {
 <div id="confirm-info-box">
   <div id= "confirm-user-info">
     <h2><strong>Confirm To Join Ride</strong></h2>
-  <p>Would you like to join this ride?</p>
   <hr>
   <p>Destination: <span class = "user-entered">{{Dest}}</span> </p>
   <p>Date and time of ride: <span class = "user-entered">{{Date}}</span> </p>
@@ -62,6 +61,7 @@ form .btn {
     {% endfor %} </p>
     </span> 
   <hr>
+    <p>Would you like to join this ride?</p>
   <form action="confirm/{{id}}">
     <input type="submit" class="btn btn-secondary" value = "Back"
     onClick="history.go(-1);return true;">

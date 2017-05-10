@@ -19,10 +19,11 @@
 {% endblock %}
 
 {% block content %}
-<h2 style="padding-left:50px">{{Title}}</h2>
+
 
 <div id="confirm-info-box">
   <div id= "confirm-user-info">
+    <h2><strong>Successfully Joined Ride</strong></h2>
     <p><b>You will also receive an email with the following information: </b></p>
     <hr>
     <p>Destination: <span class="user-entered">{{dest}} </p></span>
@@ -36,8 +37,8 @@
     <p><b>Enjoy Your Carpool!</b></p>
     <hr>
     <form action="/{{rtype}}/open/">
-      <input type="submit" class="btn btn-primary" value = "Back to Open Requests" />
-      <a href="{% url 'my_rides' %}" class="btn btn-secondary">My Rides</a>
+      <input type="submit" class="btn btn-secondary" value = "Back to Open Requests" />
+      <a href="{% url 'my_rides' %}" class="btn btn-primary">My Rides</a>
     </form>
 
 </div>
