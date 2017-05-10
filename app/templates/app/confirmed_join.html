@@ -12,12 +12,6 @@
 
 <style>
 
-footer {
-    position: fixed;
-    width: 100%;
-    left: 0px;
-    bottom: 0px;
-}
 
 
 </style>
@@ -31,12 +25,13 @@ footer {
   <div id= "confirm-user-info">
     <p><b>You will also receive an email with the following information: </b></p>
     <hr>
-    <p>Destination: {{dest}} </p>
-    <p>Date and time of ride: {{date}}</p>
+    <p>Destination: <span class="user-entered">{{dest}} </p></span>
+    <p>Date and time of ride: <span class="user-entered">{{date}}</p></span>
     <p>Current passenger(s): 
+        <span class="user-entered">
     {% for user in Riders %} 
         <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
-        {% endfor %} </p>
+        {% endfor %} </p></span>
     <br>
     <p><b>Enjoy Your Carpool!</b></p>
     <hr>
