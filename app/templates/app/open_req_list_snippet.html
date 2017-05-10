@@ -1,34 +1,35 @@
 {% load humanize %}
 
 <div class= "d-flex flex-column justify-content-center">
-    {% if search_results %}
-                {% for ride in search_results %}
-                    <a href="select/{{ride.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <div class='lg-info'>
-                                <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right">leaving {{ride.date_time|naturaltime}}</small></h5>
+{% if search_results %}
+    {% for ride in search_results %}
 
-                                <small class="mb-2">Trip: {{ride.get_start_destination_display}} to {{ ride.end_destination}} </small>
-                                <br>
-                                <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>
-                                <br>
-                                <small class="mb-2"># Empty Seats: {{ ride.seats }}</small>
-                                <small class="text-muted"><br>Current Riders:
-                                   {% for user in ride.usrs.all %} 
-                                        <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
-                                    {% endfor %} </small>
-                                {% for user in ride.usrs.all %}
-                                    {%if netid == user.netid%}
-                                        <small class="text-muted"><br>You are already in this ride!</small>
-                                    {%endif%}
-                                {% endfor %}
+    <a href="select/{{ride.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <div class='lg-info'>
 
-                            </div>
-                        </div>
-                    </a>
+                {% if ride.soon %}
+                    <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right"><font color=red>leaving {{ride.date_time|naturaltime}}</font></small></h5>
+                {% else %}
+                    <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right">leaving {{ride.date_time|naturaltime}}</small></h5>
+                {% endif %}
 
+                <small class="mb-2">Destination: {{ride.get_start_destination_display}} to {{ ride.end_destination}} </small>
+                <br>
+                <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>
+                <br>
+                <small class="mb-2"># empty seats: {{ ride.seats }}</small>
+                <small class="text-muted"><br>Current Riders:<ul id="userlist">
+                    <br>
+                    {% for user in ride.usrs.all %}
+                    <li>{{user.first_name}} {{user.last_name}} ({{user.netid}})</li>
+                    {% endfor %} 
+                    </ul></small>
+                {% for user in ride.usrs.all %}
+                    {%if netid == user.netid%}
+                        <small class="text-muted"><br><span style='color:#40964a'>You are already in this ride!</span></small>
+                    {%endif%}
                 {% endfor %}
-
 
                 {% else %}
                 <div align="center">
@@ -38,7 +39,24 @@
                     <br><br>
                 </div>
             {% endif %}
+
             </div>
+
+            {#                <script language="javascript">#}
+            {##}
+            {#                    var dateOfIncident = $('#ride-time').val();#}
+            {#                    var dateNow = Date.now();#}
+            {#                    if(true)#}
+            {#                    {#}
+            {#                        $("#lg-info").css("color", "red");#}
+            {#                    }#}
+            {#                </script>#}
+
+        </div>
+    </a>
+
+    {% endfor %}
+</div>
 
 {#</p>#}
 {#      <ul>#}
@@ -47,4 +65,3 @@
 {#         {% endfor %}#}
 {#      </ul>#}
 {#</p>#}
-

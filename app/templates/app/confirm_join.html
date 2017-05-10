@@ -50,23 +50,65 @@ form .btn {
 
 <div id="confirm-info-box">
   <div id= "confirm-user-info">
+  {% if in_ride == 'True' %}
+    <h2><strong>You are already in this ride!</strong></h2>
+  {% else %}
     <h2><strong>Confirm To Join Ride</strong></h2>
+  {% endif %}
+
   <hr>
   <p>Destination: <span class = "user-entered">{{Dest}}</span> </p>
   <p>Date and time of ride: <span class = "user-entered">{{Date}}</span> </p>
-  <p>Current passenger(s): 
+  <p>Current passenger(s):
     <span class = "user-entered">
-    {% for user in Riders %}  
-    <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})  
-    {% endfor %} </p>
-    </span> 
+    {% for user in Riders %}
+    <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
+     </p>
+    </span>
+  {% endfor %}
   <hr>
-    <p>Would you like to join this ride?</p>
-  <form action="confirm/{{id}}">
-    <input type="submit" class="btn btn-secondary" value = "Back"
-    onClick="history.go(-1);return true;">
-    <input type="submit" class="btn btn-primary" value = "Confirm" />
-  </form>
+
+    {% if in_ride == 'True' %}
+
+      <p>Either go back or drop this ride.</p>
+      <form action="confirm/{{id}}">
+        <input type="submit" class="btn btn-secondary" value = "Back"
+        onClick="history.go(-1);return true;">
+         <button type='button' class='btn btn-danger btn-danger-join' data-toggle="modal" data-target="#myModal{{id}}"> Drop</button>
+
+         <!-- Modal -->
+                                    <div id="myModal{{id}}" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button class="btn close" data-dismiss="modal">&times;</button>
+                                                    <p>Drop Ride #{{id}} to {{Dest}} on {{Date}}</p>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure? You will not be able to reverse this action.</p>
+
+                                                <div id="modal-btns">
+                                                <!-- <div class="modal-footer"> -->
+                                                    <a class="btn btn-warning" role="button" href="drop/{{id}}">Yes, I want to drop this ride.</a>
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">No, I want to keep it.</button><br>
+                                                    </div>
+                                                </div>
+                                                <!-- </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+      </form>
+    {% else %}
+      <p>Would you like to join this ride?</p>
+      <form action="confirm/{{id}}">
+        <input type="submit" class="btn btn-secondary" value = "Back"
+        onClick="history.go(-1);return true;">
+        <input type="submit" class="btn btn-primary" value = "Confirm" />
+      </form>
+  {% endif %}
+
   </div>
   <br>
 </div>

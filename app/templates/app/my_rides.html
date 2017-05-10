@@ -26,6 +26,7 @@
 
     <!-- <link href="{% static 'css/landing-page.css' %}" rel="stylesheet"> -->
     <link href="{% static 'css/master.css' %}" rel="stylesheet">
+    <link href="{% static 'css/userlist.css' %}" rel="stylesheet">
 <!--     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"> -->
 
 {% endblock %}
@@ -54,11 +55,7 @@ hr.style2 {
 }
 
 .modal-header .close {
-  font-size: 30px; 
-}
-
-.btn-danger {
-    font-size: 16px;
+  font-size: 30px;
 }
 
 </style>
@@ -79,23 +76,28 @@ hr.style2 {
                             <!-- <div class="d-flex w-100 justify-content-between"> -->
 
                               <!--   <div class='lg-info'> -->
-                                    <button type='button' class='btn btn-danger pull-right' data-toggle="modal" data-target="#myModal{{ride.id}}"><span class='glyphicon glyphicon-remove'></span> Drop</button>
-                                    <div style='padding-left:40px'>
-                                    <h3 >Ride #{{ride.id}}</h3>
 
-                                    
-                                        <small class="mb-1">Trip: <span class='user-entered'>{{ride.get_start_destination_display}} to {{ ride.get_end_destination_display}} </span></small>
-                                        <br>
-                                        <small class="mb-1">Ride Departure Time: <span class='user-entered'>{{ ride.date_time}}</span></small>
-                                        <br>
-                                         <small class="mb-1"># Empty Seats: <span class='user-entered'>{{ ride.seats }}</span></small>
+                                    <button type='button' class='btn btn-danger btn-danger-join pull-right' data-toggle="modal" data-target="#myModal{{ride.id}}"><span class='glyphicon glyphicon-remove'></span>
+                                      Drop</button>
+                                    <h5 class="mb-1">Ride #{{ride.id}}</h5>
 
-                                        <small class="text-muted mb-1"><br><span class='user-entered'>Current Riders: {% for user in ride.usrs.all %} 
-                                        <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}}) 
-                                            
-                                        {% endfor %} </span></small>
-                                    </div>
-                                    <hr class='style2'>
+
+                                    <small class="mb-2">Trip: {{ride.get_start_destination_display}} to {{ ride.get_end_destination_display}} </small>
+                                    <br>
+                                    <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>
+                                    <br>
+                                     <small class="mb-2"># Empty Seats: {{ ride.seats }}</small>
+
+                                    <small class="text-muted"><br>Current Riders: 
+                                    <ul id="userlist">
+                                    <br>
+                                    {% for user in ride.usrs.all %}
+                                    <li>{{user.first_name}} {{user.last_name}} ({{user.netid}})</li>
+                                    {% endfor %} 
+                                    </ul>
+                                     </small>
+                     
+                                    <br><hr class='style2'>
 
                                     <!-- Modal -->
                                     <div id="myModal{{ride.id}}" class="modal fade" role="dialog">

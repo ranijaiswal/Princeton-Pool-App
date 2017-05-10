@@ -11,7 +11,7 @@ from .forms import RequestForm, FeedbackForm
 from time import strftime
 from django.db import models
 from .models import Rides, Users
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 from django.utils.timezone import activate
 
@@ -96,13 +96,13 @@ def init_User(netid):
 		full_name = scrape_name(netid)
 		Users.objects.create(netid=netid, first_name=full_name[0], last_name=full_name[1])
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/') 
 def my_rides(request):
 	user = request.user
 	init_User(user.username)
 
 	theUser = Users.objects.get(netid=user.username)
-	rides = theUser.pools.all()
+	rides = theUser.pools.all().filter(seats__gt=0)
 	context = {
 		'Title': 'My Rides',
 		'rides': rides,
@@ -120,19 +120,19 @@ def open_requests(request):
 	if rtype == 'airport':
 		context = {
 			'Title': 'Open Airport Requests',
-			'rides': Rides.objects.all().filter(ride_type='airport', seats__gt=0, date_time__gt=datetime.now()).exclude(usrs__netid__contains = user.username),
+			'rides': Rides.objects.all().filter(ride_type='airport', seats__gt=0, date_time__gt=datetime.now()),
 			'netid': user.username,
 		}
 	elif rtype == 'shopping':
 		context = {
 			'Title': 'Open Shopping Requests',
-			'rides': Rides.objects.all().filter(ride_type='shopping', seats__gt=0, date_time__gt=datetime.now()).exclude(usrs__netid__contains = user.username),
+			'rides': Rides.objects.all().filter(ride_type='shopping', seats__gt=0, date_time__gt=datetime.now()),
 			'netid': user.username,
 		}
 	else:
 		context = {
 			'Title': 'Open Miscellaneous Requests',
-			'rides': Rides.objects.all().filter(ride_type='other', seats__gt=0, date_time__gt=datetime.now()).exclude(usrs__netid__contains = user.username),
+			'rides': Rides.objects.all().filter(ride_type='other', seats__gt=0, date_time__gt=datetime.now()),
 			'netid': user.username,
 		}
 	return render(request, 'app/open_req_list.html', context)
@@ -202,7 +202,7 @@ def confirmation_new_request(request):
 	rtype = request.path.split('/')[1]
 	ride = Rides(ride_type=rtype, start_destination = start, end_destination=dest,
 				 other_destination="", date_time=date + " " + time, req_date_time=timezone.now(),
-				 seats = number_going)
+				 seats = number_going, soon=False)
 
 	ride.save()
 	rider = Users.objects.get(netid=user.username)
@@ -228,29 +228,30 @@ def confirmation_new_request(request):
 	datetime_object = datetime.strptime(ride.date_time, '%Y-%m-%d %H:%M')
 	date_obj_str = datetime_object.strftime('%m/%d/%Y %I:%M %p')[0:date_length]
 	time_obj_str = datetime_object.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST'
-	
-	# mail = EmailMultiAlternatives(
-	# 	subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
-	# 	body= 'Idk what goes here?',
-	# 	from_email= 'Princeton Go <princetongo333@gmail.com>',
-	# 	to=[user.username + '@princeton.edu']
-	# 	)
-	# # Add template
-	# mail.template_id = '4f75a67a-64a9-47f5-9a59-07646a578b9f'
 
-	# # Replace substitutions in template
-	# message = 'Your ride request has been created! Below you can find the information for your ride.'
-	# theUser = Users.objects.get(netid=user.username)
-	# closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
-	# mail.substitutions = {'%names%': theUser.first_name, '%body%': message, '%date%': date_obj_str, 
-	# 					  '%time%': time_obj_str, '%destination%': start + ' to ' + dest, 
-	# 					  '%riders%': theUser.first_name + " " + theUser.last_name, '%seats%': number_going,
-	# 					  '%closing%': closing}
+	mail = EmailMultiAlternatives(
+		subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
+		body= 'Idk what goes here?',
+		from_email= 'Princeton Go <princetongo333@gmail.com>',
+		to=[user.username + '@princeton.edu']
+		)
+	# Add template
+	mail.template_id = '4f75a67a-64a9-47f5-9a59-07646a578b9f'
 
-	# mail.attach_alternative(
- #    "<p>This is a simple HTML email body</p>", "text/html"
-	# )
-	# mail.send()
+	# Replace substitutions in template
+	message = 'Your ride request has been created! Below you can find the information for your ride.'
+	theUser = Users.objects.get(netid=user.username)
+	closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
+	mail.substitutions = {'%names%': theUser.first_name, '%body%': message, '%date%': date_obj_str,
+						  '%time%': time_obj_str, '%destination%': start + ' to ' + dest,
+						  '%riders%': theUser.first_name + " " + theUser.last_name, '%seats%': number_going,
+						  '%closing%': closing}
+
+	mail.attach_alternative(
+    "<p>This is a simple HTML email body</p>", "text/html"
+	)
+	mail.send()
+
 	return render(request, 'app/confirmed_ride.html', context)
 
 @login_required(login_url='/accounts/login/')
@@ -259,6 +260,10 @@ def join_ride(request, ride_id):
 	ride = get_object_or_404(Rides, pk=ride_id)
 	user = request.user
 	init_User(user.username)
+	theUser = Users.objects.get(netid=user.username)
+	in_ride = "False"
+	if theUser.pools.filter(id=ride_id).exists():
+		in_ride = "True"
 	context = {
 		'Title': 'Join Airport Ride',
 		'Dest': ride.end_destination,
@@ -266,6 +271,8 @@ def join_ride(request, ride_id):
 		'id': ride_id,
 		'Riders': ride.usrs.all(),
 		'netid': user.username,
+		'in_ride': in_ride,
+
 	}
 	return render(request, 'app/confirm_join.html', context)
 
@@ -308,38 +315,38 @@ def confirm_join_ride(request, ride_id):
 	# put 'and' and delete comma if only two riders
 	split_firsts = riders_firstnames.split(', ')
 	num_riders = len(split_firsts)
-	if num_riders == 2: 
+	if num_riders == 2:
 		riders_firstnames = (' and ').join(split_firsts)
 	else:
 		riders_firstnames = (', ').join(split_firsts[0:(num_riders - 1)])
 		riders_firstnames = riders_firstnames + ', and ' + split_firsts[num_riders - 1]
 
 	riders_fullnames = riders_fullnames.rstrip(', ')
-	
+
 	date_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[0:date_length]
 	time_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST'
-	
-	# mail_to_riders = EmailMultiAlternatives(
-	# 	subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
-	# 	body= 'Idk what goes here?',
-	# 	from_email= 'Princeton Go <princetongo333@gmail.com>',
-	# 	to=riders_emails
-	# 	)
-	# # Add template
-	# mail_to_riders.template_id = '4f75a67a-64a9-47f5-9a59-07646a578b9f'
 
-	# # Replace substitutions in template
-	# theUser = Users.objects.get(netid=user.username)
-	# message = theUser.first_name + ' ' + theUser.last_name +' has joined your ride! Below you can find the information for this ride.'
-	# closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
-	# mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str, 
-	# 								'%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination, 
-	# 								'%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
+	mail_to_riders = EmailMultiAlternatives(
+		subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
+		body= 'Idk what goes here?',
+		from_email= 'Princeton Go <princetongo333@gmail.com>',
+		to=riders_emails
+		)
+	# Add template
+	mail_to_riders.template_id = '4f75a67a-64a9-47f5-9a59-07646a578b9f'
 
-	# mail_to_riders.attach_alternative(
- #    "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
-	# )
-	# mail_to_riders.send()
+	# Replace substitutions in template
+	theUser = Users.objects.get(netid=user.username)
+	message = theUser.first_name + ' ' + theUser.last_name +' has joined your ride! Below you can find the information for this ride.'
+	closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
+	mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str,
+									'%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination,
+									'%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
+
+	mail_to_riders.attach_alternative(
+    "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
+	)
+	mail_to_riders.send()
 
 	return render(request, 'app/confirmed_join.html', context)
 
@@ -363,6 +370,11 @@ def drop_ride(request, ride_id):
 	ride.save()
 	rider.save()
 
+	#make sure this is the last thing done in the view
+	if (ride.usrs.count() == 0):
+		ride.delete()
+	return render(request, 'app/drop_ride.html', context)
+
 	# list of all the riders
 	riders_emails = []
 	riders_firstnames = ""
@@ -376,7 +388,7 @@ def drop_ride(request, ride_id):
 	# put 'and' and delete comma if only two riders
 	split_firsts = riders_firstnames.split(', ')
 	num_riders = len(split_firsts)
-	if num_riders == 2: 
+	if num_riders == 2:
 		riders_firstnames = (' and ').join(split_firsts)
 	elif num_riders > 2:
 		riders_firstnames = (', ').join(split_firsts[0:(num_riders - 1)])
@@ -387,57 +399,51 @@ def drop_ride(request, ride_id):
 	# email to dropper
 	date_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[0:date_length]
 	time_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST'
-	
-	# mail_to_dropper= EmailMultiAlternatives(
-	# 	subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
-	# 	body= 'Idk what goes here?',
-	# 	from_email= 'Princeton Go <princetongo333@gmail.com>',
-	# 	to=[user.username + '@princeton.edu']
-	# 	)
-	# # Add template
-	# mail_to_dropper.template_id = '4f75a67a-64a9-47f5-9a59-07646a578b9f'
 
-	# # Replace substitutions in template
-	# message = 'You have dropped a ride. For your records, below you can find the ride information.'
-	# theUser = Users.objects.get(netid=user.username)
-	# closing = 'Thank you for using Princeton Go!'
-	# mail_to_dropper.substitutions = {'%names%': theUser.first_name, '%body%': message, '%date%': date_obj_str, 
-	# 								 '%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination, 
-	# 								 '%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
+	mail_to_dropper= EmailMultiAlternatives(
+		subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
+		body= 'Idk what goes here?',
+		from_email= 'Princeton Go <princetongo333@gmail.com>',
+		to=[user.username + '@princeton.edu']
+		)
+	# Add template
+	mail_to_dropper.template_id = '4f75a67a-64a9-47f5-9a59-07646a578b9f'
 
-	# mail_to_dropper.attach_alternative(
- #    "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
-	# )
-	# mail_to_dropper.send()
+	# Replace substitutions in template
+	message = 'You have dropped a ride. For your records, below you can find the ride information.'
+	theUser = Users.objects.get(netid=user.username)
+	closing = 'Thank you for using Princeton Go!'
+	mail_to_dropper.substitutions = {'%names%': theUser.first_name, '%body%': message, '%date%': date_obj_str,
+									 '%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination,
+									 '%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
 
-	# # email to everyone in the ride
-	
-	# mail_to_riders = EmailMultiAlternatives(
-	# 	subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
-	# 	body= 'Idk what goes here?',
-	# 	from_email= 'Princeton Go <princetongo333@gmail.com>',
-	# 	to=riders_emails
-	# 	)
-	# # Add template
-	# mail_to_riders.template_id = '4f75a67a-64a9-47f5-9a59-07646a578b9f'
+	mail_to_dropper.attach_alternative(
+    "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
+	)
+	mail_to_dropper.send()
 
-	# # Replace substitutions in template
-	# message = theUser.first_name + ' ' + theUser.last_name +' has dropped your ride. We have increased the number of available seats, as you can see below in the ride information.'
-	# closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
-	# mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str, 
-	# 								'%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination, 
-	# 								'%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
+	# email to everyone in the ride
 
-	# mail_to_riders.attach_alternative(
- #    "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
-	# )
-	# mail_to_riders.send()
+	mail_to_riders = EmailMultiAlternatives(
+		subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
+		body= 'Idk what goes here?',
+		from_email= 'Princeton Go <princetongo333@gmail.com>',
+		to=riders_emails
+		)
+	# Add template
+	mail_to_riders.template_id = '4f75a67a-64a9-47f5-9a59-07646a578b9f'
 
-	#make sure this is the last thing done in the view
-	if (ride.usrs.count() == 0):
-		ride.delete()
-	return render(request, 'app/drop_ride.html', context)
+	# Replace substitutions in template
+	message = theUser.first_name + ' ' + theUser.last_name +' has dropped your ride. We have increased the number of available seats, as you can see below in the ride information.'
+	closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
+	mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str,
+									'%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination,
+									'%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
 
+	mail_to_riders.attach_alternative(
+    "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
+	)
+	mail_to_riders.send()
 
 class RidesList(generics.ListAPIView):
 	# model = Rides
@@ -451,6 +457,7 @@ class RidesList(generics.ListAPIView):
 
 
 def submit_search_from_ajax(request):
+	user = request.user
 	rides=[]
 	search_text=""
 	search_terms=[]
@@ -462,16 +469,27 @@ def submit_search_from_ajax(request):
 	ride_type = request.GET.get('ride_type')
 
 
+	#where filtering/querysetting for search bar occurs
 	user = request.user
-	search_results=Rides.objects.all().filter(ride_type=ride_type, seats__gt=0, date_time__gt=datetime.now()).exclude(usrs__netid__contains = user.username)
+	soon_list = []
+
+	search_results=Rides.objects.all().filter(ride_type=ride_type, seats__gt=0, date_time__gt=datetime.now())
 	if (search_text != ""):
 		#search_results = Rides.objects.all().filter(ride_type=ride_type, seats__gt=0, date_time__gt=datetime.now(), end_destination__contains=search_text).exclude(usrs__netid__contains = user.username)
 		for term in search_terms:
 			search_results = search_results.filter(end_destination__icontains=term) | search_results.filter(start_destination__icontains=term)
+
+	for result in search_results:
+		if (result.date_time<=datetime.now()+timedelta(minutes=60)):
+			result.soon = True
+
+	print (search_results)
+
 	context = {
 		"search_text": search_text,
 		"search_results": search_results,
 		"ride_type": ride_type,
+		'netid': user.username
 	}
 
 
