@@ -420,7 +420,7 @@ def drop_ride(request, ride_id):
 	)
 	mail_to_dropper.send()
 
-	email to everyone in the ride
+	# email to everyone in the ride
 
 	mail_to_riders = EmailMultiAlternatives(
 		subject= 'Ride #' + str(ride.id) + ' To ' + ride.get_end_destination_display(),
