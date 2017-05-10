@@ -12,17 +12,18 @@
                     <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right">leaving {{ride.date_time|naturaltime}}</small></h5>
                 {% endif %}
 
-                <small class="mb-2">Destination: {{ride.get_start_destination_display}} to {{ ride.end_destination}} </small>
+                <small class="mb-2">Destination: {{ride.get_start_destination_display}} to {{ ride.end_destination_display}} </small>
                 <br>
                 <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>
                 <br>
                 <small class="mb-2"># empty seats: {{ ride.seats }}</small>
                 <small class="text-muted"><br>Current Riders:<ul id="userlist">
-                <br>
-                {% for user in ride.usrs.all %}
-                <li>{{user.first_name}} {{user.last_name}} ({{user.netid}})</li>
-                {% endfor %} 
-                </ul></small>
+                    <br>
+                    {% for user in ride.usrs.all %}
+                    <li>{{user.first_name}} {{user.last_name}} ({{user.netid}})</li>
+                    {% endfor %}
+                    </ul></small>
+
                 {% for user in ride.usrs.all %}
                     {%if netid == user.netid%}
                         <small class="text-muted"><br><span style='color:#40964a'>You are already in this ride!</span></small>
@@ -30,11 +31,11 @@
 
                 {% endfor %}
                 {% endfor %}
-                
+
                 {% else %}
                 <div align="center">
                     <hr>
-                    <h3>There are currently no open {{ride_type}} rides!<br>Please make a new ride or try again later.</h3>                  
+                    <h3>There are currently no open {{ride_type}} rides!<br>Please make a new ride or try again later.</h3>
                     <img src = "https://s-media-cache-ak0.pinimg.com/originals/c9/eb/6c/c9eb6cc67b97ec85e3be12b8e39b7d6d.gif">
                     <br><br>
                 <!-- </div> -->
@@ -42,7 +43,7 @@
                 </div>
                 </a>
             {% endif %}
-            
-        
-    
+
+
+
 </div>
