@@ -102,7 +102,7 @@ def my_rides(request):
 	init_User(user.username)
 
 	theUser = Users.objects.get(netid=user.username)
-	rides = theUser.pools.all().filter(seats__gt=0)
+	rides = theUser.pools.all().filter(seats__gte=0)
 	context = {
 		'Title': 'My Rides',
 		'rides': rides,
