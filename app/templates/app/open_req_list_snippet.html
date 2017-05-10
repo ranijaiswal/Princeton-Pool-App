@@ -14,7 +14,7 @@
                     <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right">leaving {{ride.date_time|naturaltime}}</small></h5>
                 {% endif %}
 
-                <small class="mb-2">Destination: {{ride.get_start_destination_display}} to {{ ride.end_destination}} </small>
+                <small class="mb-2">Destination: {{ride.get_start_destination_display}} to {{ ride.end_destination_display}} </small>
                 <br>
                 <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>
                 <br>
@@ -23,7 +23,7 @@
                     <br>
                     {% for user in ride.usrs.all %}
                     <li>{{user.first_name}} {{user.last_name}} ({{user.netid}})</li>
-                    {% endfor %} 
+                    {% endfor %}
                     </ul></small>
                 {% for user in ride.usrs.all %}
                     {%if netid == user.netid%}

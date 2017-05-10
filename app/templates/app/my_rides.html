@@ -87,15 +87,15 @@ hr.style2 {
                                     <br>
                                      <small class="mb-2"># Empty Seats: {{ ride.seats }}</small>
 
-                                    <small class="text-muted"><br>Current Riders: 
+                                    <small class="text-muted"><br>Current Riders:
                                     <ul id="userlist">
                                     <br>
                                     {% for user in ride.usrs.all %}
                                     <li>{{user.first_name}} {{user.last_name}} ({{user.netid}})</li>
-                                    {% endfor %} 
+                                    {% endfor %}
                                     </ul>
                                      </small>
-                     
+
                                     <br><hr class='style2'>
 
                                     <!-- Modal -->
@@ -106,7 +106,7 @@ hr.style2 {
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button class="btn close" data-dismiss="modal">&times;</button>
-                                                    <p>Drop Ride #{{ride.id}} to {{ride.end_destination}} on {{ride.date_time}}</p>
+                                                    <p>Drop Ride #{{ride.id}} to {{ride.end_destination_display}} on {{ride.date_time}}</p>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p>Are you sure? You will not be able to reverse this action.</p>
