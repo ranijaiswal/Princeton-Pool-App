@@ -68,7 +68,7 @@ form .btn {
 
     {% if in_ride == 'True' %}
 
-      <p><strong>Above are this ride's details. You can either go back or drop this ride. </strong></p>
+      <p>Either go back or drop this ride.</p>
       <form action="confirm/{{id}}">
         <input type="submit" class="btn btn-secondary" value = "Back"
         onClick="history.go(-1);return true;">
@@ -99,7 +99,7 @@ form .btn {
                                     </div>
       </form>
     {% else %}
-      <p><b>Would you like to join this ride? </b></p>
+      <p>Would you like to join this ride?</p>
       <form action="confirm/{{id}}">
         <input type="submit" class="btn btn-secondary" value = "Back"
         onClick="history.go(-1);return true;">
