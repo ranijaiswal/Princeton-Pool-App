@@ -489,7 +489,7 @@ def submit_search_from_ajax(request):
 		"search_text": search_text,
 		"search_results": search_results,
 		"ride_type": ride_type,
-		'netid': user.username
+		'netid': user.username,
 	}
 
 

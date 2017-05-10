@@ -59,12 +59,11 @@ form .btn {
   <hr>
   <p>Destination: <span class = "user-entered">{{Dest}}</span> </p>
   <p>Date and time of ride: <span class = "user-entered">{{Date}}</span> </p>
-  <p>Current passenger(s):<span class = "user-entered">
-    {% for user in Riders %}
-    <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
-         </span></p>
-
-  {% endfor %}
+  <p>Current passenger(s): 
+        <span class="user-entered">
+    {% for user in Riders %} 
+        <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
+        {% endfor %} </p></span>
   <hr>
 
     {% if in_ride == 'True' %}
@@ -90,8 +89,8 @@ form .btn {
 
                                                 <div id="modal-btns">
                                                 <!-- <div class="modal-footer"> -->
-                                                    <a class="btn btn-warning" role="button" href="drop/{{id}}">Yes, I want to drop this ride.</a>
-                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">No, I want to keep it.</button><br>
+                                                    <a class="btn btn-primary" role="button" href="drop/{{id}}">Yes, I want to drop this ride.</a>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I want to keep it.</button><br>
                                                     </div>
                                                 </div>
                                                 <!-- </div> -->
