@@ -9,11 +9,11 @@ from django.forms.extras.widgets import SelectDateWidget
 from .SelectTimeWidget import SelectTimeWidget
 
 AIRPORT_DESTINATIONS = (
-    ('PTON', 'Princeton'),
-    ('EWR', 'Newark (EWR)'),
-    ('JFK', 'John F. Kennedy (JFK)'),
-    ('LGA', 'LaGuardia (LGA)'),
-    ('PHL', 'Philadelphia (PHL)'),
+    ('Princeton', 'Princeton'),
+    ('Newark (EWR)', 'Newark (EWR)'),
+    ('John F. Kennedy (JFK)', 'John F. Kennedy (JFK)'),
+    ('LaGuardia (LGA)', 'LaGuardia (LGA)'),
+    ('Philadelphia (PHL)', 'Philadelphia (PHL)'),
 )
 
 SHOPPING_DESTINATIONS = (
@@ -75,7 +75,7 @@ class RequestForm(forms.Form):
         starting_destination = cleaned_data.get('starting_destination')
         destination = cleaned_data.get('destination')
         number_going = cleaned_data.get('number_going')
-        
+
         ride_date = cleaned_data.get('date')
         ride_time = cleaned_data.get('time')
         date_time = ('%s %s' % (ride_date, ride_time))

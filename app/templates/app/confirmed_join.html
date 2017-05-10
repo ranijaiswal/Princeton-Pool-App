@@ -19,8 +19,6 @@
 {% endblock %}
 
 {% block content %}
-
-
 <div id="confirm-info-box">
   <div id= "confirm-user-info">
     <h2><strong>Successfully Joined Ride</strong></h2>
@@ -34,9 +32,9 @@
         <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
         {% endfor %} </p></span>
     <br>
-    <p><b>Enjoy Your Carpool!</b></p>
+    <p style="text-align:center"><b>Enjoy Your Carpool!</b></p>
     <hr>
-    <form action="/{{rtype}}/open/">
+    <form style="text-align:center" action="/{{rtype}}/open/">
       <input type="submit" class="btn btn-secondary" value = "Back to Open Requests" />
       <a href="{% url 'my_rides' %}" class="btn btn-primary">My Rides</a>
     </form>

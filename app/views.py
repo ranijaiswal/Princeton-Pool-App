@@ -96,7 +96,7 @@ def init_User(netid):
 		full_name = scrape_name(netid)
 		Users.objects.create(netid=netid, first_name=full_name[0], last_name=full_name[1])
 
-@login_required(login_url='/accounts/login/') 
+@login_required(login_url='/accounts/login/')
 def my_rides(request):
 	user = request.user
 	init_User(user.username)
@@ -230,7 +230,7 @@ def confirmation_new_request(request):
 	time_obj_str = datetime_object.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST'
 
 	mail = EmailMultiAlternatives(
-		subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
+		subject= 'Ride #' + str(ride.id) + ' To ' + ride.get_end_destination_display(),
 		body= 'Idk what goes here?',
 		from_email= 'Princeton Go <princetongo333@gmail.com>',
 		to=[user.username + '@princeton.edu']
@@ -266,7 +266,7 @@ def join_ride(request, ride_id):
 		in_ride = "True"
 	context = {
 		'Title': 'Join Airport Ride',
-		'Dest': ride.end_destination,
+		'Dest': ride.get_end_destination_display(),
 		'Date': ride.date_time,
 		'id': ride_id,
 		'Riders': ride.usrs.all(),
@@ -295,7 +295,7 @@ def confirm_join_ride(request, ride_id):
 
 		'Riders': ride.usrs.all(),
 		'title': 'Successfully Joined Ride',
-		'dest': ride.end_destination,
+		'dest': ride.get_end_destination_display(),
 		'date': ride.date_time,
 		'netid': user.username,
 		'rtype': request.path.split('/')[1],
@@ -327,7 +327,7 @@ def confirm_join_ride(request, ride_id):
 	time_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST'
 
 	mail_to_riders = EmailMultiAlternatives(
-		subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
+		subject= 'Ride #' + str(ride.id) + ' To ' + ride.get_end_destination_display(),
 		body= 'Idk what goes here?',
 		from_email= 'Princeton Go <princetongo333@gmail.com>',
 		to=riders_emails
@@ -340,7 +340,7 @@ def confirm_join_ride(request, ride_id):
 	message = theUser.first_name + ' ' + theUser.last_name +' has joined your ride! Below you can find the information for this ride.'
 	closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
 	mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str,
-									'%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination,
+									'%time%': time_obj_str, '%destination%': ride.get_start_destination_display() + ' to ' + ride.get_end_destination_display(),
 									'%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
 
 	mail_to_riders.attach_alternative(
@@ -357,8 +357,8 @@ def drop_ride(request, ride_id):
 	ride = Rides.objects.get(pk=ride_id)
 	idnum = str(ride.id)
 	context = {
-		'start': ride.start_destination,
-		'end': ride.end_destination,
+		'start': ride.get_start_destination_display(),
+		'end': ride.get_end_destination_display(),
 		'time': ride.date_time,
 		'netid': user.username,
 	}
@@ -401,7 +401,7 @@ def drop_ride(request, ride_id):
 	time_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST'
 
 	mail_to_dropper= EmailMultiAlternatives(
-		subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
+		subject= 'Ride #' + str(ride.id) + ' To ' + ride.get_end_destination_display(),
 		body= 'Idk what goes here?',
 		from_email= 'Princeton Go <princetongo333@gmail.com>',
 		to=[user.username + '@princeton.edu']
@@ -414,7 +414,7 @@ def drop_ride(request, ride_id):
 	theUser = Users.objects.get(netid=user.username)
 	closing = 'Thank you for using Princeton Go!'
 	mail_to_dropper.substitutions = {'%names%': theUser.first_name, '%body%': message, '%date%': date_obj_str,
-									 '%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination,
+									 '%time%': time_obj_str, '%destination%': ride.get_start_destination_display() + ' to ' + ride.get_end_destination_display(),
 									 '%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
 
 	mail_to_dropper.attach_alternative(
@@ -425,7 +425,7 @@ def drop_ride(request, ride_id):
 	# email to everyone in the ride
 
 	mail_to_riders = EmailMultiAlternatives(
-		subject= 'Ride #' + str(ride.id) + ' To ' + ride.end_destination,
+		subject= 'Ride #' + str(ride.id) + ' To ' + ride.get_end_destination_display(),
 		body= 'Idk what goes here?',
 		from_email= 'Princeton Go <princetongo333@gmail.com>',
 		to=riders_emails
@@ -437,7 +437,7 @@ def drop_ride(request, ride_id):
 	message = theUser.first_name + ' ' + theUser.last_name +' has dropped your ride. We have increased the number of available seats, as you can see below in the ride information.'
 	closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
 	mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str,
-									'%time%': time_obj_str, '%destination%': ride.start_destination + ' to ' + ride.end_destination,
+									'%time%': time_obj_str, '%destination%': ride.get_start_destination_display() + ' to ' + ride.get_end_destination_display(),
 									'%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
 
 	mail_to_riders.attach_alternative(
