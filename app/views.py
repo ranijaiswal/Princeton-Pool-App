@@ -373,8 +373,7 @@ def drop_ride(request, ride_id):
 	#make sure this is the last thing done in the view
 	if (ride.usrs.count() == 0):
 		ride.delete()
-	return render(request, 'app/drop_ride.html', context)
-
+	
 	# list of all the riders
 	riders_emails = []
 	riders_firstnames = ""
@@ -444,6 +443,8 @@ def drop_ride(request, ride_id):
     "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
 	)
 	mail_to_riders.send()
+	return render(request, 'app/drop_ride.html', context)
+
 
 class RidesList(generics.ListAPIView):
 	# model = Rides
