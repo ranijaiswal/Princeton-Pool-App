@@ -59,12 +59,11 @@ form .btn {
   <hr>
   <p>Destination: <span class = "user-entered">{{Dest}}</span> </p>
   <p>Date and time of ride: <span class = "user-entered">{{Date}}</span> </p>
-  <p>Current passenger(s):
-    <span class = "user-entered">
+  <p>Current passenger(s):<span class = "user-entered">
     {% for user in Riders %}
     <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
-     </p>
-    </span>
+         </span></p>
+
   {% endfor %}
   <hr>
 
