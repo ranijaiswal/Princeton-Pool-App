@@ -102,7 +102,7 @@ def my_rides(request):
 	init_User(user.username)
 
 	theUser = Users.objects.get(netid=user.username)
-	rides = theUser.pools.all().filter(seats__gte=0)
+	rides = theUser.pools.all().filter(seats__gte=0, date_time__gt=datetime.now())
 	context = {
 		'Title': 'My Rides',
 		'rides': rides,
@@ -280,19 +280,9 @@ def join_ride(request, ride_id):
 
 @login_required(login_url='/accounts/login/')
 def confirm_join_ride(request, ride_id):
-	ride = get_object_or_404(Rides, pk=ride_id)
-
-	name = "netid"+str(ride_id)
 	user = request.user
-	init_User(user.username)
+	ride = get_object_or_404(Rides, pk=ride_id)
 	rider = Users.objects.get(netid=user.username)
-	rider.save()
-	rider.pools.add(ride)
-	rider.save()
-	ride.usrs.add(rider)
-	ride.seats -= 1
-	ride.save()
-
 	context = {
 
 		'Riders': ride.usrs.all(),
@@ -304,52 +294,62 @@ def confirm_join_ride(request, ride_id):
 		'rtype': request.path.split('/')[1],
 	}
 
-	# email to everyone in the ride
+	if not rider.pools.filter(pk=ride_id).exists():
+		name = "netid"+str(ride_id)
+		init_User(user.username)
+		rider.save()
+		rider.pools.add(ride)
+		rider.save()
+		ride.usrs.add(rider)
+		ride.seats -= 1
+		ride.save()
 
-	# list of all the riders
-	riders_emails = []
-	riders_firstnames = ""
-	riders_fullnames = ""
-	for rider in ride.usrs.all():
-		riders_emails.append(rider.netid + '@princeton.edu')
-		riders_firstnames = riders_firstnames + ", " + rider.first_name
-		riders_fullnames = riders_fullnames + rider.first_name + " " + rider.last_name + ', '
-	riders_firstnames = riders_firstnames.lstrip(', ')
-	# put 'and' and delete comma if only two riders
-	split_firsts = riders_firstnames.split(', ')
-	num_riders = len(split_firsts)
-	if num_riders == 2:
-		riders_firstnames = (' and ').join(split_firsts)
-	else:
-		riders_firstnames = (', ').join(split_firsts[0:(num_riders - 1)])
-		riders_firstnames = riders_firstnames + ', and ' + split_firsts[num_riders - 1]
+		# email to everyone in the ride
 
-	riders_fullnames = riders_fullnames.rstrip(', ')
-
-	date_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[0:date_length]
-	time_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST'
-
-	mail_to_riders = EmailMultiAlternatives(
-		subject= 'Ride #' + str(ride.id) + ' To ' + ride.get_end_destination_display(),
-		body= 'Idk what goes here?',
-		from_email= 'Princeton Go <princetongo333@gmail.com>',
-		to=riders_emails
-		)
-	# Add template
-	mail_to_riders.template_id = '4f75a67a-64a9-47f5-9a59-07646a578b9f'
-
-	# Replace substitutions in template
-	theUser = Users.objects.get(netid=user.username)
-	message = theUser.first_name + ' ' + theUser.last_name +' has joined your ride! Below you can find the information for this ride.'
-	closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
-	mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str,
-									'%time%': time_obj_str, '%destination%': ride.get_start_destination_display() + ' to ' + ride.get_end_destination_display(),
-									'%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
-
-	mail_to_riders.attach_alternative(
-    "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
-	)
-	mail_to_riders.send()
+		# list of all the riders
+		# riders_emails = []
+		# riders_firstnames = ""
+		# riders_fullnames = ""
+		# for rider in ride.usrs.all():
+		# 	riders_emails.append(rider.netid + '@princeton.edu')
+		# 	riders_firstnames = riders_firstnames + ", " + rider.first_name
+		# 	riders_fullnames = riders_fullnames + rider.first_name + " " + rider.last_name + ', '
+		# riders_firstnames = riders_firstnames.lstrip(', ')
+		# # put 'and' and delete comma if only two riders
+		# split_firsts = riders_firstnames.split(', ')
+		# num_riders = len(split_firsts)
+		# if num_riders == 2:
+		# 	riders_firstnames = (' and ').join(split_firsts)
+		# else:
+		# 	riders_firstnames = (', ').join(split_firsts[0:(num_riders - 1)])
+		# 	riders_firstnames = riders_firstnames + ', and ' + split_firsts[num_riders - 1]
+		#
+		# riders_fullnames = riders_fullnames.rstrip(', ')
+		#
+		# date_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[0:date_length]
+		# time_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST'
+		#
+		# mail_to_riders = EmailMultiAlternatives(
+		# 	subject= 'Ride #' + str(ride.id) + ' To ' + ride.get_end_destination_display(),
+		# 	body= 'Idk what goes here?',
+		# 	from_email= 'Princeton Go <princetongo333@gmail.com>',
+		# 	to=riders_emails
+		# 	)
+		# # Add template
+		# mail_to_riders.template_id = '4f75a67a-64a9-47f5-9a59-07646a578b9f'
+		#
+		# # Replace substitutions in template
+		# theUser = Users.objects.get(netid=user.username)
+		# message = theUser.first_name + ' ' + theUser.last_name +' has joined your ride! Below you can find the information for this ride.'
+		# closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
+		# mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str,
+		# 								'%time%': time_obj_str, '%destination%': ride.get_start_destination_display() + ' to ' + ride.get_end_destination_display(),
+		# 								'%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
+		#
+		# mail_to_riders.attach_alternative(
+	    # "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
+		# )
+		# mail_to_riders.send()
 
 	return render(request, 'app/confirmed_join.html', context)
 
@@ -358,6 +358,7 @@ def drop_ride(request, ride_id):
 	user = request.user
 	init_User(user.username)
 	ride = Rides.objects.get(pk=ride_id)
+	rider = Users.objects.get(netid=user.username)
 	idnum = str(ride.id)
 	context = {
 		'start': ride.get_start_destination_display(),
@@ -366,86 +367,87 @@ def drop_ride(request, ride_id):
 		'netid': user.username,
 	}
 
-	rider = Users.objects.get(netid=user.username)
-	ride.usrs.remove(rider)
-	ride.seats += 1
-	rider.pools.remove(ride)
-	ride.save()
-	rider.save()
-	
-	# list of all the riders
-	riders_emails = []
-	riders_firstnames = ""
-	riders_fullnames = ""
-	for rider in ride.usrs.all():
-		riders_emails.append(rider.netid + '@princeton.edu')
-		riders_firstnames = riders_firstnames + ", " + rider.first_name
-		riders_fullnames = riders_fullnames + rider.first_name + " " + rider.last_name + ', '
+	if rider.pools.filter(pk=ride_id).exists():
+		rider = Users.objects.get(netid=user.username)
+		ride.usrs.remove(rider)
+		ride.seats += 1
+		rider.pools.remove(ride)
+		ride.save()
+		rider.save()
 
-	riders_firstnames = riders_firstnames.lstrip(', ')
-	# put 'and' and delete comma if only two riders
-	split_firsts = riders_firstnames.split(', ')
-	num_riders = len(split_firsts)
-	if num_riders == 2:
-		riders_firstnames = (' and ').join(split_firsts)
-	elif num_riders > 2:
-		riders_firstnames = (', ').join(split_firsts[0:(num_riders - 1)])
-		riders_firstnames = riders_firstnames + ', and ' + split_firsts[num_riders - 1]
+		# list of all the riders
+		# riders_emails = []
+		# riders_firstnames = ""
+		# riders_fullnames = ""
+		# for rider in ride.usrs.all():
+		# 	riders_emails.append(rider.netid + '@princeton.edu')
+		# 	riders_firstnames = riders_firstnames + ", " + rider.first_name
+		# 	riders_fullnames = riders_fullnames + rider.first_name + " " + rider.last_name + ', '
+		#
+		# riders_firstnames = riders_firstnames.lstrip(', ')
+		# # put 'and' and delete comma if only two riders
+		# split_firsts = riders_firstnames.split(', ')
+		# num_riders = len(split_firsts)
+		# if num_riders == 2:
+		# 	riders_firstnames = (' and ').join(split_firsts)
+		# elif num_riders > 2:
+		# 	riders_firstnames = (', ').join(split_firsts[0:(num_riders - 1)])
+		# 	riders_firstnames = riders_firstnames + ', and ' + split_firsts[num_riders - 1]
+		#
+		# riders_fullnames = riders_fullnames.rstrip(', ')
+		#
+		# # email to dropper
+		# date_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[0:date_length]
+		# time_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST'
+		#
+		# mail_to_dropper= EmailMultiAlternatives(
+		# 	subject= 'Ride #' + str(ride.id) + ' To ' + ride.get_end_destination_display(),
+		# 	body= 'Idk what goes here?',
+		# 	from_email= 'Princeton Go <princetongo333@gmail.com>',
+		# 	to=[user.username + '@princeton.edu']
+		# 	)
+		# # Add template
+		# mail_to_dropper.template_id = '4f75a67a-64a9-47f5-9a59-07646a578b9f'
+		#
+		# # Replace substitutions in template
+		# message = 'You have dropped a ride. For your records, below you can find the ride information.'
+		# theUser = Users.objects.get(netid=user.username)
+		# closing = 'Thank you for using Princeton Go!'
+		# mail_to_dropper.substitutions = {'%names%': theUser.first_name, '%body%': message, '%date%': date_obj_str,
+		# 								 '%time%': time_obj_str, '%destination%': ride.get_start_destination_display() + ' to ' + ride.get_end_destination_display(),
+		# 								 '%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
+		#
+		# mail_to_dropper.attach_alternative(
+	    # "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
+		# )
+		# mail_to_dropper.send()
+		#
+		# # email to everyone in the ride
+		#
+		# mail_to_riders = EmailMultiAlternatives(
+		# 	subject= 'Ride #' + str(ride.id) + ' To ' + ride.get_end_destination_display(),
+		# 	body= 'Idk what goes here?',
+		# 	from_email= 'Princeton Go <princetongo333@gmail.com>',
+		# 	to=riders_emails
+		# 	)
+		# # Add template
+		# mail_to_riders.template_id = '4f75a67a-64a9-47f5-9a59-07646a578b9f'
+		#
+		# # Replace substitutions in template
+		# message = theUser.first_name + ' ' + theUser.last_name +' has dropped your ride. We have increased the number of available seats, as you can see below in the ride information.'
+		# closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
+		# mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str,
+		# 								'%time%': time_obj_str, '%destination%': ride.get_start_destination_display() + ' to ' + ride.get_end_destination_display(),
+		# 								'%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
+		#
+		# mail_to_riders.attach_alternative(
+	    # "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
+		# )
+		# mail_to_riders.send()
 
-	riders_fullnames = riders_fullnames.rstrip(', ')
-
-	# email to dropper
-	date_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[0:date_length]
-	time_obj_str = ride.date_time.strftime('%m/%d/%Y %I:%M %p')[date_length:] + ' EST'
-
-	mail_to_dropper= EmailMultiAlternatives(
-		subject= 'Ride #' + str(ride.id) + ' To ' + ride.get_end_destination_display(),
-		body= 'Idk what goes here?',
-		from_email= 'Princeton Go <princetongo333@gmail.com>',
-		to=[user.username + '@princeton.edu']
-		)
-	# Add template
-	mail_to_dropper.template_id = '4f75a67a-64a9-47f5-9a59-07646a578b9f'
-
-	# Replace substitutions in template
-	message = 'You have dropped a ride. For your records, below you can find the ride information.'
-	theUser = Users.objects.get(netid=user.username)
-	closing = 'Thank you for using Princeton Go!'
-	mail_to_dropper.substitutions = {'%names%': theUser.first_name, '%body%': message, '%date%': date_obj_str,
-									 '%time%': time_obj_str, '%destination%': ride.get_start_destination_display() + ' to ' + ride.get_end_destination_display(),
-									 '%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
-
-	mail_to_dropper.attach_alternative(
-    "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
-	)
-	mail_to_dropper.send()
-
-	# email to everyone in the ride
-
-	mail_to_riders = EmailMultiAlternatives(
-		subject= 'Ride #' + str(ride.id) + ' To ' + ride.get_end_destination_display(),
-		body= 'Idk what goes here?',
-		from_email= 'Princeton Go <princetongo333@gmail.com>',
-		to=riders_emails
-		)
-	# Add template
-	mail_to_riders.template_id = '4f75a67a-64a9-47f5-9a59-07646a578b9f'
-
-	# Replace substitutions in template
-	message = theUser.first_name + ' ' + theUser.last_name +' has dropped your ride. We have increased the number of available seats, as you can see below in the ride information.'
-	closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
-	mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str,
-									'%time%': time_obj_str, '%destination%': ride.get_start_destination_display() + ' to ' + ride.get_end_destination_display(),
-									'%riders%': riders_fullnames, '%seats%': ride.seats, '%closing%': closing}
-
-	mail_to_riders.attach_alternative(
-    "<p>This is a simple HTML email body</p>", "text/html" #don't know what this does but it doesn't work w/o it, don't delete
-	)
-	mail_to_riders.send()
-
-	#make sure this is the last thing done in the view
-	if (ride.usrs.count() == 0):
-		ride.delete()
+		#make sure this is the last thing done in the view
+		if (ride.usrs.count() == 0):
+			ride.delete()
 	return render(request, 'app/drop_ride.html', context)
 
 
