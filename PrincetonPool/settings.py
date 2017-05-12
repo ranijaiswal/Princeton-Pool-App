@@ -103,9 +103,7 @@ TEMPLATES = [
         },
     },
 ]
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'website.context_processors.google_analytics',
-)
+
 WSGI_APPLICATION = 'PrincetonPool.wsgi.application'
 
 
@@ -163,9 +161,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-98879179-1'
-GOOGLE_ANALYTICS_DOMAIN = 'princetongo.es'
-GOOGLE_ANALYTICS_MODEL = True
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
