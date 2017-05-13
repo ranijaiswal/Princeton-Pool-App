@@ -186,6 +186,7 @@ def create_new_request(request):
 	context = {
 		'Title': title,
 		'form': form,
+		'rtype': rtype,
 		'netid': user.username,
 		'first_name': theUser.first_name,
 	}
@@ -207,6 +208,7 @@ def confirm_new_request(request):
 				'number_going': form.cleaned_data['number_going'],
 				'date': form.cleaned_data['date'],
 				'time': form.cleaned_data['time'],
+				'rtype': rtype,
 				'netid': user.username,
 				'first_name': theUser.first_name,
 				'last_name': theUser.last_name,

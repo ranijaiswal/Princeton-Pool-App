@@ -8,21 +8,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<!-- <link href="{% static 'css/landing-page.css' %}" rel="stylesheet"> -->
 <link href="{% static 'css/master.css' %}" rel="stylesheet">
 
 {% endblock %}
 
 {% block style %}
 <style>
-
-footer {
-  background-color: #222;
-  position: fixed;
-  width: 100%;
-  left: 0px;
-  bottom: 0px;
-}
 
 form .btn {
   font-size: 20px;
@@ -34,39 +25,29 @@ form .btn {
 
 {% block content %}
 
-
 <div id="confirm-info-box">
   <div id= "confirm-user-info">
+
+    <!--Ride info-->
     <h2><strong>Successfully Created Ride</strong></h2>
     <br>
     <p><b>You will also receive an email with the following information: </b></p>
+    
     <hr>
-  <p>Trip: <span class="user-entered">{{ start }} to {{ dest }} </p></span>
-  <p>Date and time of ride: <span class="user-entered">{{ date }} at {{ time }}</p></span>
-      <h3 style="text-align:center"><b>Enjoy Your Carpool!</b></h3>
-  <hr>
-  <form style="text-align:center" action="/{{rtype}}/open/">
-    <input type="submit" class="btn btn-secondary"value = "Back to Open Requests" />
-    <a href="{% url 'my_rides' %}" class='btn btn-primary'>My Rides</a>
-  </form>
+    
+    <p>Trip: <span class="user-entered">{{ start }} to {{ dest }} </p></span>
+    <p>Date and time of ride: <span class="user-entered">{{ date }} at {{ time }}</p></span>
+    <h3 style="text-align:center"><b>Enjoy Your Carpool!</b></h3>
+    
+    <hr>
+
+    <!--Nav buttons-->
+    <form style="text-align:center" action="/{{rtype}}/open/">
+      <input type="submit" class="btn btn-secondary"value = "Back to Open Requests" />
+      <a href="{% url 'my_rides' %}" class='btn btn-primary'>My Rides</a>
+    </form>
+  </div>
 </div>
-</div>
-<!--
-    <h2 style="padding-left:50px">Successfully Created Ride</h2>
-    <div id="confirm-info-box">
-        <div id= "confirm-user-info">
-            <p><b>You will also receive an email with the following information: </b></p>
-            <hr>
-            <p>Your Journey: {{ start }} to {{ dest }} </p>
-            <p>Date and time of ride: {{ date}} at {{ time }} </p>
-            <h3 style="text-align:center"><b>Enjoy Your Carpool!</b></h3>
-            {#{{ date }} at {{ time }}#}
-            <hr>
-            <form action="/{{rtype}}/open/">
-                <input type="submit" class="btn btn-primary"value = "Back to Open Requests" />
-            </form>
-        </div>
-    </div> -->
 
 {% endblock %}
 
