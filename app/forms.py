@@ -81,7 +81,7 @@ class RequestForm(forms.Form):
         date_time = ('%s %s' % (ride_date, ride_time))
         date_time = datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S')
         if datetime.now() >= date_time:
-            raise forms.ValidationError(u'Invalid input: Please enter a valid date or time! "%s"' % date_time)
+            raise forms.ValidationError(u'Invalid input: Please enter a future time and date! "%s"' % date_time)
 
 
         if (starting_destination == destination):

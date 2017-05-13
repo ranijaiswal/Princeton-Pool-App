@@ -45,21 +45,22 @@ form .btn {
   {% endif %}
 
   <hr>
-  <p>Trip: <span class="user-entered">{{ start }} to {{ dest }} </p></span>
+  <p>Trip: <span class="user-entered">{{ start }} to {{ dest }} </span></p>
   <p>Date and time of ride: <span class = "user-entered">{{Date}}</span> </p>
   <p>Current passenger(s):
         <span class="user-entered">
     {% for user in Riders %}
         <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
-        {% endfor %} </p></span>
+        {% endfor %} </span></p>
   <hr>
 
     {% if in_ride == 'True' %}
 
       <p>Either go back or drop this ride.</p>
-      <form action="confirm/{{id}}">
-        <input type="submit" class="btn btn-secondary" value = "Back"
-        onClick="history.go(-1);return true;">
+      <form action="/{{ rtype}}/open">
+        <input type="submit" class="btn btn-secondary" value = "Back">
+      </form>
+        <form action=""confirm/{{ id }}>
          <button type='button' class='btn btn-danger btn-danger-join' data-toggle="modal" data-target="#myModal{{id}}"> Drop</button>
 
          <!-- Modal -->
