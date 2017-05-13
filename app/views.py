@@ -20,6 +20,9 @@ from rest_framework.response import Response
 from rest_framework import generics
 from .serializers import RideSerializer
 
+from django.shortcuts import (render_to_response)
+from django.template import RequestContext
+
 activate(settings.TIME_ZONE)
 date_length=10
 
@@ -30,6 +33,17 @@ date_length=10
 
 from bs4 import BeautifulSoup
 from .scrape_name import scrape_name
+
+def bad_request(request):
+    response = render_to_response('404.html',context_instance=RequestContext(request))
+    response.status_code = 400
+    return response
+
+def handler404(request):
+    return render(request, '404.html', status=404)
+
+def handler500(request):
+    return render(request, '500.html', status=500)
 
 def google_analytics(request):
     """
@@ -44,7 +58,7 @@ def google_analytics(request):
             'GOOGLE_ANALYTICS_DOMAIN': ga_domain,
         }
     return {}
-    
+
 def index(request):
 	user = request.user
 	context = {

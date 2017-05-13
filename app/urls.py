@@ -6,6 +6,10 @@ import django_cas_ng.views
 from . import views
 from .views import RidesList
 
+from django.conf.urls import (
+handler400, handler403, handler404, handler500
+)
+
 urlpatterns = [
     # url(r'^$', views.public_index, name='public_index'),
     url(r'^$', views.index, name='index'),
@@ -25,3 +29,8 @@ urlpatterns = [
    	url(r'accounts/logout/$', django_cas_ng.views.logout, name='logout_view'),
     url(r'^search/', views.submit_search_from_ajax, name='rides_list')
    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+handler400 = 'app.views.bad_request'
+handler403 = 'app.views.permission_denied'
+handler404 = 'app.views.page_not_found'
+handler500 = 'app.views.server_error'
