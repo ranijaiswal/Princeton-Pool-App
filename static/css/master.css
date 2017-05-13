@@ -34,6 +34,10 @@ a {
 	font-family: Source Sans Pro, Helvetica, sans-serif;
 }
 
+#frm {
+	display:"inline-block";
+}
+
 /*footer {
 	font-family: Source Sans Pro, 'Pavanam', Helvetica, sans-serif;
 	background-color: #222;
@@ -83,11 +87,11 @@ input {
 }
 
 .btn-danger {
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .btn-danger-my-rides {
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .btn-primary {
@@ -105,7 +109,7 @@ input {
 
 .btn-warning {
 	font-family: Source Sans Pro, 'Pavanam', Helvetica, sans-serif;
-	font-size: 25px;
+    font-size: 20px;
 }
 
 .user-entered {
