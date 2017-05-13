@@ -4,3 +4,4 @@ venv
 .idea
 *.pyc
 Procfile
+PrincetonPool/static/*
