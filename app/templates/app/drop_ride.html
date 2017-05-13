@@ -12,7 +12,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
@@ -24,10 +23,7 @@
     {##}
     {#    <link rel = "stylesheet" href="style.css">#}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- <link href="{% static 'css/landing-page.css' %}" rel="stylesheet"> -->
     <link href="{% static 'css/master.css' %}" rel="stylesheet">
-    <!-- <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"> -->
 
 {% endblock %}
 
@@ -40,13 +36,15 @@
             <div class="my_rides_list">
                 <h3 align="center">You have been dropped from this ride. Thank you for using Princeton Go!</h3>
                 <div align="center">
+
+                     <!--Nav buttons-->
                     <a href="{% url 'my_rides'%}" class='btn btn-secondary .mb-1'>Back to My Rides</a>
                     <br><br>
                     <a href="/airport/open/" class='btn btn-secondary .mb-1'>Open Airport Rides</a>
                     <a href="/shopping/open/" class='btn btn-secondary .mb-1'>Open Shopping Rides</a>
                     <a href="/other/open/" class='btn btn-secondary .mb-1'>Open Miscellaneous Rides</a>
                     <br><br>
-                <img  class="img-responsive" src = "https://s-media-cache-ak0.pinimg.com/originals/a9/3b/fa/a93bfa0a67a0a93bb021591c079f808a.gif"/>
+                    <img class="img-responsive" src = "https://s-media-cache-ak0.pinimg.com/originals/a9/3b/fa/a93bfa0a67a0a93bb021591c079f808a.gif"/>
                 </div>
             </div>
         </div>
@@ -57,18 +55,6 @@
 
 {% block style %}
 <style>
-@import url('https://fonts.googleapis.com/css?family=Pavanam');
-
-/* footer {
-  font-family: Pavanam, sans-serif;
-  background-color: #222;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-body {
-    font-family: 'Pavanam', Helvetica, sans-serif;
-} */
 
 .my-rides {
     font-size: 15px;
@@ -82,9 +68,8 @@ body {
 }
 
 .modal-header .close {
-  font-size: 30px; //bigger
+  font-size: 30px;
 }
-
 
 </style>
 {% endblock %}

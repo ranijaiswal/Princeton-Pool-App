@@ -79,12 +79,15 @@ class RequestForm(forms.Form):
         ride_date = cleaned_data.get('date')
         ride_time = cleaned_data.get('time')
         date_time = ('%s %s' % (ride_date, ride_time))
+        if (date_time[0:4] == "None"):
+            raise forms.ValidationError("")
+
         date_time = datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S')
         if datetime.now() >= date_time:
             raise forms.ValidationError(u'Invalid input: Please enter a future time and date! "%s"' % date_time)
 
 
-        if (starting_destination == destination):
+        if (starting_destination.upper() == destination.upper()):
             raise forms.ValidationError(u'Invalid input: Start and end location cannot be the same!')
 
         #raise forms.ValidationError("%s" %destination)

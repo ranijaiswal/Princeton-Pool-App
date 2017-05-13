@@ -120,8 +120,9 @@ def feedback_thanks(request):
 
 def init_User(netid):
 	#print("test")
+	print("outside")
 	if not Users.objects.filter(netid=netid).exists():
-
+		print("test")
 		full_name = scrape_name(netid)
 		Users.objects.create(netid=netid, first_name=full_name[0], last_name=full_name[1])
 
@@ -129,7 +130,6 @@ def init_User(netid):
 def my_rides(request):
 	user = request.user
 	init_User(user.username)
-
 	theUser = Users.objects.get(netid=user.username)
 	rides = theUser.pools.all().filter(seats__gte=0, date_time__gt=datetime.now())
 	context = {
@@ -171,6 +171,8 @@ def create_new_request(request):
 	user = request.user
 	init_User(user.username)
 	rtype = request.path.split('/')[1]
+
+	print(Users.objects.filter(netid=user.username))
 	theUser = Users.objects.get(netid=user.username)
 
 	form = RequestForm(rtype=rtype)
@@ -184,6 +186,7 @@ def create_new_request(request):
 	context = {
 		'Title': title,
 		'form': form,
+		'rtype': rtype,
 		'netid': user.username,
 		'first_name': theUser.first_name,
 	}
@@ -205,6 +208,7 @@ def confirm_new_request(request):
 				'number_going': form.cleaned_data['number_going'],
 				'date': form.cleaned_data['date'],
 				'time': form.cleaned_data['time'],
+				'rtype': rtype,
 				'netid': user.username,
 				'first_name': theUser.first_name,
 				'last_name': theUser.last_name,

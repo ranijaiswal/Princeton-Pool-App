@@ -3,7 +3,6 @@
  * any file specific differences separated into sections by html file
  */
 
-
 /* ---------------- general CSS (applies to all templates) */
 
 /* Google fonts */
@@ -37,13 +36,6 @@ a {
 #frm {
 	display:"inline-block";
 }
-
-/*footer {
-	font-family: Source Sans Pro, 'Pavanam', Helvetica, sans-serif;
-	background-color: #222;
-	padding-top: 30px;
-	padding-bottom: 30px;
-}*/
 
 .topnav {
 	font-family: Source Sans Pro, 'Pavanam', Helvetica, sans-serif;
@@ -122,22 +114,6 @@ input {
 /* ---------------- about.html */
 
 /* ---------------- confirm_join.html */
-
-/*#confirm-join-info-box {
-  background: url(../img/fast-car-muted.jpg);
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  text-align: left;
-}
-
-#confirm-join-user-info {
-  background-color: white;
-  border-radius: 25px;
-  padding: 15px;
-}*/
-
 /* ---------------- confirm_ride.html */
 
 #confirm-info-box {
@@ -148,7 +124,6 @@ input {
   padding-bottom: 30px;
   text-align: left;
   position: absolute;
-/*  left:0;*/
   width: 100%;
   top:0;
   bottom: 0;
@@ -157,7 +132,6 @@ input {
 #confirm-user-info {
   background-color: white;
   border-radius: 25px;
-/*  max-height: 100px;*/
   padding-left: 10%;
   padding-right: 10%;
   padding-top: 10%;
@@ -186,8 +160,7 @@ input {
   padding-right: 20%;
   padding-top: 100px;
   padding-bottom: 30px;
-    position: absolute;
-/*  left:0;*/
+  position: absolute;
   width: 100%;
   top:0;
   bottom: 0;
@@ -202,7 +175,6 @@ input {
   padding-top: 10%;
   padding-bottom: 10%;
   border-radius: 25px;
-/*  min-width: 500px;*/
 }
 
 /* ---------------- index.html */
@@ -222,7 +194,6 @@ input {
 	background: white;
 	width: 70%;
 	height:100%;
-/*	min-width: 500px;*/
 	min-height:700px;
 	top:0;
 	bottom:0;
@@ -230,10 +201,8 @@ input {
 
 .open_req_list {
 	text-align: left;
-/*	min-width: 400px;*/
 	width: 80%;
 	height:100%;
-/*	position: absolute;*/
 }
 
 .list-group a {
@@ -264,17 +233,11 @@ input {
 .my_rides_list {
 	text-align: left;
 	width:80%;
-/*	min-width: 400px;*/
 }
 
 .active {
 	background-color: white;
 }
-
-/*.lg-info {
-	padding-left: 50px;
-	padding-right: 50px;
-}*/
 
 /* ---------------- feedback.html */
 .feedback_container {
@@ -325,6 +288,17 @@ input {
 	  width: 100%;
       height:100%;
       padding:0px;
+	}
+
+	.feedback_container {
+		background: white;
+		padding-left: 5%;
+		padding-right:5%;
+	}
+
+	.feedback_form {
+		padding-left: 0%;
+		padding-right: 0%;
 	}
 
 }
