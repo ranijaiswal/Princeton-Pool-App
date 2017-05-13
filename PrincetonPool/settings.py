@@ -36,6 +36,7 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'), ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -44,7 +45,7 @@ STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'), ]
 SECRET_KEY = '5&&pdcj_!61pw*6btg9v)br&2v*oju37#ro5*7s=jt9-i8&)8y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 USE_TZ = False
 
 ALLOWED_HOSTS = [u'princeton-pool.herokuapp.com', 'localhost', u'127.0.0.1', 'princetongo.es', 'www.princetongo.es']
@@ -72,6 +73,7 @@ INSTALLED_APPS = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]'''
 
 MIDDLEWARE_CLASSES = [
