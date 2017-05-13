@@ -8,10 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
-
 <!-- Custom CSS -->
-<!-- <link href="{% static 'css/landing-page.css' %}" rel="stylesheet"> -->
 <link href="{% static 'css/master.css' %}" rel="stylesheet">
 
 {% endblock %}
@@ -25,14 +22,6 @@ input {
     background-color: white;
 }
 
-footer {
-  background-color: #222;
-  position: fixed;
-  width: 100%;
-  left: 0px;
-  bottom: 0px;
-}
-
 form .btn {
   font-size: 20px;
 }
@@ -43,21 +32,22 @@ form .btn {
 
 {% block content %}
     
-
     <div id="confirm-info-box">
         <div id= "confirm-user-info">
           <h2><strong>Confirm New Request</strong></h2>
+
+          <!--Ride info-->
             <p><strong>Please confirm the following information is correct: </strong></p>
+            
             <hr>
-            <p>Who go?
-            <span class = "user-entered">
-            {{first_name}} {{last_name}} ({{netid}})</span></p>
+            
+            <p>Who go? <span class = "user-entered">{{first_name}} {{last_name}} ({{netid}})</span></p>
             <p>How many go?: <span class="user-entered">{{ number_going }}</p></span>
             <p>Where go? <span class="user-entered">{{ start }} to {{ dest }}</p></span>
             <p>When go? <span class="user-entered">{{date}} at {{ time }}</p></span>
 
-
             <hr>
+          <!--Nav buttons--> 
             <form style="text-align:center" action = "confirmation">
                 <input type="submit" class="btn btn-secondary" value = "Edit Request"
                        onClick="history.go(-1);return true;">
@@ -65,8 +55,6 @@ form .btn {
             </form>
         </div>
         <br>
-
-
     </div>
 
 {% endblock %}

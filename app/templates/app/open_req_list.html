@@ -51,7 +51,6 @@
         <br>
         <div class="list-group open_req_list">
             <h1 align="center"><strong>{{Title}}</strong></h1>
-<!--             <br> -->
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
 
@@ -63,6 +62,7 @@
 
             </div>
 
+            <!--See open_req_list_snippet.html for ride info display format-->
             <script language="javascript">
                 /*
                  Before our JavaScript can be imported, the following JavaScript
@@ -70,7 +70,6 @@
                  values could be hard-coded into the JavaScript, this allows
                  them to be centrally located.
                  */
-
 
                 //The url to submit the search form. From color_liker.urls
                 var SUBMIT_URL = "{% url 'rides_list' %}";
