@@ -399,11 +399,11 @@ def drop_ride(request, ride_id):
 
 	if rider.pools.filter(pk=ride_id).exists():
 
-		rider = Users.objects.get(netid=user.username)
-		ride.usrs.remove(rider)
+    	rider = Users.objects.get(netid=user.username)
+    	ride.usrs.remove(rider)
         if (ride.usrs.count() > 0):
             ride.seats += 1
-		rider.pools.remove(ride)
+    	rider.pools.remove(ride)
 		ride.save()
 		rider.save()
 
