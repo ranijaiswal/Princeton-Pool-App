@@ -10,11 +10,12 @@
             <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right">leaving {{ride.date_time|naturaltime}}</small></h5>
         {% endif %}
 
-        <small class="mb-2">Trip: {{ride.get_start_destination_display}} to {{ride.get_end_destination_display}} </small>
+
+        <small class="mb-2">Trip: <span class = 'user-entered'>{{ride.get_start_destination_display}} to {{ride.get_end_destination_display}}</span></small>
         <br>
-        <small class="mb-2">Ride Departure Time: {{ ride.date_time}}</small>
+        <small class="mb-2">Ride Departure Time: <span class = 'user-entered'>{{ ride.date_time}}</span></small>
         <br>
-        <small class="mb-2"># empty seats: {{ ride.seats }}</small>
+        <small class="mb-2"># empty seats: <span class = 'user-entered'>{{ ride.seats }}</span></small>
         <small class="text-muted"><br>Current Riders:<ul id="userlist">
             <br>
             {% for user in ride.usrs.all %}
