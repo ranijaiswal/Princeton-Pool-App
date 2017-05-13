@@ -295,7 +295,8 @@ input {
 	  background: white;
 	  top:0;
 	  bottom: 0;
-	  padding:0px;
+	  padding:5%;
+	  padding-top:50px;
 	}
 
     .form-container form {
@@ -310,7 +311,8 @@ input {
 	  background: white;
 	  top:0;
 	  bottom: 0;
-	  padding:0px;
+	  padding:5%;
+	  padding-top:50px;
 	}
 
 	#confirm-user-info {
