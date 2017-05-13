@@ -303,6 +303,7 @@ def join_ride(request, ride_id):
 		'Riders': ride.usrs.all(),
 		'netid': user.username,
 		'in_ride': in_ride,
+		'rtype': request.path.split('/')[1],
 
 	}
 	return render(request, 'app/confirm_join.html', context)
