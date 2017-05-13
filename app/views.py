@@ -20,6 +20,9 @@ from rest_framework.response import Response
 from rest_framework import generics
 from .serializers import RideSerializer
 
+from django.shortcuts import (render_to_response)
+from django.template import RequestContext
+
 activate(settings.TIME_ZONE)
 date_length=10
 
@@ -31,6 +34,30 @@ date_length=10
 from bs4 import BeautifulSoup
 from .scrape_name import scrape_name
 
+def bad_request(request):
+    response = render_to_response('404.html',context_instance=RequestContext(request))
+    response.status_code = 400
+    return response
+
+def handler404(request):
+    return render(request, '404.html', status=404)
+
+def handler500(request):
+    return render(request, '500.html', status=500)
+
+def google_analytics(request):
+    """
+    Use the variables returned in this function to
+    render your Google Analytics tracking code template.
+    """
+    ga_prop_id = getattr(settings, 'GOOGLE_ANALYTICS_PROPERTY_ID', False)
+    ga_domain = getattr(settings, 'GOOGLE_ANALYTICS_DOMAIN', False)
+    if not settings.DEBUG and ga_prop_id and ga_domain:
+        return {
+            'GOOGLE_ANALYTICS_PROPERTY_ID': ga_prop_id,
+            'GOOGLE_ANALYTICS_DOMAIN': ga_domain,
+        }
+    return {}
 
 def index(request):
 	user = request.user

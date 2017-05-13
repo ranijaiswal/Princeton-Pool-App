@@ -8,13 +8,11 @@
 
 /* Google fonts */
 @import url('https://fonts.googleapis.com/css?family=Pavanam');
-@import url('https://fonts.googleapis.com/css?family=Arimo');
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 body {
 	font-family: Source Sans Pro;
 	padding-top:50px;
-	background-color: white;
 	height: 100%;
 }
 
@@ -36,20 +34,12 @@ a {
 	font-family: Source Sans Pro, Helvetica, sans-serif;
 }
 
-footer {
-/*	position: relative;
-	left: 0;
-	right: 0;
-	bottom: 0;*/
+/*footer {
 	font-family: Source Sans Pro, 'Pavanam', Helvetica, sans-serif;
 	background-color: #222;
 	padding-top: 30px;
 	padding-bottom: 30px;
-}
-
-footer .small {
-	font-size: 85%;
-}
+}*/
 
 .topnav {
 	font-family: Source Sans Pro, 'Pavanam', Helvetica, sans-serif;
@@ -127,8 +117,6 @@ input {
 }
 /* ---------------- about.html */
 
-
-
 /* ---------------- confirm_join.html */
 
 /*#confirm-join-info-box {
@@ -170,12 +158,12 @@ input {
   padding-right: 10%;
   padding-top: 10%;
   padding-bottom: 10%;
+  top:0;
+  bottom:0;
 
 }
 
 /* ---------------- confirmed_join.html */
-
-
 
 /* ---------------- confirmed_ride.html */
 
@@ -202,7 +190,7 @@ input {
 }
 
 .form-container form {
-  font-family: Source Sans Pro, Pavanam, sans-serif;
+  font-family: Source Sans Pro, sans-serif;
   font-size:22px;
   background-color: white;
   padding-left: 10%;
@@ -211,13 +199,12 @@ input {
   padding-bottom: 10%;
   border-radius: 25px;
 /*  min-width: 500px;*/
-
 }
 
 /* ---------------- index.html */
 
 .intro-header {
-	font-family: Source Sans Pro, Arimo, 'Pavanam', Helvetica, sans-serif;
+	font-family: Source Sans Pro, 'Pavanam', Helvetica, sans-serif;
 	padding: 0px;
 }
 
@@ -231,16 +218,15 @@ input {
 	background: white;
 	width: 70%;
 	height:100%;
-	min-width: 500px;
-	min-height:700px;
+/*	min-width: 500px;
+	min-height:700px;*/
 	top:0;
 	bottom:0;
-
 }
 
 .open_req_list {
 	text-align: left;
-	min-width: 400px;
+/*	min-width: 400px;*/
 	width: 80%;
 /*	position: absolute;*/
 }
@@ -273,7 +259,7 @@ input {
 .my_rides_list {
 	text-align: left;
 	width:80%;
-	min-width: 400px;
+/*	min-width: 400px;*/
 }
 
 .active {
@@ -290,10 +276,17 @@ input {
 	background: url(../img/fast-car-muted-green.jpg);
 	padding-left: 5%;
 	padding-right:5%;
-
 }
 
 .feedback_form {
 	padding-left: 8%;
 	padding-right: 8%;
+}
+
+/*---------------- mobile responsive */
+
+@media(max-width:480px) {
+    .vertical-veil {
+        width: 100%;
+    }
 }
