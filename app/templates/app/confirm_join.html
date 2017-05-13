@@ -13,21 +13,17 @@
 {% block style %}
 <style>
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
 input {
     border-radius: 8px;
     background-color: white;
 }
-
 body {
   height: 100%;
 }
-
 form .btn {
   font-family: Arimo, Pavanam;
   font-size: 20px;
 }
-
 </style>
 
 {% endblock %}
@@ -56,12 +52,14 @@ form .btn {
 
     {% if in_ride == 'True' %}
 
-      <p>Either go back or drop this ride.</p>
-      <form action="/{{ rtype}}/open">
-        <input type="submit" class="btn btn-secondary" value = "Back">
-      </form>
-        <form action=""confirm/{{ id }}>
-         <button type='button' class='btn btn-danger btn-danger-join' data-toggle="modal" data-target="#myModal{{id}}"> Drop</button>
+      <p align="center">Either go back or drop this ride.</p>
+
+      <div align='center'>
+      <form >
+        <a href="/{{rtype}}/open" type="submit" class="btn btn-secondary" value = "Back">Back</a>
+<!--       </form> -->
+<!--         <form > -->
+         <button type='button' action="confirm/{{ id }}" class='btn btn-danger btn-danger-join' data-toggle="modal" data-target="#myModal{{id}}"> Drop</button>
 
          <!-- Modal -->
                                     <div id="myModal{{id}}" class="modal fade" role="dialog">
@@ -87,6 +85,7 @@ form .btn {
                                         </div>
                                     </div>
       </form>
+    </div>
     {% else %}
       <p>Would you like to join this ride?</p>
       <form style="text-align:center" action="confirm/{{id}}">
