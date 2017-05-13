@@ -92,7 +92,9 @@ def feedback_thanks(request):
 	return render(request, 'app/feedback_thanks.html', context)
 
 def init_User(netid):
+	#print("test")
 	if not Users.objects.filter(netid=netid).exists():
+
 		full_name = scrape_name(netid)
 		Users.objects.create(netid=netid, first_name=full_name[0], last_name=full_name[1])
 
