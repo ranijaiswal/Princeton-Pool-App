@@ -107,12 +107,12 @@ def feedback_thanks(request):
 		if message_email == ", whose email address is ":
 			message_email = ", who did not give an email address"
 
-		# message = form.cleaned_data['feedback']
-		# send_mail("Feedback",
-		# 		  "You have received feedback from " + message_name + message_email + ". They left the following message: \n\n" + message,
-		# 		  'Princeton Go <princetongo333@gmail.com>', ['princetongo333@gmail.com'],
-		# 		  fail_silently=False,
-		# 		  )
+		message = form.cleaned_data['feedback']
+		send_mail("Feedback",
+				  "You have received feedback from " + message_name + message_email + ". They left the following message: \n\n" + message,
+				  'Princeton Go <princetongo333@gmail.com>', ['princetongo333@gmail.com'],
+				  fail_silently=False,
+				  )
 	context = {
 		'Title': 'Thank you for the feedback!'
 	}
@@ -400,9 +400,11 @@ def drop_ride(request, ride_id):
 	}
 
 	if rider.pools.filter(pk=ride_id).exists():
+
 		rider = Users.objects.get(netid=user.username)
 		ride.usrs.remove(rider)
-		ride.seats += 1
+		if (ride.usrs.count() > 0):
+			ride.seats += 1
 		rider.pools.remove(ride)
 		ride.save()
 		rider.save()
