@@ -3,49 +3,42 @@
 {% block title %} Feedback | Princeton Go {% endblock %}
 
 {% block style %}
-    <style>
-
-    </style>
 {% endblock %}
 
 {% block links %}
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <!-- Custom CSS -->
     <link href="{% static 'css/master.css' %}" rel="stylesheet">
 
 {% endblock %}
 
 {% block content %}
-    <body>
-        <div align = 'center'>
-    <div class='feedback_container'>
-        <div class='vertical-veil'>
-
-            <div class='feedback_form'>
-        <!-- Page Heading -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 >{{ Title }}
-                </h1><hr>
+<body>
+    <div align = 'center'>
+        <div class='feedback_container'>
+            <div class='vertical-veil'>
+                <div class='feedback_form'>
+                <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 >{{ Title }}
+                            </h1><hr>
         
-    <!--Feedback table-->
-    <form action="thanks/" method="POST">
-        {% csrf_token %}
-        <table >
-            {{ form.as_table }}
-        </table>
-        <input type="submit" value="Submit" class="btn btn-primary">
-    </form>
+                        <!--Feedback table-->
+                        <form action="thanks/" method="POST">
+                            {% csrf_token %}
+                            <table>
+                                {{ form.as_table }}
+                            </table>
+                            <input type="submit" value="Submit" class="btn btn-primary">
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-</div>
-    </div>
-    </div>
-</div>
-
-    </body>
-
+</body>
 {% endblock %}
