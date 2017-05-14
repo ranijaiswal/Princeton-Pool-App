@@ -11,9 +11,6 @@
 <link href="{% static 'css/master.css' %}" rel="stylesheet">
 
 <style>
-
-
-
 </style>
 
 {% endblock %}
@@ -21,9 +18,12 @@
 {% block content %}
 <div id="confirm-info-box">
   <div id= "confirm-user-info">
+
+    <!--Ride info-->
     <h2><strong>Successfully Joined Ride</strong></h2>
     <p>You will also receive an email with the following information:</p>
     <hr>
+
     <p>Trip: <span class="user-entered">{{ start }} to {{ dest }} </p></span>
     <p>Date and time of ride: <span class="user-entered">{{date}}</p></span>
     <p>Current passenger(s):
@@ -34,6 +34,8 @@
     <br>
     <p style="text-align:center"><b>Enjoy Your Carpool!</b></p>
     <hr>
+
+     <!--Nav buttons-->
     <form style="text-align:center" action="/{{rtype}}/open/">
       <input type="submit" class="btn btn-secondary" value = "Back to Open Requests" />
       <a href="{% url 'my_rides' %}" class="btn btn-primary">My Rides</a>

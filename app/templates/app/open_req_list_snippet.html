@@ -4,13 +4,15 @@
 {% if search_results %}
     {% for ride in search_results %}
     <a href="select/{{ride.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
+        
+        <!--Countdown text turns red if close to departure time-->
         {% if ride.soon %}
             <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right"><font color=red>leaving {{ride.date_time|naturaltime}}</font></small></h5>
         {% else %}
             <h5 class="mb-1">Ride #{{ride.id}}<small class="text-muted pull-right">leaving {{ride.date_time|naturaltime}}</small></h5>
         {% endif %}
 
-
+        <!--Ride info-->
         <small class="mb-2">Trip: <span class = 'user-entered'>{{ride.get_start_destination_display}} to {{ride.get_end_destination_display}}</span></small>
         <br>
         <small class="mb-2">Departs: <span class = 'user-entered'>{{ ride.date_time}}</span></small>
@@ -31,6 +33,8 @@
 
         {% endfor %}
     </a>    
+
+        <!--If no rides that match search/in list, display message-->
         {% else %}
         <div align="center">
             <hr>

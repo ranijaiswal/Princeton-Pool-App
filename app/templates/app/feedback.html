@@ -4,18 +4,6 @@
 
 {% block style %}
     <style>
-        form {
-/*            font-family: 'Pavanam';*/
-            font-size: 20px;
-            background-color: white;
-        }
-
-        footer {
-            position: fixed;
-            width: 100%;
-            left: 0px;
-            bottom: 0px;
-        }
 
     </style>
 {% endblock %}
@@ -26,7 +14,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
-<!--     <link href="{% static 'css/landing-page.css' %}" rel="stylesheet"> -->
     <link href="{% static 'css/master.css' %}" rel="stylesheet">
 
 {% endblock %}
@@ -44,13 +31,13 @@
                 <h1 >{{ Title }}
                 </h1><hr>
         
+    <!--Feedback table-->
     <form action="thanks/" method="POST">
         {% csrf_token %}
         <table >
             {{ form.as_table }}
         </table>
         <input type="submit" value="Submit" class="btn btn-primary">
-        <input type="submit" class="btn btn-secondary" value = "Go Back" onClick="history.go(-1);return true;">
     </form>
     </div>
 </div>

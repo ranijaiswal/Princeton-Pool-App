@@ -1,3 +1,5 @@
+<!--Bootstrap template, modified-->
+
 {% extends "app/base.html" %}
 
 {% block title %} FAQs | Princeton Go {% endblock %}
@@ -5,14 +7,11 @@
 {% block links %}
     {#    <link rel="stylesheet" href="css/bootstrap.min.css">#}
     {#    <link rel = "stylesheet" href="style.css">#}
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-    <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 
     <!-- Custom CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
     <link href="{% static 'css/master.css' %}" rel="stylesheet">
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 
@@ -89,10 +88,9 @@
     <hr>
 
     <div class="container">
-        <!-- Accordion START -->
 
+        <!-- Accordion START -->
         <div class="panel-group" id="accordion">
-            <div class="faqHeader">General questions</div>
 
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -101,10 +99,10 @@
                     </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="panel-body">
+                    <div class="panel-body"><p><small>
                         If you are a Princeton student, begin by simply logging in with your netid. Then, choose the category of your ride to view currently open requests.
                         If you see one you like, request to join. If not, click on "Create New Request" to make your own.
-                    </div>
+                    </p></small></div>
                 </div>
             </div>
 
@@ -115,10 +113,10 @@
                     </h4>
                 </div>
                 <div id="collapseTen" class="panel-collapse collapse">
-                    <div class="panel-body">
+                    <div class="panel-body"><p><small>
                         Going into this project, we wanted to grant Princeton students the convenience and comfort of sharing rides with other
                         Princeton students. As our app takes off at Princeton, we definitely hope to offer local versions for fans of our service elsewhere!
-                    </div>
+                    </p></small></div>
                 </div>
             </div>
             <div class="panel panel-default">
@@ -129,17 +127,14 @@
                     </h4>
                 </div>
                 <div id="collapseEleven" class="panel-collapse collapse">
-                    <div class="panel-body">
+                    <div class="panel-body"><p><small>
                         Contact any one of the team at our @princeton.edu email, and we'll get back to you soon!
-                    </div>
+                    </p></small></div>
                 </div>
             </div>
             <br>
-            <!-- <button type="button" data-dismiss="modal" class="btn btn-warning" onClick = "history.go(-1);return true;">Back</button> -->
 
         </div>
     </div>
 
 {% endblock %}
-
-
