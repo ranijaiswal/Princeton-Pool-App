@@ -407,7 +407,6 @@ def drop_ride(request, ride_id):
         if (ride.usrs.count() > 0):
             ride.seats += 1
         rider.pools.remove(ride)
-<<<<<<< HEAD
         ride.save()
         rider.save()
 
