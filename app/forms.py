@@ -76,6 +76,9 @@ class RequestForm(forms.Form):
         destination = cleaned_data.get('destination')
         number_going = cleaned_data.get('number_going')
 
+        if (len(starting_destination) > 50 or len(destination) > 50):
+            raise forms.ValidationError(u'Please truncate your input.')
+
         ride_date = cleaned_data.get('date')
         ride_time = cleaned_data.get('time')
         date_time = ('%s %s' % (ride_date, ride_time))
