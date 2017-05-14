@@ -111,8 +111,9 @@ $(document).ready(function() {
 
     $("#rides_search_text").keypress(function(){
       var x = event.which || event.keyCode;
-      if (x == 12) {
-        $("#inputWithFocus").blur()
+      if (x == 13) {
+        document.activeElement.blur()
+        //$("#inputWithFocus").blur()
       }
 });
 });
