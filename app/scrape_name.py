@@ -4,17 +4,27 @@ import requests
 
 def scrape_name(netid):
 	search_url="http://www.princeton.edu/main/tools/search/?q="
-	netid = str(netid)
-
+	netid = str("ame")
 	r = requests.get(search_url + netid)
 	data=r.text
 	soup=BeautifulSoup(data)
 
-	name = soup.find(id = 'people-row-link-3')
-	scraped_name = str(name).split("\n")[1]
+	for i in range(3,101):
+		name = soup.find(id = 'people-row-' + str(i))
+		returned_netid = str(name).split("NetID:")
+		first= returned_netid[1]
+		second=first.split("\n")
+		if second[1].strip() == netid:
+			num=i
+			break
+		else:
+			continue
+
+	name_s = soup.find(id = 'people-row-link-' + str(num))
+	scraped_name = str(name_s).split("\n")[1]
 	just_name = scraped_name.split(",")
 
-	last_name = just_name[0].strip() 
+	last_name = just_name[0].strip()
 	fname_array = just_name[1].split()
 
 	if "." in fname_array[-1]:
@@ -31,5 +41,4 @@ def scrape_name(netid):
 	name_list = []
 	name_list.append(fname_str)
 	name_list.append(last_name)
-
-	return name_list
+return name_list
