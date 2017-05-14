@@ -402,8 +402,7 @@ def drop_ride(request, ride_id):
 	}
 
 	if rider.pools.filter(pk=ride_id).exists():
-
-    	rider = Users.objects.get(netid=user.username)
+        rider = Users.objects.get(netid=user.username)
     	ride.usrs.remove(rider)
         if (ride.usrs.count() > 0):
             ride.seats += 1
