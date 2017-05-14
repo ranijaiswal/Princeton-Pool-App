@@ -4,7 +4,7 @@ import requests
 
 def scrape_name(netid):
 	search_url="http://www.princeton.edu/main/tools/search/?q="
-	netid = str("ame")
+	netid = str(netid)
 	r = requests.get(search_url + netid)
 	data=r.text
 	soup=BeautifulSoup(data)
