@@ -109,6 +109,7 @@ $(document).ready(function() {
     $('#rides_search_text').keyup(_.debounce(processSearch,
         MILLS_TO_IGNORE_SEARCH, true));
 
+    // hides keyboard on Android upon 'enter'
     $("#rides_search_text").keypress(function(){
       var x = event.which || event.keyCode;
       if (x == 13) {
