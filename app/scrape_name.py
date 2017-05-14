@@ -41,4 +41,4 @@ def scrape_name(netid):
 	name_list = []
 	name_list.append(fname_str)
 	name_list.append(last_name)
-return name_list
+	return name_list
