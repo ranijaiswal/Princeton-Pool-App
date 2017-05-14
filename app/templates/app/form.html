@@ -2,44 +2,19 @@
 
 {% block title %} Create New Request | Princeton Go {% endblock %}
 
-
 {% block links %}
-<!-- Latest compiled and minified CSS -->
+<!-- CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- Custom CSS -->
-
-<!-- <link href="{% static 'css/landing-page.css' %}" rel="stylesheet"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="{% static 'css/master.css' %}" rel="stylesheet">
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-       <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
-    <link href="{% static 'css/master.css' %}" rel="stylesheet">
-    <!-- Custom CSS -->
-
 {% endblock %}
 
 {% block style %}
-<style>
-form .btn .btn-secondary {
-  font-family: Pavanam;
-  font-size: 20px;
-  background-color: white;
-}
-
-h3 {text-align:center;}
-
- </style>
 {% endblock %}
 
 
 {% block content %}
-
 <div class="form-container ">
-
     <!--Create a new request form-->
     <form action = "confirm/" method="POST" >
         {% csrf_token %}
@@ -51,9 +26,9 @@ h3 {text-align:center;}
         </table>
         <hr>
         <div style="text-align:center" >
-        <a href="/{{rtype}}/open" type="submit" class="btn btn-secondary" value = "Back">Back</a>
-        <input type="submit" value="Next" class="btn btn-primary">
-    </div>
+            <a href="/{{rtype}}/open" type="submit" class="btn btn-secondary" value = "Back">Back</a>
+            <input type="submit" value="Next" class="btn btn-primary">
+        </div>
     </form>
 </div>
 
