@@ -45,7 +45,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 SECRET_KEY = os.environ.get("DJANGO_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 USE_TZ = False
 
 ALLOWED_HOSTS = [u'princeton-pool.herokuapp.com', 'localhost', u'127.0.0.1', 'princetongo.es', 'www.princetongo.es']
