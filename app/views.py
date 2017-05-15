@@ -496,6 +496,7 @@ class RidesList(generics.ListAPIView):
         query_ride_type = self.kwargs['ride_type']
         return Rides.objects.filter(ride_type=query_ride_type)
 
+# code adapted from function described at https://aliteralmind.wordpress.com/2014/09/21/jquery_django_tutorial/
 
 def submit_search_from_ajax(request):
     user = request.user
