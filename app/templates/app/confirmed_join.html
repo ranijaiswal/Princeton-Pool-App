@@ -15,18 +15,17 @@
 
     <!--Ride info-->
     <h2><strong>Successfully Joined Ride!</strong></h2>
-    <p>You will also receive an email with the following information:</p>
     <hr>
 
     <p>Trip: <span class="user-entered">{{ start }} to {{ dest }} </p></span>
-    <p>Date and time of ride: <span class="user-entered">{{date}}</p></span>
+    <p>Departs: <span class="user-entered">{{date}}</p></span>
     <p>Current passenger(s):
         <span class="user-entered">
     {% for user in Riders %}
         <br> &emsp; {{user.first_name}} {{user.last_name}} ({{user.netid}})
         {% endfor %} </p></span>
     <br>
-    <p style="text-align:center"><b>Enjoy Your Carpool!</b></p>
+    <p style="text-align:center"><b> You'll be added to an email chain with the current passengers to coordinate how to get to {{ dest }}. Enjoy Your Carpool!</b></p>
     <hr>
 
      <!--Nav buttons-->

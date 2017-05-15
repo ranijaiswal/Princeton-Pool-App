@@ -3,7 +3,6 @@
  * any file specific differences separated into sections by html file
  */
 
-
 /* ---------------- general CSS (applies to all templates) */
 
 /* Google fonts */
@@ -34,12 +33,9 @@ a {
 	font-family: Source Sans Pro, Helvetica, sans-serif;
 }
 
-/*footer {
-	font-family: Source Sans Pro, 'Pavanam', Helvetica, sans-serif;
-	background-color: #222;
-	padding-top: 30px;
-	padding-bottom: 30px;
-}*/
+#frm {
+	display:"inline-block";
+}
 
 .topnav {
 	font-family: Source Sans Pro, 'Pavanam', Helvetica, sans-serif;
@@ -83,11 +79,11 @@ input {
 }
 
 .btn-danger {
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .btn-danger-my-rides {
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .btn-primary {
@@ -105,7 +101,7 @@ input {
 
 .btn-warning {
 	font-family: Source Sans Pro, 'Pavanam', Helvetica, sans-serif;
-	font-size: 25px;
+    font-size: 20px;
 }
 
 .user-entered {
@@ -118,22 +114,6 @@ input {
 /* ---------------- about.html */
 
 /* ---------------- confirm_join.html */
-
-/*#confirm-join-info-box {
-  background: url(../img/fast-car-muted.jpg);
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  text-align: left;
-}
-
-#confirm-join-user-info {
-  background-color: white;
-  border-radius: 25px;
-  padding: 15px;
-}*/
-
 /* ---------------- confirm_ride.html */
 
 #confirm-info-box {
@@ -144,7 +124,6 @@ input {
   padding-bottom: 30px;
   text-align: left;
   position: absolute;
-/*  left:0;*/
   width: 100%;
   top:0;
   bottom: 0;
@@ -153,7 +132,6 @@ input {
 #confirm-user-info {
   background-color: white;
   border-radius: 25px;
-/*  max-height: 100px;*/
   padding-left: 10%;
   padding-right: 10%;
   padding-top: 10%;
@@ -182,8 +160,7 @@ input {
   padding-right: 20%;
   padding-top: 100px;
   padding-bottom: 30px;
-    position: absolute;
-/*  left:0;*/
+  position: absolute;
   width: 100%;
   top:0;
   bottom: 0;
@@ -198,7 +175,6 @@ input {
   padding-top: 10%;
   padding-bottom: 10%;
   border-radius: 25px;
-/*  min-width: 500px;*/
 }
 
 /* ---------------- index.html */
@@ -218,17 +194,15 @@ input {
 	background: white;
 	width: 70%;
 	height:100%;
-/*	min-width: 500px;
-	min-height:700px;*/
+	min-height:700px;
 	top:0;
 	bottom:0;
 }
 
 .open_req_list {
 	text-align: left;
-/*	min-width: 400px;*/
 	width: 80%;
-/*	position: absolute;*/
+	height:100%;
 }
 
 .list-group a {
@@ -259,24 +233,17 @@ input {
 .my_rides_list {
 	text-align: left;
 	width:80%;
-/*	min-width: 400px;*/
 }
 
 .active {
 	background-color: white;
 }
 
-/*.lg-info {
-	padding-left: 50px;
-	padding-right: 50px;
-}*/
-
 /* ---------------- feedback.html */
 .feedback_container {
 	background: url(../img/fast-car-muted-green.jpg);
 	padding-left: 5%;
 	padding-right:5%;
-
 }
 
 .feedback_form {
@@ -284,10 +251,54 @@ input {
 	padding-right: 8%;
 }
 
+/*---------------- mobile responsive */
 
 @media(max-width:480px) {
     .vertical-veil {
         width: 100%;
+        height:100%;
     }
+
+	.form-container {
+	  background: white;
+	  top:0;
+	  bottom: 0;
+	  padding:5%;
+	  padding-top:50px;
+	}
+
+    .form-container form {
+	  font-family: Source Sans Pro, sans-serif;
+	  background-color: white;
+	  width: 100%;
+      height:100%;
+      padding:0px;
+	}
+
+	#confirm-info-box {
+	  background: white;
+	  top:0;
+	  bottom: 0;
+	  padding:5%;
+	  padding-top:50px;
+	}
+
+	#confirm-user-info {
+	  background-color: white;
+	  width: 100%;
+      height:100%;
+      padding:0px;
+	}
+
+	.feedback_container {
+		background: white;
+		padding-left: 5%;
+		padding-right:5%;
+	}
+
+	.feedback_form {
+		padding-left: 0%;
+		padding-right: 0%;
+	}
 
 }

@@ -274,7 +274,7 @@ def confirmation_new_request(request):
     # Replace substitutions in template
     message = 'Your ride request has been created! Below you can find the information for your ride.'
     theUser = Users.objects.get(netid=user.username)
-    closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
+    closing = 'As others join your ride, you will get notified by email, and you can coordinate how to get to your destination. Thank you for using Princeton Go! We hope you enjoy your ride.'
     mail.substitutions = {'%names%': theUser.first_name, '%body%': message, '%date%': date_obj_str,
                           '%time%': time_obj_str, '%destination%': start + ' to ' + dest,
                           '%riders%': theUser.first_name + " " + theUser.last_name, '%seats%': number_going,
@@ -374,7 +374,7 @@ def confirm_join_ride(request, ride_id):
 
         # Replace substitutions in template
         theUser = Users.objects.get(netid=user.username)
-        message = theUser.first_name + ' ' + theUser.last_name +' has joined your ride! Below you can find the information for this ride.'
+        message = theUser.first_name + ' ' + theUser.last_name +' has joined your ride! Below you can find the information for this ride, and you can coordinate how to get to your destination.'
         closing = 'Thank you for using Princeton Go! We hope you enjoy your ride.'
         mail_to_riders.substitutions = {'%names%': riders_firstnames, '%body%': message, '%date%': date_obj_str,
                                         '%time%': time_obj_str, '%destination%': ride.get_start_destination_display() + ' to ' + ride.get_end_destination_display(),
