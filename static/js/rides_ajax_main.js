@@ -1,6 +1,5 @@
-/**
- * Created by Alice on 4/28/2017.
- */
+// code added on top of scripts provided at https://aliteralmind.wordpress.com/2014/09/21/jquery_django_tutorial/
+
 //THIS MUST BE IMPORTED AS THE VERY LAST THING BEFORE THE CLOSE </body>
 //tag.
 
